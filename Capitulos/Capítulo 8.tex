@@ -1,0 +1,92 @@
+\section{Introducción}
+ En la Sección 5.6 discutimos el método de separación de variables para resolver una EDP, en particular, usamos la ecuación de Helmholtz para desarrollar la técnica. Cuando llegamos a las coordenadas esféricas, para la el ángulo polar hicimos uso de los polinomios de Legendre antes de definirlos. Con los capítulos 6 y 7 ahora estamos listos para dar una solución más detallada para la ecuación de Helmholtz
+\begin{equation}
+    (\nabla^2+k^2)\psi=0
+\end{equation}
+en coordenadas esféricas. Empecemos con la parte angular de la solución.
+\section{Armónicos Esféricos}
+
+Recordemos que el método de separación de variables dividía la solución en el producto de funciones que contenía solo una de las coordenadas, es decir
+\begin{equation}
+    \psi(\bmR)=R(r)\Phi(\varphi)\Theta(\theta).
+\end{equation}
+La función para $\Phi$, tomando en cuenta que es naturalmente periódica, descubrimos que tiene la forma de 
+\begin{equation}
+    \Phi_m(\varphi)=e^{im\varphi},\quad m=\dots,-2,-1,0,1,2,\dots
+\end{equation}
+Podemos normalizar la función de la siguiente manera
+\begin{equation}
+      \Phi_m(\varphi)=\frac{1}{\sqrt{2\pi}}e^{im\varphi}.
+\end{equation}
+Ahora, para la parte polar $\Theta$ vimos que esta dependía de los valores de $l,m$ que cumplían con la relación $-l\leq m\leq l$. Por la condición de ortogonalidad de las funciones de Legendre asociadas (6.71) podemos obtener la solución normalizada
+\begin{equation}
+    \Theta_{lm}(\cos\theta)=\sqrt{\frac{2l+1}{2}\frac{(l-m)!}{(l+m)!}} P_l^m(\cos\theta).
+\end{equation}
+El producto $\Phi_m \Theta_{lm}$ es conocido como un armónico esférico y se define como
+\begin{equation}
+    Y_l^m(\theta,\phi)\equiv \sqrt{\frac{2l+1}{4\pi}\frac{(l-m)!}{(l+m)!}}P_l^m(\cos\theta)e^{im\varphi}.
+\end{equation}
+Los armónicos esféricos aparecen en una gran variedad de problemas y son muy importantes, ya que, aunque cambiemos la dependencia radial o incluso añadamos un término $V(r)\psi$ a la EDP la parte angular se mantendrá intacta y definida por (8.6).
+\section{Parte Radial}
+Ahora describamos lo más a detalle la solución de la parte radial. Recordemos que para la parte radial llegamos a la ecuación
+\begin{equation}
+    r^2R''+2rR'+[k^2r^2-l(l+1)]R=0,
+\end{equation}
+que con el cambio de variable 
+\begin{equation*}
+    R(r)=\frac{Z(kr)}{(kr)^{1/2}}=\frac{Z(x)}{\sqrt{x}}
+\end{equation*}
+se puede reescribir como 
+\begin{equation}
+    x^2Z''(x)+xZ'(x)+\left[x^2-\left(l+\frac{1}{2}\right)^2\right]Z=0.
+\end{equation}
+Ya discutimos que las soluciones para esta ecuación iban a ser las funciones de Bessel y Neumann esféricas, las cuáles podemos normalizar cómo
+\begin{align}
+    j_l(x)&=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x)\\
+    y_l(x)&=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x)
+\end{align}
+respectivamente. Por lo que la solución de la parte radial vendrá dada por
+\begin{equation}
+    R_l(r)=A_lj_l(kr)+B_ly_l(kr).
+\end{equation}
+Detuvimos nuestro análisis aquí y nos dimos por satisfechos. Sin embargo, hay un par de puntos por arreglar. 
+\subsection{Funciones de Bessel y Neumann de órdenes no enteros} La función de Bessel 
+\begin{equation}
+    J_n(x)=\sum_{s=0}^\infty \frac{(-1)^s}{s!(n+s)!}\left(\frac{x}{2}\right)^{n+2s}
+\end{equation}
+es válida para $n\in \mathbb{Z}^+$. Sin embargo, para un $\nu\notin \mathbb{Z}^+$ tenemos un problema, ya que $(\nu+s)!$ no está definido para valores racionales. Este problema no puede ser ignorado ya que $J_{l+1/2}$ es de orden no entero necesariamente, pues $l$ es entero. Para poder resolver este problema recurrimos a la función generatriz
+\begin{equation}
+    g(x,t)=\exp\left[\frac{x}{2}\left(t-\frac{1}{t}\right)\right].
+\end{equation}
+Siguiendo el mismo proceso que usamos en el capítulo 6 para encontrar relaciones de recurrencia para los polinomios de Legendre, podemos llegar a las relaciones 
+\begin{align}
+    J_{n-1}(x)+J_{n+1}(x)&=\frac{2n}{x}J_n(x),\\
+    J_{n-1}(x)-J_{n+1}(x)&=2J'_n(x).
+\end{align}
+Con estas relaciones o, de manera más sencilla, recordando que la función Gamma es como la extensión del factorial (o por inspiración divina, también es válido) podemos calcular la función de Bessel de orden no entero cómo 
+\begin{equation}
+    J_\nu(x)=\sum_{s=0}^\infty \frac{(-1)^s}{s!\Gamma(\nu+s+1)}\left(\frac{x}{2}\right)^{\nu+2s}.
+\end{equation}
+Si $\nu=n\in \mathbb{Z}^+$ recuperamos la ecuación (8.12). Además, se puede demostrar por sustitución directa de (8.16) en la ecuación de Bessel que efectivamente esta función cumple con la ecuación de Bessel (ejercicio para el lector). Además, para órdenes no enteros, $J_\nu$ y $J_{-\nu}$ son independientes (ejercicio para el lector), por lo que podemos definir a las funciones de Neumann de orden no entero de la siguiente manera
+\begin{equation}
+    Y_\nu(x)=\frac{\cos(\nu\pi)J_\nu(x)-J_{-\nu(x)}}{\sen(\nu\pi)}.
+\end{equation}
+\subsection{Funciones de Bessel y Neumann esféricas}
+
+Ahora que ya tenemos bien definidas las funciones de Bessel y de Neumann para el caso en el que su orden no sea entero, podemos usar las funciones de Bessel y Neumann esféricas dadas por (8.9) y (8.10). En el caso de la función de Neumann esférica, usando la ecuación (8.17) podemos escribirla como
+\begin{equation}
+    y_l(x)=\frac{\cos\left[\left(l+\frac{1}{2}\right)\pi\right]j_l(x)-j_{-(l+1)}(x)}{\sen\left[\left(l+\frac{1}{2}\right)\pi\right]}.
+\end{equation}
+\subsection{Funciones de Hankel Esféricas}
+
+De manera general, quisiéramos que todas las soluciones de una ecuación diferencial se porten  ``bien'' tanto en el 0 como en el infinito. Para lograr esto con las funciones de Bessel y de Neumann esféricas, definimos una función que es combinación lineal de ambas y se la conoce como función de Hankel esférica. Tenemos dos tipos de esta función:
+\begin{align}
+    h_l^{(1)}(x)&=j_l(x)+iy_l(x),\\
+    h_l^{(2)}(x)&=j_l(x)-iy_l(x).
+\end{align}
+Cuando $x\to\infty$ (no tomamos el límite, solo analizamos el comportamiento de la función para valores de $x$ muy grandes) las funciones de Hankel se comportan de la siguiente manera
+\begin{align}
+     h_l^{(1)}&\to (-i)^{l+1}\frac{e^{ix}}{x},\\
+     h_l^{(2)}&\to i^{l+1}\frac{e^{-ix}}{x}.
+\end{align}
+La expresión (8.21) describe un comportamiento de una onda esférica que se propaga por el espacio y (8.22) describe una onda que se comprime en el origen. 

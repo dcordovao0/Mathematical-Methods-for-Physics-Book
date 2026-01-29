@@ -1,0 +1,1197 @@
+\section{Introducción} Antes de atacar ecuaciones diferenciales, debemos definir claramente los términos que se van a utilizar.
+\begin{definition}
+    Se dice que una variable es independiente cuando su valor no depende de ningún parámetro fuera de ella misma. Por ejemplo: $\bmR, t$.
+\end{definition}
+\begin{definition}
+    Se dice que una variable es dependiente cuando su valor depende de otra variable, puede depender del espacio, del tiempo, de ambos o de cualquier otro parámetro. Por ejemplo:$V(\bmR),\mathbf{v}(t),\mathbf{E}(\bmR),\mathbf{F}(\bmR,t)$.
+\end{definition}
+\begin{definition}
+    Una ecuación diferencial es ordinaria (EDO) cuando sus derivadas son con respecto a una sola variable. Por ejemplo:
+    \begin{equation*}
+        m\frac{d^2\bmR(t)}{dt^2}=\mathbf{F}(\bmR(t)).
+    \end{equation*}
+\end{definition}
+\begin{definition}
+    Una ecuación diferencial es parcial (EDP) cuando sus derivadas son con respecto a dos o más variables. Por ejemplo:
+    \begin{equation*}
+        \nabla^2V(\bmR)=0.
+    \end{equation*}
+\end{definition}
+\begin{definition}
+    El orden de una ecuación diferencial es la derivada más alta que hay en la ecuación.
+\end{definition}
+\begin{definition}
+    Una ED es homogénea cuando la función y sus derivadas son los únicos términos en la ecuación. Por ejemplo:
+    \begin{equation*}
+        \frac{\partial f(x)}{\partial x}+af(x)=0.
+    \end{equation*}
+\end{definition}
+\begin{definition}
+    Una ED es no homogénea cuando hay un término de fuente, es decir, cuando hay otras funciones además de la función y sus derivadas. Por ejemplo:
+    \begin{equation*}
+        \frac{\partial f(x)}{\partial x}-c(x)=0
+    \end{equation*}
+\end{definition}
+La diferencia entre ED homogéneas y no homogéneas es que para el caso de la homogénea debe haber una condición inicial $\neq 0$ para que la solución sea $\neq 0$. Esto se puede ver usando una aproximación a la ED. Tomando la ecuación de la Def.4.6 y haciendo una aproximación tenemos:
+\begin{equation*}
+    \frac{f_{n+1}-f_n}{\Delta x}+af_n=0 \to f_{n+1}=f_n-a\Delta x f_n,
+\end{equation*}
+notamos que $f_n=0$, la solución será 0. Por otro lado, aproximando la ecuación de la Def. 4.7 tenemos:
+\begin{equation*}
+    \frac{f_{n+1}-f_n}{\Delta x}=c_n\to f_{n+1}=f_n+\Delta xc_n,
+\end{equation*}
+en cambio en esta ecuación notamos que aunque $f_n=0$, el término de fuente ($c(x)$) no permite que la solución sea 0 incluso si la condición inicial es 0.
+\begin{definition}
+    Se dice que una ED es lineal cuando su operador diferencial es lineal. Es decir, el operador diferencial $L$ cumple con 
+    \begin{equation*}
+        L[\alpha f(x)+\beta g(x)]=\alpha L[f(x)]+\beta L[g(x)]
+    \end{equation*}
+\end{definition}
+\begin{definition}
+    Una ED es no lineal cuando su operador diferencial no es lineal.
+\end{definition}
+\begin{definition}
+    Se dice que dos funciones f,g son independientes si es que cumplen con 
+    \begin{equation*}
+        \langle f|g \rangle=\int f(x)g(x)dx
+    \end{equation*}
+\end{definition}
+
+Antes de ver métodos para resolver EDO, comencemos con uno de los ejemplos más conocidos en física: el oscilador armónico.
+\begin{example}
+    Encontrar la solución para la ecuación diferencial
+    \begin{equation*}
+        \frac{d^2f(x)}{dx^2}+f(x)=0.
+    \end{equation*}
+\end{example}
+Conocemos que esta EDO tiene 2 soluciones independientes:
+\begin{equation*}
+    g(x)=\sen x, \quad h(x)=\cos x.
+\end{equation*}
+Podemos comprobar que estas soluciones son independientes calculando el producto punto entre ellas en e intervalo de interés, es decir:
+\begin{equation*}
+    \int_0^{2\pi}\sen x \cos x dx=0.
+\end{equation*}
+La solución general de la EDO viene dada por una combinación lineal de estas soluciones:
+\begin{equation*}
+    f(x)=ag(x)+bh(x)=a\sen x+b\cos x.
+\end{equation*}
+Puedo explorar todo el espacio de soluciones con esta base, por lo que puedo pensar en las soluciones independientes como coordenadas ortogonales de un espacio de funciones. Se llega a una solución cuando se toman en cuenta las condiciones de borde.
+
+Veamos ahora como se comporta una EDO no homogénea.
+
+\begin{example}
+    Encontrar la solución de la EDO
+    \begin{equation*}
+        \frac{d^2f(x)}{dx^2}+f(x)=F_0\sen x.
+    \end{equation*}
+\end{example}
+Para esta EDO, además de la solución de la homogénea, se va a tener la solución particular $p(x)$. Por la forma de la ecuación, intentemos buscar una solución de la forma 
+\begin{equation*}
+    p(x)=c(x)\cos x.
+\end{equation*}
+Calculemos la primera y segunda derivada de $p(x)$:
+\begin{equation*}
+    \frac{dp(x)}{dx}=-c(x)\sen x+\frac{dc(x)}{dx}\cos x
+\end{equation*}
+\begin{equation*}
+    \frac{d^2p(x)}{dx^2}=-c(x)\cos x-2\frac{dc(x)}{dx}\sen x+\frac{d^2c(x)}{dx^2}\sen x.
+\end{equation*}
+Ponemos como condición que 
+\begin{equation*}
+    \frac{d^2c(x)}{dx^2}=0,
+\end{equation*}
+esta condición es impuesta debido a que al lado derecho tenemos un seno multiplicado por una constante, por lo que esperaríamos que $c(x)$ sea, máximo, una ecuación lineal. Reemplazando $p(x)$ en la ecuación tenemos:
+\begin{equation*}
+    -c(x)\cos c-2\frac{dc(x)}{dx}\sen x+c(x)\cos=F_0\sen x\to \frac{dc(x)}{dx}=-\frac{F_0}{2}.
+\end{equation*}
+Resolviendo para $c(x)$ tenemos:
+\begin{equation*}
+    c(x)=-\frac{F_0}{2}x.
+\end{equation*}
+Por lo tanto, la solución particular será:
+\begin{equation*}
+    p(x)=-\frac{F_0}{2}x\cos x.
+\end{equation*}
+
+Ahora que vimos estos ejemplos, que seguramente el estudiante se ha topado más de una vez hasta el momento, veamos cómo resolver una EDO en casos concretos.
+
+\section{Ecuaciones Diferenciales Ordinarias Lineales}
+\subsection{Ecuaciones Separables} Una EDO es separable cuando tiene la forma
+\begin{equation}
+    \frac{dy}{dx}=-\frac{P(x)}{Q(y)}.
+\end{equation}
+Esta EDO se resuelve fácilmente calculando
+\begin{equation}
+    \int_{x_0}^xP(x')dx'+\int_{y_0}^yQ(y')dy'=0.
+\end{equation}
+
+\subsection{Diferencial Exacto}
+Sea la EDO
+\begin{equation*}
+    P(x,y)dx+Q(x,y)dx=0.
+\end{equation*}
+Si es que el diferencial es exacto, podemos igualar el lado izquierdo de la ecuación anterior con 
+\begin{equation}
+    d\phi=\frac{\partial\phi}{\partial x}dx+\frac{\partial \phi}{\partial y}dy,
+\end{equation}
+esto implica que 
+\begin{equation*}
+    \frac{\partial\phi}{\partial x}=P(x,y)\quad\land\quad \frac{\partial \phi}{\partial y}=Q(x,y).
+\end{equation*}
+Si es que queremos saber que esto existe calculamos
+\begin{equation*}
+    \frac{\partial^2\phi}{\partial x\partial y}=\frac{\partial P(x,y)}{\partial y}\quad\land\quad \frac{\partial^2 \phi}{\partial x\partial y}=\frac{\partial Q(x,y)}{\partial x}.
+\end{equation*}
+Esto significa que $d\phi$ es un diferencial y se puede resolver la EDO de esta manera si y solo si
+\begin{equation*}
+    \frac{\partial P(x,y)}{\partial y}=\frac{\partial Q(x,y)}{\partial x}.
+\end{equation*}
+Si es que se cumple con esta condición, la solución viene dada por
+\begin{equation}
+    \phi(x,y)=\int_{x_0}^xP(x',y_0)dx'+\int_{y_0}^yQ(x_0,y')dy'=const.
+\end{equation}
+
+\subsection{EDO homogénea de orden m} Si el orden combinado de $x,y$ en todos los términos se suma como $m$ se puede sustituir 
+\begin{equation}
+    y=xv.
+\end{equation}
+\begin{example}
+    Resolver la EDO
+    \begin{equation*}
+        \frac{dy}{dx}+\frac{2x+y}{x}=0.
+    \end{equation*}
+\end{example}
+Reescribimos la ecuación a 
+\begin{equation*}
+    (2x+y)dx+xdy=0
+\end{equation*}
+El orden de ambos términos es 2, por lo que podemos usar la sustitución
+\begin{equation*}
+    y=xv\Rightarrow dy=vdx+xdv,
+\end{equation*}
+con esto tenemos:
+\begin{align*}
+    (2+v)xdx+x(vdx+xdv)&=0\\
+    (2+2v)dx+xdv&=0\\
+    \frac{dx}{x}&=-\frac{1}{2}\frac{dv}{1+v}.
+\end{align*}
+Esta es una EDO separable, por lo que se considera resulto el problema.
+
+\subsection{Ecuación Isobárica} Se le asigna un peso diferente a $x,y$. Se le asigna a $x$ un peso de 1 y a $y$ un peso de $m$. Con esto se calcula el valor de $m$ igualando los pesos de los términos de la ecuación para hacer la sustitución
+\begin{equation}
+    y=x^mv.
+\end{equation}
+\begin{example}
+    Resolver la EDO
+    \begin{equation*}
+    \frac{dy}{dx}+\frac{x^2-y}{x}=0
+\end{equation*}
+\end{example}
+Reescribimos la ecuación:
+\begin{equation*}
+    (x^2-y)dx+xdy=0.
+\end{equation*}
+Tenemos que $x^2dx$ es de orden 3 y $ydx,xdy$ son de orden $1+m$. Por lo tanto $1+m=3\Rightarrow m=2$ y podemos usar la sustitución
+\begin{equation*}
+    y=x^2v\Rightarrow dy=2xvdx+x^2dv,
+\end{equation*}
+reemplazamos en la ecuación para obtener:
+\begin{align*}
+    (1-v)x^2dx+x^2(xdv+2vdx)&=0\\
+    (1+v)dx+xdv&=0\\
+    \frac{dx}{x}&=-\frac{dv}{1+v}
+\end{align*}
+esta es una EDO separable, por lo que consideramos como resuelta la ecuación.
+
+\subsection{EDO con coeficientes constantes} Los ejemplos anteriores nos sugieren una manera de atacar a las EDO de la forma
+\begin{equation}
+   \frac{d^nf(x)}{dx^n}+a_{n-1}\frac{d^{n-1}f(x)}{dx^{n-1}}+\cdots+a_1\frac{df(x)}{dx}+a_0f(x)=F(x),
+\end{equation}
+donde $a_i$ son coeficientes constantes. Podemos buscar las soluciones de la homogénea con la función
+\begin{equation}
+    f(x)=e^{mx},
+\end{equation}
+dónde $m$ es la solución de 
+\begin{equation}
+    m^n+a_{n-1}m^{n-1}+\cdots+a_1m+a_0=0.
+\end{equation}
+Luego de esto se busca la solución particular $p(x)$. Con esto, la solución general queda de la siguiente manera:
+\begin{equation}
+    f(x)=\sum_{i=1}^nc_ie^{m_ix}+p(x).
+\end{equation}
+
+Si es que $F(x)=cte$, el sistema va a tender a llegar a un estado de equilibrio. Si es que $F(x)$ oscila, el sistema buscará un estado de equilibrio para la envoltura de la onda. 
+
+\subsection{EDO lineales con coeficientes no constantes} Sea la EDO de la forma
+\begin{equation}
+    \frac{dy(x)}{dx}+p(x)y(x)=q(x).
+\end{equation}
+Para resolver esta ecuación trato de usar el método del diferencial exacto. Si es que no se puede resolver de esta manera, multiplico por una función $\alpha(x)$ para que lo sea. Es decir, 
+\begin{equation*}
+    \alpha(x)\frac{dy(x)}{dx}+\alpha(x)p(x)y(x)=\alpha(x)q(x).
+\end{equation*}
+Defino $\alpha(x)$ de la siguiente manera:
+\begin{equation*}
+    \frac{d}{dx}[\alpha(x)y(x)]=\alpha(x)\frac{dy(x)}{dx}+\alpha(x)p(x)y(x).
+\end{equation*}
+Por regla de la cadena, tenemos que
+\begin{equation*}
+     \frac{d}{dx}[\alpha(x)y(x)]=\alpha(x)\frac{dy(x)}{dx}+\frac{d\alpha(x)}{dx}y(x).
+\end{equation*}
+Comparando ambas ecuaciones, llegamos a
+\begin{equation*}
+    \frac{d\alpha(x)}{dx}=\alpha(x)p(x),
+\end{equation*}
+resolviendo la ecuación separable,
+\begin{equation*}
+    \int \frac{d\alpha(x)}{\alpha(x)}=\int p(x)dx\to\alpha(x)=e^{\int p(x)dx}.
+\end{equation*}
+Ahora, por definición, 
+\begin{equation*}
+    \frac{d}{dx}[\alpha(x)y(x)]=\alpha(x)q(x),
+\end{equation*}
+integrando obtenemos:
+\begin{equation*}
+    \alpha(x)y(x)=\int\alpha(x)q(x)+C.
+\end{equation*}
+Reemplazando la expresión para $\alpha(x)$ encontramos la solución
+\begin{equation}
+    y(x)=e^{-\int^xp(z)dz}\left[\int e^{\int^xp(z)dz}q(x)dx+C\right].
+\end{equation}
+Como notamos, esta solución se compone de dos partes, $y(x)=y_1(x)+y_2(x)$. La función $y_2$, i.e.
+\begin{equation}
+    y_2(x)=ce^{-\int^xp(z)dz}
+\end{equation}
+es la solución de la homogénea asociada.
+
+Ahora, se enunciarán dos teoremas importantes sobre las EDO lineales. 
+\begin{theorem}
+    Si existen dos soluciones independientes de la EDO lineal
+    \begin{equation*}
+        y'(x)+p(x)y(x)=q(x),
+    \end{equation*}
+    su diferencia es solución a la homogénea.
+\end{theorem}
+\begin{proof}
+    Sean $y_1,y_2$ soluciones independientes de la EDO lineal. Con esto tenemos las ecuaciones
+    \begin{align*}
+        y_1'+py_1&=q\\
+        y_2'+py_2&=q
+    \end{align*}
+    Si restamos la primera ecuación a la segunda obtenemos
+    \begin{equation*}
+        (y_2-y_1)'+p(y_2-y_1)=0.
+    \end{equation*}  
+    Entonces $\Delta y=y_2-y_1$ es la solución de la homogénea.
+\end{proof}
+
+\begin{theorem}
+    Si $y_1,y_2$ son soluciones para la EDO lineal y homogénea
+    \begin{equation*}
+        y'(x)+p(x)y(x)=0,
+    \end{equation*}
+    entonces $y_1=cy_2$.
+\end{theorem}
+\begin{proof}
+    Dadas las soluciones se tiene
+    \begin{equation*}
+        \frac{y_1'}{y_1}=-p\quad,\quad \frac{y_2'}{y_2}=-p,
+    \end{equation*}
+    igualando las ecuaciones:
+    \begin{equation*}
+        \frac{y_1'}{y_1}=\frac{y_2'}{y_2}\Rightarrow \ln{y_1}=\ln{y_2}+c_1.
+    \end{equation*}
+    Por propiedades de los logaritmos:
+    \begin{equation*}
+        \ln{y_2}+c_1=\ln{cy_2}, \quad \text{con }c_1=\ln{c}. 
+    \end{equation*}
+    Finalmente, llegamos a
+    \begin{equation*}
+        \ln{y_1}=\ln{cy_2}\Rightarrow y_1=cy_2.
+    \end{equation*}
+\end{proof}
+
+Esto es todo lo que se va a discutir sobre las EDO lineales. A continuación, vamos a desarrollar técnicas que nos permitirán atacar a EDO de segundo orden, que son las ecuaciones más comunes e importantes en física. 
+
+\section{EDO de segundo orden}
+\subsection{Puntos Singulares}Para las EDO de segundo orden no hay un método que funcione siempre. Empecemos analizando las EDO de segundo orden homogéneas, es decir, ecuaciones de la forma
+\begin{equation}
+    y''(x)+P(x)y'(x)+Q(x)y(x)=0.
+\end{equation}
+Lo primero que vamos a hacer es analizar si es que la ecuación tiene puntos singulares. Definamos primero qué es un punto singular. 
+\begin{definition}
+    Se dice que el punto $x_0$ es singular regular si es que 
+    \begin{equation}
+        \lim_{x\to x_0}P(x)=\infty \quad\lor\quad \lim_{x\to x_0}Q(x)=\infty,
+    \end{equation}
+    y los siguientes límites convergen:
+    \begin{equation}
+        \lim_{x\to x_0}(x-x_0)P(x)= p \quad\land\quad \lim_{x\to x_0}(x-x_0)^2Q(x)= q,\quad p,q<+\infty
+    \end{equation}
+\end{definition}
+\begin{definition}
+    El punto $x_0$ es un punto singular irregular si es que 
+    \begin{equation}
+        \lim_{x\to x_0}(x-x_0)P(x)= \infty
+         \quad\lor\quad \lim_{x\to x_0}(x-x_0)^2Q(x)=\infty.
+    \end{equation}
+\end{definition}
+
+La misma ecuación diferencial puede tener más de un punto singular. Usualmente, los puntos singulares aparecen en el 0 y en $\infty$. Para tratar de mejor manera con los límites al infinito definimos el cambio de variable 
+\begin{equation}
+    z=\frac{1}{x}.
+\end{equation}
+Definimos además
+\begin{equation}
+    w(z)=y(z^{-1}).
+\end{equation}
+Con este cambio de variable calculamos la primera derivada de $y$:
+\begin{equation*}
+    y'=\frac{dy(x)}{dx}=\frac{dy(z^{-1})}{dz}\frac{dz}{dx}=-\frac{1}{x^2}w'=-z^2w.
+\end{equation*}
+Además, la segunda derivada de $y$ es:
+\begin{equation*}
+    y''=\frac{d}{dx}(-z^2w')=z^4w''+2z^3w'.
+\end{equation*}
+Reemplazamos esto en la ecuación diferencial para obtener:
+\begin{equation*}
+    z^4w''+2z^3w'-P(z^{-1})z^2w'+Q(z^{-1})w(z)=0,
+\end{equation*}
+dividiendo todo para $z^4$ obtenemos:
+\begin{equation}
+    w''+\frac{2z-P(z^{-1})}{z^2}w'+\frac{Q(z^{-1})}{z^4}w=0.
+\end{equation}
+Defino ahora 
+\begin{equation}
+    \mathcal{P}(z)=\frac{2z-P(z^{-1})}{z^2}\quad,\quad\mathcal{Q}(z)=\frac{Q(z^{-1})}{z^4}.
+\end{equation}
+Con esto podemos probar los límites para $x\to\infty$ de manera más sencilla, ya que mandar a $x$ al infinito es equivalente a $z\to0$.
+\begin{example}
+    Encontrar los puntos singulares de la EDO 
+    \begin{equation*}
+        x^2y''+xy'+(x^2-\nu^2)y=0.
+    \end{equation*}
+    Esta ecuación se conoce como la ecuación de Bessel.
+\end{example}
+Primero, tenemos que
+\begin{equation*}
+    P(x)=\frac{1}{x}\quad,\quad Q(x)=1-\frac{\nu^2}{x^2},
+\end{equation*}
+calculamos los límites cuando $x\to0$ para ver si 0 es un punto singular y, si lo es, ver de que tipo.
+\begin{equation*}
+    \lim_{x\to 0}P(x)=\infty \quad,\quad \lim_{x\to 0}Q(x)=-\infty
+\end{equation*}
+\begin{equation*}
+    \lim_{x\to 0}xP(x)=1 \quad,\quad \lim_{x\to 0}x^2Q(x)=-n^2.
+\end{equation*}
+Por lo tanto 0 es un punto singular regular. Ahora veamos que pasa con $\infty$. Encontremos primero $\mathcal{P}$ y $\mathcal{Q}$.
+\begin{align*}
+    \mathcal{P}(z)&=\frac{2z-z}{z^2}=\frac{1}{z}
+    \mathcal{Q}(z)&=\frac{1}{z^4}(1-\nu^2z^2)=\frac{1}{z^4}-\frac{\nu^2}{z^2}.
+\end{align*}
+Tomamos los respectivos límites:
+\begin{equation*}
+    \lim_{z\to 0}\mathcal{P}(z)=\infty \quad,\quad \lim_{z\to 0}\mathcal{Q}(z)=\infty
+\end{equation*}
+\begin{equation*}
+    \lim_{z\to 0}z\mathcal{P}(z)=1 \quad,\quad \lim_{z\to 0}z^2\mathcal{Q}(z)=\infty.
+\end{equation*}
+Por lo tanto, $\infty$ es un punto singular irregular. \hfill$\blacksquare$
+
+\subsection{Método de Frobenius} El método de Frobenius es una técnica para resolver EDO de segundo orden alrededor de un punto que no es singular o que es singular regular. La solución que nos da este método viene en forma de serie de potencias. Lo que hacemos, es tratar de buscar una solución de la forma
+\begin{equation}
+    y(x)=\sum_{i=0}^\infty a_i(x-x_0)^{s+i}, \quad a_0\neq0
+\end{equation}
+Usualmente, la solución se busca alrededor del 0, por lo que la solución se simplifica a 
+\begin{equation}
+    y(x)=\sum_{i=0}^\infty a_ix^{s+i}.
+\end{equation}
+La primera y segunda derivada de $y$ vienen dadas por
+\begin{align}
+    y'(x)&=\sum_{i=0}^\infty (s+i)a_ix^{s+i-1},\\
+    y''(x)&=\sum_{i=0}^\infty (s+i-1)(s+i)a_ix^{s+i-2},
+\end{align}
+respectivamente. Veamos un ejercicio para saber cómo se aplica este método. 
+\begin{example}
+    Encontrar la solución de la EDO $y''(x)+\omega^2y(x)=0$.
+\end{example}
+Aunque usar el método de Frobenius para esta ecuación es como matar a un hámster con un bomba nuclear (esta EDO tiene coeficientes constantes, no tiene ninguna irregularidad en el 0 y conocemos su solución desde el colegio), este ejemplo es solo para entender cómo funciona este método.
+
+Reemplazamos los valores de $y(x)$ y $y''(x)$ en la EDO y obtenemos:
+\begin{equation*}
+    \sum_{i=0}^\infty (s+i-1)a_ix^{s+i-2}+\omega^2\sum_{i=0}^\infty a_ix^{s+i}=0,
+\end{equation*}
+como el índice de las sumatorias es el mismo, podemos escribir
+\begin{equation*}
+    \sum_{i=0}^\infty [(s+i-1)(s+i)a_ix^{s+i-2}+\omega^2a_ix^{s+i}]=0.
+\end{equation*}
+Veamos qué pasa con el término en corchetes cuando cambiamos el índice para ver si podemos encontrar un patrón:
+\begin{align*}
+    \text{Con }i=0:&\quad s(s-1)a_0x^{s-2}+\omega^2a_0x^s \\
+    \text{Con }i=1:&\quad (s+1)sa_1x^{s-1}+\omega^2a_1x^{s+1}\\
+    \text{Con }i=2:&\quad (s+2)(s+1)a_2x^{s}+\omega^2a_2x^{s+2}\\
+    \text{Con }i=3:&\quad (s+3)(s+2)a_3x^{s+1}+\omega^2a_3x^{s+3},
+\end{align*}
+y así sucesivamente. Para que el resultado sea 0, se deben cancelar los términos que tengan el $x$ elevado el mismo grado. Notamos que desde $x^s$ se pueden cancelar los términos entre sí. Sin embargo, $x^{s-2},x^{s-1}$ no tienen ninguna pareja, por lo que se debe imponer condiciones para que el resultado sea 0. Para $x^{s-2}$ tenemos:
+\begin{equation*}
+    s(s-1)a_0x^{s-2}=0,
+\end{equation*}
+debido a que se impuso que $a_0\neq0$ y $x^{s-2}$ es una variable, la condición que se debe cumplir es que
+\begin{equation*}
+    s(s-1)=0\to s=0\lor s=1.
+\end{equation*}
+A esta ecuación cuadrática que nos da los valores de $s$ se la conoce como la ecuación característica o indicial. Para la segunda condición tenemos:
+\begin{equation*}
+    (s+1)sa_1=0,
+\end{equation*}
+ya tenemos dos valores de $s$ dados por la primera condición. Si es que $s=0,a_1$ puede tener cualquier valor. Pero si es que $s=1,a_1=0$ necesariamente. Recordemos que no estamos buscando una solución general, solo queremos una solución, por lo que elegimos que $a_1=0$ para que se pueda usar el valor de $s=1$. Ahora que tenemos esto, busquemos un patrón para los coeficientes que acompañan a cada $x^{s+j}$, ya que queremos que estos sean iguales a 0. Es decir,
+\begin{equation*}
+    \sum_jB_jx^{s+j}=0\Rightarrow B_j=0.
+\end{equation*}
+Escribamos los primeros términos para encontrar el patrón
+\begin{align*}
+    B_0&=\omega^2a_0+(s+2)(s+1)a_2\\
+    B_1&=\omega^2a_1+(s+3)(s+2)a_3
+\end{align*}
+De manera general, notamos que 
+\begin{equation*}
+    B_n=\omega^2a_n+(n+s+2)(n+s+1)a_{n+2},
+\end{equation*}
+Con la condición de que $B_n=0$ se tiene
+\begin{equation*}
+    a_{n+2}=-\frac{\omega^2a_n}{(n+s+2)(n+s+1)},
+\end{equation*}
+a esta relación se la conoce como relación de recurrencia, y es lo que nos permitirá encontrar la solución. Debido a que $a_1=0$, debido a la relación de recurrencia tenemos que
+\begin{equation*}
+    a_1=a_3=\cdots=a_2n+1=0.
+\end{equation*}
+Esto nos deja únicamente con los coeficientes $a_2n$. Usando el primer valor de $s,s=0$ tenemos:
+\begin{equation*}
+    a_{n+2}=-\frac{\omega^2}{(n+2)(n+1)}a_n.
+\end{equation*}
+Calculando los primeros términos se tiene
+\begin{align*}
+    a_2=&-\frac{\omega^2}{2!}a_0\\
+    a_4=&-\frac{\omega^2}{4\cdot3}a_2=-\frac{\omega^2}{4\cdot3}\left(-\frac{\omega^2}{2!}a_0\right)=\frac{\omega^4}{4!}a_0\\
+    a_6=&-\frac{\omega^2}{6\cdot5}a_4=-\frac{\omega^2}{6\cdot5}\left(\frac{\omega^4}{4!}a_0\right)=-\frac{\omega^6}{6!}a_0,
+\end{align*}
+de manera general:
+\begin{equation*}
+    a_{2n}=(-1)^n\frac{\omega^{2n}}{(2n)!}a_0.
+\end{equation*}
+Poniendo esto en la solución tenemos:
+\begin{equation*}
+    y_0(x)=a_0\sum_n(-1)^n\frac{\omega^{2n}}{(2n)!}x^{2n},
+\end{equation*}
+recordando expansión en series de Taylor, vemos que esta suma de polinomios es el coseno, por lo tanto
+\begin{equation*}
+    y_0(x)=a_0\cos(\omega x).
+\end{equation*}
+Hacemos el mismo proceso para $s=1$ y vamos a llegar a:
+\begin{align*}
+    a_{2n}=&(-1)^n\frac{\omega^{2n}}{(2n+1)!}a_0\\
+    y_1(x)=&\frac{a_0}{\omega}\sum_n(-1)^n\frac{\omega^{2n+1}}{(2n+1)!}x^{2n+1}=\frac{a_0}{\omega}\sen(\omega x).
+\end{align*}
+De esta manera hemos encontrado las dos soluciones independientes de la EDO, la solución general viene dada por
+\begin{equation*}
+    y(x)=a_0\cos(\omega x)+b_0\sen(\omega x),
+\end{equation*}
+que es la solución que ya conocíamos. \hfill$\blacksquare$
+
+\subsection{Limitaciones del Método de Frobenius}
+
+\subsubsection{Puntos singulares irregulares}
+
+El método de Frobenius funciona en la mayoría de los casos en puntos que no son singulares o son singulares regulares. Cuando el punto es singular irregular, el método, por lo general, falla y no da ninguna solución.
+
+\begin{example}
+    Usar el método de Frobenius para hallar la solución de la EDO 
+    \begin{equation*}
+        y''-\frac{6}{x^3}y=0.
+    \end{equation*}
+\end{example}
+Debido a que 
+\begin{equation*}
+    \lim_{x\to 0}x^2Q(x)=\infty,
+\end{equation*}
+0 es un punto singular irregular. Usando $y(x)=\sum_{i}a_ix^{s+i}$ se tiene:
+\begin{align*}
+    \sum_{i=0}^\infty(s+i-1)(s+i)a_ix^{s+i-2}-\frac{6}{x^3} \sum_{i=0}^\infty a_ix^{s+i}&=0\\
+    \sum_{i=0}^\infty\left[(s+i-1)(s+i)a_ix^{s+i-2}-6a_ix^{s+i-3}\right]&=0
+\end{align*}
+Analizando los primeros términos tenemos:
+\begin{align*}
+    i=0:&\quad s(s-1)a_0x^{s-2}-6a_0x^{s-3}\\
+    i=1:&\quad (s+1)sa_1x^{s-1}-6a_1x^{s-2}\\
+    i=2:&\quad (s+2)(s+1)a_2x^{s}-6a_2x^{s-1}
+\end{align*}
+Desde $x^{s-2}$ todos los términos tienen una pareja, por lo que debemos condicionar el término que acompaña a $x^{s-3}$:
+\begin{equation*}
+    -6a_0x^{s-3}=0\Rightarrow a_0=0.
+\end{equation*}
+
+Nuestra única asunción para usar el método de Frobenius es que $a_0\neq0$, por lo que el método falla en encontrar una solución a esta EDO. \hfill$\blacksquare$
+
+\subsubsection{Una sola solución}
+
+Aunque este método nos de una solución a la EDO, no nos asegura que encontremos las dos soluciones independientes a la ecuación. 
+
+\begin{example}
+    Resolver la EDO
+    \begin{equation*}
+        x^2y''+xy'+(x^2-\nu^2)y=0.
+    \end{equation*}
+\end{example}
+Reescribimos la ecuación como 
+\begin{equation*}
+    y''+\frac{1}{x}y'+\left[1-\left(\frac{\nu}{x}\right)^2\right]y=0,
+\end{equation*}
+esto no afecta al resultado, solo es por cuestiones estéticas de dejar solo al término de segundo orden. Asumimos una solución de la forma $y(x)=\sum_{i}a_ix^{s+i}$ y reemplazamos en la ecuación
+\begin{align*}
+    \sum_{i=0}^\infty\left\{(s+i-1)(s+i)a_ix^{s+i-2}+(s+i)a_ix^{s+i-2}+a_ix^{s+i}-\nu^2a_ix^{s+i-2}\right\}&=0\\
+    \sum_{i=0}^\infty\left\{a_ix^{s+i-2}\left[(s+i)^2-\nu^2\right]+a_ix^{s+i}\right\}&=0\\
+\end{align*}
+Miramos los primeros términos:
+\begin{align*}
+    i=0:&\quad a_0x^{s-2}(s^2-\nu^2)+a_0x^s\\
+    i=1:&\quad a_1x^{s-1}[(s+1)^2-\nu^2]+a_1x^{s+1}\\
+    i=2:&\quad a_2x^{s}[(s+2)^2-\nu^2]+a_2x^{s+2}\\
+    i=3:&\quad a_3x^{s+1}[(s+3)^2-\nu^2]+a_3x^{s+3}.
+\end{align*}
+Desde $x^s$ hay una pareja para cada potencia, por lo que se debe cumplir que
+\begin{align*}
+    a_0x^{s-2}(s^2-\nu^2)=0&\Rightarrow s=\pm \nu,\\
+    a_1x^{s-1}[(s+1)^2-\nu^2]=0&\Rightarrow a_1=0.
+\end{align*}
+Buscamos la relación de recurrencia usando
+\begin{equation*}
+    \sum_jB_jx^{s+j}=0\Rightarrow B_j=0,
+\end{equation*}
+expandiendo los primeros términos tenemos:
+\begin{align*}
+    B_0=&a_0+a_2[(s+2)^2-\nu^2],\\
+    B_1=&a_1+a_3[(s+3)^2-\nu^2],\\
+    B_j=&a_j+a_{j+2}[(s+j+2)^2-\nu^2]=0,
+\end{align*}
+lo que implica que
+\begin{equation*}
+    a_{j+2}=-a_j\frac{1}{(s+j+2)^2-\nu^2}.
+\end{equation*}
+Escogemos el valor de $s=\nu$ y obtenemos:
+\begin{equation*}
+    a_{j+2}=-a_j\frac{1}{(\nu+j+2)^2-\nu^2}=-a_j\frac{1}{(j+2)(2\nu+j+2)}.
+\end{equation*}
+Debido a que $a_1=0$, tenemos que $a_1=a_3=a_5=\cdots=a_{2n+1}=0$. Para los términos pares tenemos:
+\begin{align*}
+    a_2=&-a_0\frac{\nu!}{2^21!(\nu+1)!},\\
+    a_4=&-a_2\frac{1}{4\cdot 2(\nu+2)}=a_0\frac{\nu!}{2^4 2!(\nu+2)!},\\
+    a_6=&-a_4\frac{1}{6\cdot 2(\nu+3)}=-a_0\frac{\nu!}{2^6 3!(\nu+3)!},\\
+    a_{2p}=&(-1)^p a_0\frac{\nu!}{2^{2p} p!(\nu+p)!}, 
+\end{align*}
+en forma de suma la solución queda
+\begin{equation*}
+    y(x)=a_0\sum_{j=0}^\infty(-1)^j\frac{\nu!x^{\nu+2j}}{2^{2j}j!(\nu+j)!}\\
+\end{equation*}
+\begin{equation}
+    J_n(x)\equiv y(x)=a_02^\nu \nu!\sum_{j=0}^\infty(-1)^j\frac{1}{j!(\nu+j)!}\left(\frac{x}{2}\right)^{\nu+2j}.
+\end{equation}
+A esta función se la conoce como la función de Bessel de primer orden y de grado $\nu$. Ahora, calculemos la solución para $s=-\nu$. Con esto la relación de recurrencia queda:
+\begin{align*}
+    a_{j+2}&=-a_j\frac{1}{(-\nu+j+2)^2-\nu^2}\\
+    &=-a_j\frac{1}{(-2\nu+j+2)(j+2)},
+\end{align*}
+con $j+2=2\nu$, la suma diverge, pues el denominador es igual a 0. Por lo tanto, no podemos encontrar otra solución en serie convergente a la ecuación de Bessel usando el método de Frobenius. Hay algunos métodos que se usan para poder encontrar la segunda solución, los cuales se discutirán más adelante.\hfill $\blacksquare$
+
+\subsection{Teorema de Fuchs}
+
+Tenemos la siguiente EDO
+
+\begin{equation*}
+    y''-\frac{6}{x^2}y=0,
+\end{equation*}
+
+en este caso, 0 es un punto singular regular. Si usamos el método de Frobenius, llegamos a lo siguiente:
+\begin{equation*}
+    \sum_n[(s+n)(s+n-1)-6]a_n x^{s+n-2}=0.
+\end{equation*}
+Aunque el punto es singular regular, no es posible construir una relación de recurrencia. Si es que escogemos $n=0$, llegamos a la ecuación indicial:
+
+\begin{equation*}
+    s(s-1)-6=0\quad\Rightarrow\quad s(s-1)=6,
+\end{equation*}
+lo que da como resultado $s_1=3,s_2=-2$. Ya que no hay relación de recurrencia, las soluciones serían
+\begin{equation*}
+    y_1(x)=a_0x^3\quad, y_2(x)=\frac{a_0}{x^2},
+\end{equation*}
+si es que reemplazamos estas funciones en la ecuación, vemos que son soluciones de la EDO. Por ahora, hemos visto ejemplos de varias EDO que se han resuelto por el método de Frobenius, algunas veces hemos obtenido las 2 soluciones independientes, otras solo hemos obtenido una solución y otras no hemos podido obtener ninguna. Por esta razón es necesaria una manera de generalizar nuestro conocimiento de cuándo el método de Frobenius nos entrega, o no, la solución de una EDO del segundo orden.
+
+\begin{theorem}
+    \textbf{(Teorema de Fuchs)}. Si es que se está expandiendo alrededor de un punto ordinario, o singular regular, la serie obtenida por el método de Frobenius producirá por lo menos una solución. Después de obtener la ecuación indicial, si es que $s_1=s_2$, solo obtendremos una solución. Por otro lado, si es que $s_1\neq s_2$ tendremos dos casos:
+    \begin{itemize}
+        \item $|s_1-s_2|=\eta,\eta\notin \mathbb{Z}$. Se producen dos soluciones necesariamente.
+        \item $|s_1-s_2|=N,N\in \mathbb{N}$. El máx($s_1,s_2$) produce una solución, el otro, no necesariamente.
+    \end{itemize}
+\end{theorem}
+
+\subsection{Simetría de las Soluciones}
+
+Conocemos que las soluciones independientes del oscilador armónico, sacadas con el método de Frobenius, son
+\begin{align*}
+    y_1(x)&=a_0\cos(\omega x),\\
+    y_2(x)&=\frac{a_0}{\omega}\sen(\omega x).
+\end{align*}
+Notamos que la soluciones cumplen tienen la siguiente característica:
+\begin{align*}
+    y_1(-x)=y_1(x)&\quad\text{Paridad Par}\\
+    y_2(-x)=-y_2(x)&\quad\text{Paridad Impar}
+\end{align*}
+Esta característica de las soluciones no es casual. Escribamos el operador diferencial de esta ecuación:
+\begin{equation*}
+    \mathcal{L}(x)=\frac{d}{dx^2}+\omega^2,\quad \mathcal{L}(x)y(x)=0
+\end{equation*}
+Notamos que, para este caso
+\begin{equation*}
+    \mathcal{L}(-x)=\mathcal{L}(x),
+\end{equation*}
+demostremos este resultado formalmente.
+
+\begin{theorem}
+    Sea $x'=-x$, entonces
+    \begin{equation}
+        \frac{d}{dx'}=-\frac{d}{dx} \quad \text{y}\quad \frac{d^2}{dx'^2}=\frac{d^2}{dx^2}.
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Con el cambio de variable $x'=-x$ usamos regla de la cadena y tenemos
+    \begin{equation*}
+        \frac{d}{dx'}=\frac{dx}{dx'}\frac{d}{dx}=-\frac{d}{dx}.
+    \end{equation*}
+    Para la segunda derivada tenemos:
+    \begin{equation*}
+        \frac{d^2}{dx'^2}=\frac{d}{dx'}\left(-\frac{d}{dx}\right)=\frac{dx}{dx'}\frac{d}{dx}\left(-\frac{d}{dx}\right)=-\frac{d}{dx}\left(-\frac{d}{dx}\right)=\frac{d^2}{dx^2}.
+    \end{equation*}
+    Demostrando de esta manera lo que se quería.
+\end{proof}
+Para el operador diferencial del oscilador armónico tenemos
+\begin{equation*}
+    \frac{d^2}{d(-x)^2}+\omega=\frac{d}{dx^2}+\omega^2,
+\end{equation*}
+usando el Teorema 4.1. Por lo que llegamos a la conclusión que $\mathcal{L}(-x)=\mathcal{L}(x)$, es decir, el operador diferencial tiene paridad par. Con esto podemos obtener el siguiente resultado.
+\begin{theorem}
+    Si el operador diferencial $\mathcal{L}(x)$ tiene paridad y $y(x)$ es una solución a la EDO $\mathcal{L}(x)y(x)=0$, entonces $y(-x)$ también es solución a la EDO.
+\end{theorem}
+\begin{proof}
+    Separamos la prueba en dos casos. Para el primer paso supongamos que $\mathcal{L}(x)$ tiene paridad par. Hacemos el cambio de $x$ a $-x$ y tenemos:
+    \begin{equation*}
+        \mathcal{L}(-x)y(-x)=0\Rightarrow \mathcal{L}(x)y(-x)=0,
+    \end{equation*}
+    debido a que que $ \mathcal{L}(x)$ es par. En el caso de que $ \mathcal{L}(x)$ sea impar, tenemos en cambio
+    \begin{equation*}
+        \mathcal{L}(-x)y(-x)=0\Rightarrow -\mathcal{L}(x)y(-x)=0,
+    \end{equation*}
+    el negativo se absorbe multiplicando ambos lados por -1 y obtenemos que $y(-x)$ también solución de la EDO. 
+\end{proof}
+
+Para estas soluciones,podemos tener dos posibilidades:
+\begin{enumerate}
+    \item $y(x)$ y $y(-x)$ son l.d., es decir:
+    \begin{equation*}
+        y(-x)=\alpha y(x),
+    \end{equation*}
+    siendo $\alpha$ un número cualquiera, pero solo nos interesa los casos en los que $\alpha_1=1, \alpha_2=-1$.
+    \item $y(x)$ y $y(-x)$ son l.i.
+\end{enumerate}
+
+En el caso de que las soluciones sean l.i., son las soluciones que queríamos encontrar y no se necesita calcular nada más. Por el otro lado, cuando las soluciones son l.d., puedo construir una función par e impar independientes de la siguiente manera:
+\begin{align}
+    y_{par}(x)&=y(x)+y(-x),\\
+    y_{impar}(x)&=y(x)-y(-x).
+\end{align}
+
+De manera general, cualquier EDO homogénea de segundo orden puede ser par, impar, o ninguna de las 2, i.e., no tiene paridad. Esto depende de la paridad que tengan $P(x)$ y $Q(x)$. Los resultados de la paridad se resumen en la siguiente tabla:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+       $Q(x)/P(x)$  & Par & Impar & Cero & Ninguna \\ \hline
+       Par  & Sin Paridad & Paridad Par & Paridad Par & Sin Paridad \\ \hline
+       Impar  & Sin Paridad & Sin Paridad & Sin Paridad & Sin Paridad \\ \hline
+       Cero  & Sin Paridad & Paridad Par & Paridad Par & Sin Paridad \\ \hline
+       Ninguna  & Sin Paridad & Sin Paridad & Sin Paridad & Sin Paridad\\ \hline
+    \end{tabular}
+    \caption{Paridad del operador diferencial según los valores de $P(x)$ y $Q(x)$}
+    \label{Paridad}
+\end{table}
+
+\subsection{Wronskiano}
+
+Supongamos ahora que un amigo nos da entrega $\phi_1,\phi_2,$\\$\dots,\phi_n$ soluciones de una ecuación diferencial. ¿Cómo sabemos si estas soluciones son l.d. o l.i.? Si que la solución $\phi_j$ es l.d., tenemos:
+\begin{equation*}
+    \phi_j=\sum_{i\neq j}a_i\phi_i,
+\end{equation*}
+reescribiendo tenemos:
+\begin{equation}
+    \sum_\lambda k_\lambda\phi_\lambda=0, \quad \text{con por lo menos un }k_\lambda\neq 0
+\end{equation}
+
+Aplicamos la derivada a este resultado. Usualmente en física, las funciones se comportan de buena manera, por lo que si tenemos $n$ ecuaciones, todas las $\phi_j\in C^{n-1}(\mathbb{R})$, es decir, las funciones pertenecen al espacio de funciones cuya $n-1$-ésima derivada existe y es continua. Con esto, podemos encontrar información sobre los $k_\lambda$, si resolvemos el sistema
+\begin{align*}
+\phi_1& k_1+\phi_2 k_2+\cdots+\phi_n k_n=0\\
+\phi_1'& k_1+\phi_2' k_2+\cdots+\phi_n' k_n=0\\
+\phi_1''& k_1+\phi_2'' k_2+\cdots+\phi_n'' k_n=0\\
+\vdots&\\
+\phi_1&^{n-1} k_1+\phi_2^{n-1} k_2+\cdots+\phi_n^{n-1} k_n=0
+\end{align*}
+
+Todos los $k_i$ son constantes desconocidas. No nos sirve de nada resolver el sistema para calcular los $k_i$, sino que queremos saber si estas ecuaciones son l.d. o l.i. Para esto podemos calcular el siguiente determinante:
+\begin{equation}
+    W(x)\equiv \begin{vmatrix}
+        \phi_1 & \phi_2 & \cdots & \phi_n\\
+        \phi_1' & \phi_2' & \cdots & \phi_n'\\
+        \phi_1'' & \phi_2'' & \cdots & \phi_n''\\
+        \vdots & &  &\\
+        \phi_1^{n-1} & \phi_2^{n-1} & \cdots & \phi_n^{n-1}
+    \end{vmatrix}
+\end{equation}
+
+Definimos este determinante como el wronskiano. Si es que $W(x)=0$, las soluciones son dependientes, en cambio, si $W(x)\neq 0$ las soluciones son independientes. De esta manera, podemos saber si es que un conjunto de soluciones de una EDO es l.d. o l.i. 
+
+Por otro lado, si es que tenemos dos conjuntos de soluciones l.i. podemos demostrar que si la soluciones son independientes, también son ortogonales. 
+
+\begin{theorem}
+    Dos conjuntos de soluciones son l.i. sí y solo sí son ortogonales.
+\end{theorem}
+\begin{proof}
+    Sean los conjuntos de soluciones $k_1\phi_1,\dots,k_\lambda\phi_\lambda$ y \\$k_1^*\phi_1^*,\dots,k_\mu\phi_\mu$. Calculemos el siguiente producto
+    \begin{equation*}
+        \left\langle \sum_\lambda k_\lambda\phi_\lambda\Big{|}\sum_\mu k_\mu\phi_\mu\right\rangle= \sum_{\lambda\mu} k_\lambda k_\mu\langle\phi_\lambda| \phi_\mu\rangle,
+    \end{equation*}
+    por linealidad del producto punto. Luego tenemos:
+    \begin{align*}
+        \sum_{\lambda\mu} k_\lambda k_\mu\langle\phi_\lambda| \phi_\mu\rangle&=\sum_{\lambda\mu} k_\lambda k_\mu\delta_{\mu\lambda}\\
+        &=\sum_{\lambda}|k_\lambda|^2,
+    \end{align*}
+    si es que la única manera de que la suma de 0 es que todos los $k_\lambda$ sean 0, entonces, además de ser soluciones independientes, son soluciones ortogonales. 
+\end{proof}
+
+\subsection{Wronskianos Parciales} Supongamos que tenemos el conjunto de soluciones de una EDO homogénea de segundo orden $y_1, y_2, y_3$. Puedo calcular wronskianos parciales entre dos de las soluciones:
+\begin{equation}
+    W_{jk}=y_jy_k'-y_j'y_k.
+\end{equation}
+
+Si es que tomamos la derivada de este resultado obtendremos:
+\begin{align*}
+    W_{jk}'&= y_j'y_k'+y_jy_k''-y_j'y_k'-y_j''y_k \\
+    &=y_jy_k''-y_j''y_k,
+\end{align*}
+con esto, se puede demostrar que no hay 3 soluciones independientes de una EDO de segundo orden.
+
+\begin{theorem}
+    La ecuación $y''(x)+P(x)y'(x)+Q(x)y(x)=0$ no tiene 3 soluciones independientes $y_1,y_2,y_3)$.
+\end{theorem}
+\begin{proof}
+    Divido a la ecuación por $y(x)$ y se obtiene:
+    \begin{equation*}
+        \frac{y''}{y}+P\frac{y'}{y}+Q=0,
+    \end{equation*}
+    omitiendo la dependencia en $x$. Despejando $-Q$ y reemplazando las soluciones $y_j,y_k$ en la ecuación se tiene:
+    \begin{equation*}
+        \frac{y_j''}{y_j}+\frac{y_j'}{y_j}P=\frac{y_k''}{y_k}+\frac{y_k'}{y_k}P,
+    \end{equation*}
+    multiplicando por $y_jy_k$ y separando los términos que comparten la $P$ tenemos:
+    \begin{equation*}
+        y_jy_k''-y_j''y_k=-P(y_jy_k'-y_j'y_k).
+    \end{equation*}
+    Notamos que el lado izquierdo de la ecuación corresponde con $W'$, mientras que al lado derecho, el término en paréntesis, corresponde con $W$. Con esto, llegamos al resultado 
+    \begin{equation}
+        W_{jk}'=-PW_{jk}.
+    \end{equation}
+
+    Ahora, calculemos el Wronskiano del conjunto de soluciones:
+    \begin{align*}
+        W&=\begin{vmatrix}
+            y_1 & y_2 & y_3 \\
+            y_1' & y_2' & y_3' \\
+            y_1'' & y_2'' & y_3'' 
+        \end{vmatrix}
+        =-\begin{vmatrix}
+            y_1' & y_2' & y_3' \\
+            y_1 & y_2 & y_3 \\  
+            y_1'' & y_2'' & y_3'' 
+        \end{vmatrix} \\
+        &=-y_1'W_{23}'+y_2'W_{13}'-y_3'W_{12}'\\
+        &=P(y_1'W_{23}-y_2'W_{13}+y_3'W_{12})\\
+        &=P[y_1'(y_2y_3'-y_2'y_3)-y_2'(y_1y_3'-y_1'y_3)+y_3'(y_1y_2'-y_1'y_2)]\\
+        &=P[y_1(y_2'y_3'-y_2'y_3')+y_2(y_1'y_3'-y_3'y_3')+y_3(y_2'y_1'-y_2'y_1')]\\
+        &=0
+    \end{align*}
+    Por lo tanto, hemos demostrado, por definción del Wronskiano, que las 3 soluciones no son soluciones independientes de la EDO. 
+\end{proof}
+
+\subsection{Segunda Solución}
+
+\subsubsection{Método Integral} Para hallar la segunda solución independiente de una EDO del segundo orden, la podemos hallar usando integrales. Para esto, el resultado 
+\begin{equation*}
+    W'(x)=-P(x)W(x)
+\end{equation*}
+obtenido en la sección anterior tiene un rol fundamental. Ahora, tenemos dos casos: el simplificado en el que $P(x)=0$ y el general en el que $P(x)\neq 0$. Para el primer caso, tenemos una ecuación de la forma
+\begin{equation*}
+    y''(x)+Q(x)y(x)=0,
+\end{equation*}
+debido a que $P(x)=0$. Además, tenemos que 
+\begin{equation}
+    W'=0\Rightarrow W=cte,
+\end{equation}
+escrito de diferente manera tenemos que:
+\begin{equation}
+    W(x)=W(a).
+\end{equation}
+
+Podemos reescribir el Wronskiano de manera más conveniente (pero formalmente igual a la definición propuesta) para este caso como
+\begin{equation}
+    W(x)=y_1^2(x)\left[\frac{y_2'}{y_1}-\frac{y_2}{y_1^2}y_1'\right]=y_1^2(x)\frac{d}{dx}\left[\frac{y_2(x)}{y_1(x)}\right],
+\end{equation}
+si despejamos el término de la derivada, nos quedamos con la EDO:
+\begin{equation}
+    \frac{d}{dx}\left[\frac{y_2(x)}{y_1(x)}\right]=\frac{W(a)}{y_1^2}.
+\end{equation}
+Como notamos, el único término que desconocemos es $y_2(x)$, la segunda solución\footnote{Aunque sea evidente, cabe recalcar que el método de la segunda solución solo sirve si es que ya conocemos la primera. No hay manera de hallar la segunda solución si desconocemos la primera.}. Si integramos a ambos lados la EDO anterior tenemos:
+\begin{align*}
+    \int_b^x\frac{d}{dx_1}\left[\frac{y_2(x_1)}{y_1(x_1)}dx_1\right]&=W(a)\int_b^x\frac{dx_1}{y_1^2(x_1)},\\
+    \frac{y_2(x)}{y_1(x)}-\frac{y_2(b)}{y_1(b)}&=W(a)\int_b^x\frac{dx_1}{y_1^2(x_1)},
+\end{align*}
+por el Teorema Fundamental del Cálculo. Despejando $y_2(x)$ y renombrando las constantes $W(a)\equiv A,y_2(b)/y_1(b)\equiv B$ tenemos:
+\begin{equation*}
+    y_2(x)=Ay_1(x)\int_b^x\frac{dx_1}{y_1^2(x_1)}+By_1(x).
+\end{equation*}
+
+Recordemos que podemos expresar la solución general de una EDO homogénea del segundo orden cómo 
+\begin{equation*}
+    y(x)=c_1y_1(x)+c_2y_2(x),
+\end{equation*}
+por tanto, el término $By_1(x)$ no nos brinda ninguna información adicional, pues es solo un múltiplo de $c_1y_1(x)$. Además, las constantes se determinan por las condiciones de borde del problema, por lo que también podemos omitir la constante $A$ y quedarnos solo con la parte funcional. Con esto, podemos expresar la segunda solución como la familia de funciones: 
+\begin{equation}
+    y_2(x)=y_1(x)\int_x\frac{dx_1}{y_1^2(x_1)}.
+\end{equation}
+
+\begin{example}
+    Encontrar la segunda solución del oscilador armónico, $y''+\omega^2 y=0$, conociendo que la primera solución es $y_1(x)=\sen(\omega x)$
+\end{example}
+Este ejemplo es trivial e innecesario, ya que conocemos la segunda solución, además de que la obtuvimos con el método de Frobenius. Sin embargo, para saber como es la mecánica del método integral para encontrar la segunda solución, hagamos el cálculo. Tenemos que
+\begin{equation*}
+    \int_x\frac{dx_1}{\sen^2(\omega x_1)}=-\frac{1}{\omega}\cot(\omega x),
+\end{equation*}
+reemplazando esto en la segunda solución, y usando la definición de la cotangente como $\cos(\omega x)/\sen(\omega x)$ nos lleva a
+\begin{equation*}
+    y_2(x)=\sen(\omega x)\left[-\frac{1}{\omega}\frac{\cos(\omega x)}{\sen(\omega x)}\right]=-\frac{1}{\omega}\cos(\omega x).
+\end{equation*}
+Obteniendo de esta manera la tan inesperada solución del coseno. \hfill $\blacksquare$
+
+En el caso general, en el que $P(x)\neq 0$, vamos a tener
+\begin{equation}
+    \frac{dW(x)}{dx}=-P(x)W(x),
+\end{equation}
+usando separación de variables, pues ya no es posible simplificar esta expresión, vamos a tener
+\begin{equation*}
+    \int_{W(a)}^{W(x)}\frac{dW}{W}=-\int_a^x P(x_1)dx_1.
+\end{equation*}
+Desarrollando esta expresión y despejando $W(x)$ llegamos a 
+\begin{equation*}
+    W(x)=W(a)\exp[-\int_a^x P(x_1)dx_1].
+\end{equation*}
+Reemplazando la expresión anterior en la ecuación 4.36 e integrando ambos lados de la ecuación tenemos:
+\begin{equation*}
+    \int_b^x\frac{d}{dx_1}\left[\frac{y_2(x_1)}{y_1(x_1)}dx_1\right]=W(a)\int_b^x\frac{\exp[-\int_a^{x_2} P(x_1)dx_1]}{y_1^2(x_2)}dx_2.
+\end{equation*}
+Despejamos $y_2(x)$ de esta expresión como hicimos en el caso simplificado y usamos las constantes $A,B$ definidas para el caso anterior. Con esto tenemos:
+\begin{equation*}
+    y_2(x)=Ay_1(x)\int_b^x\frac{\exp[-\int_a^{x_2} P(x_1)dx_1]}{y_1^2(x_2)}dx_2+By_1(x),
+\end{equation*}
+por el mismo argumento que en caso más sencillo, el término $By_1(x)$ no aporta ninguna información. Podemos omitir las constantes de integración en ambas integrales, dejándonos solo con la parte funcional:
+\begin{equation}
+    y_2(x)=y_1(x)\int_x\frac{\exp[-\int_{x_2} P(x_1)dx_1]}{y_1^2(x_2)}dx_2.
+\end{equation}
+
+En el caso de que $P(x)=0$, el término exponencial se vuelve 1, dejándonos con el caso más simple propuesto anteriormente. Como es de esperarse, este método es más complicado mientras más difíciles sean las integrales, pero si se tiene ayuda de un software matemático para estas operaciones nos puede resultar de gran ayuda.
+
+\subsubsection{Método de series} Hemos visto cómo poder calcular la segunda solución usando integrales. Ahora, vamos a ver otro método, el cual usa series de potencias para poder hallar la segunda solución. Para esto, escribimos $P(x),Q(x)$ de la siguiente manera:
+\begin{equation}
+    P(x)=\sum_{i=-1}^\infty p_ix^i,\quad Q(x)=\sum_{i=-2}^\infty q_ix^i.
+\end{equation}
+La elección de los límites inferiores de las sumatorias no es al alzar. Recordemos que un punto es singular regular si es que $\lim_{x\to0}xP(x)=l \land \lim_{x\to0}x^2Q(x)=m$; con $l,m<\infty$. Que la expansión en serie de potencias de $P(x)$ empiece en -1 y la de $Q(x)$ en -2 nos asegura que el punto en el que vamos a expandir la solución sea ordinario o singular regular. Este método es de gran utilidad si es que $P$ y $Q$ son polinomios. Ahora, con el método de Frobenius hayamos la primera solución suponiendo que tiene la forma
+\begin{equation*}
+    y(x)=\sum_{\lambda=0}^\infty a_\lambda x^{\lambda+s}.
+\end{equation*}
+Si reemplazamos esto en la ecuación $y''+Py'+Qy=0$, junto con la expansión polinomial de $P$ y $Q$ llegamos a
+\begin{align*}
+    \sum_{\lambda=0}^\infty (\lambda+s)(\lambda+s-1)a_\lambda x^{\lambda+s-2}&+\sum_{i=-1}^\infty p_ix^i \sum_{\lambda=0}^\infty (\lambda+s)a_\lambda x^{\lambda+s-1}\\
+    &+\sum_{i=-2}^\infty q_ix^i\sum_{\lambda=0}^\infty a_\lambda x^{\lambda+s}=0.
+\end{align*}
+Notamos que la menor potencia de $x$ es s-2, y la obtenemos cuando $\lambda=0,i(p)=-1,i(q)=-2$. Reemplazando estos valores en la ecuación anterior nos lleva a
+\begin{equation}
+    a_0x^{s-2}[s(s-1)+p_{-1}s+q_{-2}]=0.
+\end{equation}
+Debido a que $a_0,x^{s-2}\neq 0$, obtenemos la ecuación indicial:
+\begin{equation}
+    s(s-1)+p_{-1}s+q_{-2}=0.
+\end{equation}
+Sabemos, por el teorema de Fuchs, que la ecuación tiene dos soluciones:
+\begin{equation*}
+    s_1=\alpha,\quad s_2=\alpha-n,
+\end{equation*}
+con $n\in\mathbb{N}$. Esto implica que 
+\begin{equation*}
+    (s-\alpha)(s-\alpha+n)=0.
+\end{equation*}
+Desarrollando esta expresión tenemos:
+\begin{equation}
+    s^2+(n-2\alpha)s+\alpha(\alpha-n)=0.
+\end{equation}
+
+Comparando 4.43 con 4.42 tenemos que 
+\begin{equation}
+    p_{-1}-1=n-2\alpha.
+\end{equation}
+Por el teorema de Fuchs, el método de Frobenius nos tiene que dar la primera solución con valor indicial más alto, por lo que:
+\begin{equation*}
+    y_1(x)=\sum_{\lambda=0}^\infty a_\lambda x^{\lambda+\alpha}=x^\alpha\sum_{\lambda=0}^\infty a_\lambda x^{\lambda}.
+\end{equation*}
+Ya sabemos que podemos encontrar la segunda solución de manera integral con 
+\begin{equation*}
+    y_2(x)=y_1(x)\int_x\frac{\exp[-\int_{x_2} P(x_1)dx_1]}{y_1^2(x_2)}dx_2.
+\end{equation*},
+por lo tanto, reemplazamos $y_1(x)$ y nuestra expansión en potencias de $P(x)$ para obtener:
+\begin{equation}
+    y_2(x)=y_1(x)\int_x\frac{\exp[-\int_{x_2}\sum_{i=-1}^\infty p_ix_1^idx_1]}{x_2^{2\alpha}[\sum_{\lambda=0}^\infty a_\lambda x_2^{\lambda}]^2}dx_2.
+\end{equation}
+Si resolvemos la integral del exponente tenemos:
+\begin{equation*}
+    \int_{x_2}\sum_{i=-1}^\infty p_ix_1^idx_1=p_{-1}\ln(x_2)+\sum_{k=0}^\infty\frac{p_k}{k+1}x_2^{k+1}.
+\end{equation*}
+Ahora, recordemos que la función exponencial se puede expresar como serie de potencias usando series de Taylor, es decir:
+\begin{equation*}
+    e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots,
+\end{equation*}
+con esto en mente y con la integral del exponencial resuelta, podemos escribir
+\begin{align*}
+    \exp[-\int_{x_2}\sum_{i=-1}^\infty p_ix_1^idx_1]&=\exp[-p_{-1}\ln(x_2)-\sum_{k=0}^\infty\frac{p_k}{k+1}x_2^{k+1}]\\
+    &=\exp[\ln^{-p_{-1}}(x_2)]\exp[-\sum_{k=0}^\infty\frac{p_k}{k+1}x_2^{k+1}]\\
+    &=x_2^{-p_{-1}}\left[
+    1-\sum_{k=0}^\infty\frac{p_k}{k+1}x_2^{k+1}-\frac{1}{2!}\left(\sum_{k=0}^\infty\frac{p_k}{k+1}x_2^{k+1}\right)^2+\cdots\right].
+\end{align*}
+El término en corchetes es una serie, la cual podemos reescribir como
+\begin{equation*}
+    1-\sum_{k=0}^\infty\frac{p_k}{k+1}x_2^{k+1}-\frac{1}{2!}\left(\sum_{k=0}^\infty\frac{p_k}{k+1}x_2^{k+1}\right)^2+\cdots\equiv \sum_{\gamma=0}^\infty \pi_\gamma x_2^\gamma,
+\end{equation*}
+dónde $\pi_\gamma$ es una constante que depende de los $p_k$ y constantes de la suma anterior. Es decir, los primeros valores para $\pi_\gamma$ son:
+\begin{equation*}
+    \pi_0=1,\quad\pi_1=-p_0,\quad\pi_2=\frac{1}{2!}(p_0^2-p_1),\quad\pi_3=\frac{1}{3!}(3p_0p_1-p_0^3-2p_2),\quad\dots
+\end{equation*}
+estos términos se obtuvieron expandiendo la sumatoria anterior y juntando todas las constantes que compartían cierto $x^\gamma$. Con esto, concluimos que
+\begin{equation}
+     \exp[-\int_{x_2}\sum_{i=-1}^\infty p_ix_1^idx_1]=x_2^{-p_{-1}}\sum_{\gamma=0}^\infty \pi_\gamma x_2^\gamma.
+\end{equation}
+El término en el denominador lo podemos arreglar de la siguiente manera:
+\begin{equation*}
+    \frac{1}{x_2^{2\alpha}[\sum_{\lambda=0}^\infty a_\lambda x_2^{\lambda}]^2}=x_2^{-2\alpha}\left[\sum_{\lambda=0}^\infty a_\lambda x_2^{\lambda}\right]^{-2}=x_2^{-2\alpha}[a_0+a_1x_2+a_2x_2^2+\cdots]^{-2}.
+\end{equation*}
+Si sacamos factor común $a_0$, la expresión en corchetes la podemos escribir como:
+\begin{equation*}
+    a_0+a_1x_2+a_2x_2^2+\cdots=a_0\left(1+\sum_{\lambda=1}^\infty\frac{a_\lambda}{a_0}x_2^\lambda\right).
+\end{equation*}
+Si a la expresión anterior elevamos a cualquier potencia, notamos que tiene la forma de la expansión binomial. Por lo tanto, podemos escribir:
+\begin{equation*}
+    \frac{1}{x_2^{2\alpha}[\sum_{\lambda=0}^\infty a_\lambda x_2^{\lambda}]^2}=x_2^{-2\alpha}\frac{1}{a_0^2}\left[1-2\frac{a_1}{a_0}x_2+\left(\frac{3a_1^2-2a_0a_2}{a_0^2}\right)x_2^2+\cdots\right].
+\end{equation*}
+Con un razonamiento similar al ya usado, podemos reescribir la serie
+\begin{equation*}
+    \frac{1}{a_0^2}\left[1-2\frac{a_1}{a_0}x_2+\left(\frac{3a_1^2-2a_0a_2}{a_0^2}\right)x_2^2+\cdots\right]\equiv \sum_{\lambda=0}^\infty b_\lambda x_2^\lambda,
+\end{equation*}
+dónde los $b_\lambda$ dependen de los valores $a_\lambda$ y constantes de la suma anterior. Es decir,
+\begin{equation*}
+    b_0=\frac{1}{a_0^2},\quad b_1=-2\frac{a_1}{a_0^3},\quad b_2=\frac{3a_1^2-2a_0a_2}{a_0^4},\quad\dots.
+\end{equation*}
+Usando lo anterior llegamos a 
+\begin{equation}
+     \frac{1}{x_2^{2\alpha}[\sum_{\lambda=0}^\infty a_\lambda x_2^{\lambda}]^2}=x_2^{-2\alpha}\sum_{\lambda=0}^\infty b_\lambda x_2^\lambda.
+\end{equation}
+Juntando las expresiones 4.47 y 4.48, podemos escribir la segunda solución como
+\begin{equation*}
+    y_2(x)=y_1(x)\int_x x_2^{-(p_{-1}+2\alpha)}\left[\sum_{\lambda=0}^\infty b_\lambda x_2^\lambda\right]\left[\sum_{\gamma=0}^\infty \pi_\gamma x_2^\gamma\right]dx_2.
+\end{equation*}
+La multiplicación de dos series es también una serie, por lo que definimos:
+\begin{equation*}
+    \sum_{\delta=0}^\infty c_\delta x_2^\delta\equiv\left[\sum_{\lambda=0}^\infty b_\lambda x_2^\lambda\right]\left[\sum_{\gamma=0}^\infty \pi_\gamma x_2^\gamma\right],\quad\text{con }c_\delta=\sum_{\gamma=0}^\delta\pi_\gamma b_{\delta-\gamma}.
+\end{equation*}
+Reescribimos así la segunda solución como 
+\begin{equation*}
+     y_2(x)=y_1(x)\int_x x_2^{-(p_{-1}+2\alpha)} \sum_{\delta=0}^\infty c_\delta x_2^\delta dx_2,
+\end{equation*}
+por la ecuación 4.44 tenemos:
+\begin{equation*}
+     y_2(x)=y_1(x)\int_x x_2^{-n-1} \sum_{\delta=0}^\infty c_\delta x_2^\delta dx_2,
+\end{equation*}
+expandiendo la serie tenemos:
+\begin{equation*}
+     y_2(x)=y_1(x)\int_x\left(c_0x_2^{-n-1}+c_1x_2^{-n}+c_2x_2^{-n+1}+\cdots+c_nx_2^{-1}+\cdots\right)dx_2
+\end{equation*}
+Notamos que todos los términos, excepto el que está elevado a la $-1$, van a tener una integral de la forma:
+\begin{equation*}
+    \int_x c_ix_2^{i-n-1}=\frac{c_ix^{i-n}}{i-n}=\frac{c_{l+n}}{l}x^l,\quad \text{definiendo }l\equiv i-n.
+\end{equation*}
+Esta expresión es válida $\forall i$, excepto para $n$ y se puede simplificar más definiendo $g_l\equiv c_{l+n}/l$. Para el caso en que $i=n$ tenemos:
+\begin{equation*}
+    \int_x \frac{c_n}{x_2}dx_2=c_n\ln|x|.
+\end{equation*}
+Tomamos el valor absoluto por cuestiones de paridad. Con los resultados anteriores, tenemos:
+\begin{equation*}
+    y_2(x)=y_1(x)\left[c_n\ln|x|+\sum_{l=-n}^\infty g_lx^l\right],
+\end{equation*}
+desarrollando la expresión tenemos:
+\begin{equation*}
+    y_2(x)=c_ny_1(x)\ln(x)+\left[\sum_{\lambda=0}^\infty a_\lambda x^{\alpha+\lambda}\right]\left[\sum_{l=-n}^\infty g_lx^l\right].
+\end{equation*}
+Multiplicando ambas series obtendremos:
+\begin{equation*}
+    \left[\sum_{\lambda=0}^\infty a_\lambda x^{\alpha+\lambda}\right]\left[\sum_{l=-n}^\infty g_lx^l\right]=\sum_{j=-n}^\infty \Tilde{d_j} x^{j+\alpha},\quad \Tilde{d_j}=\sum_{\lambda=-n}^j g_{\lambda}a_{j-\lambda}.
+\end{equation*}
+Finalmente, sacamos factor común $c_n$ y definimos $d_j\equiv \Tilde{d_j}/c_n$ para obtener (solo la parte funcional):
+\begin{equation}
+    y_2(x)=y_1(x)\ln|x|+\sum_{j=-n}^\infty d_j x^{j+\alpha}
+\end{equation}
+De esta manera, hayamos la segunda solución de una EDO homogénea de segundo orden.
+
+\begin{example}
+    Encontrar la segunda solución para la ecuación de Bessel de orden 0
+    \begin{equation*}
+        y''+\frac{1}{x}y'+y=0.
+    \end{equation*}
+\end{example}
+
+Notamos que
+\begin{equation*}
+    P(x)=x^{-1},\quad Q(x)=1,
+\end{equation*}
+por lo tanto, $p_{-1}=1,q_0=1$; el resto de $p_i,q_i$ son 0. 
+Recordando que la primera solución de la ecuación de Bessel de orden 0, sacada de la ecuación 4.26 (tomando la constante $a_0=1)$ viene dada por
+\begin{equation}
+y_1(x)=J_0=\sum_{j=0}^\infty (-1)^j\frac{1}{(j!)^2}\left(\frac{x}{2}\right)^{2j}=1-\frac{x^2}{4}+\frac{x^4}{64}-O(x^6).
+\end{equation}
+Usando la expresión 4.46 tenemos:
+\begin{equation*}
+    y_2(x)=J_0(x)\int_x \frac{\exp[-\int_{x_2}x_1^{-1}dx_1]}{[1-x_2^2/4+x_2^4/64-\cdots]^2}dx_2.
+\end{equation*}
+Para el numerador de la integral se tiene
+\begin{equation*}
+    \exp[-\int_{x_2}\frac{dx_1}{x_1}]=\exp[-\ln x_2]=\frac{1}{x_2}.
+\end{equation*}
+Para el denominador, usando expansión en series binomial tenemos:
+\begin{equation*}
+    \left[1-\frac{x_2^2}{4}+\frac{x_2^4}{64}-\cdots\right]^{-2}=1+\frac{x_2^2}{2}+\frac{5x_2^4}{32}+\cdots,   
+\end{equation*}
+con lo que tenemos:
+\begin{equation*}
+    y_2(x)=J_0(x)\int_x\frac{1}{x_2}\left[1+\frac{x_2^2}{2}+\frac{5x_2^4}{32}+\cdots\right]dx_2,
+\end{equation*}
+integrando, llegamos finalmente a 
+\begin{equation}
+    y_2(x)=J_0(x)\left[\ln x +\frac{x^2}{4}+\frac{5x^4}{128}+\cdots\right].
+\end{equation}
+Por linealidad de la solución, podemos añadir múltiplos de $J_0$ y también multiplicar a toda la solución por una constante, con esto, llegamos a la formulación usual de la segunda solución de la ecuación de Bessel de orden 0:
+\begin{equation}
+    N_0(x)\equiv y_2(x)=\frac{2}{\pi}[\ln x-\ln 2 +\gamma]J_0(x)+\frac{2}{\pi}J_0(x)\left\{\frac{x^2}{4}+\frac{5x^4}{128}+\cdots    \right\},
+\end{equation}
+llamamos a $N_0$ la función de Neumann de orden 0 y $\gamma$ es la constante de Euler-Mascheroni definida por
+\begin{equation}
+    \gamma=\lim_{n\to\infty}\left[\sum_{m=1}^n m^{-1}-\ln (n)\right].
+\end{equation}
+\begin{example}
+    Encontrar la segunda solución de la ecuación de Bessel de orden $\nu$ dada por
+    \begin{equation*}
+        x^2y''+xy'+(x^2-\nu^2)y=0.
+    \end{equation*}
+\end{example}
+Para este caso, vamos a usar directamente la ecuación 4.49. Con esto, tenemos una solución de la forma 
+\begin{equation*}
+    y_2(x)=J_\nu(x)\ln|x|+\sum_{j=-2\nu}^\infty d_j x^{j+\nu},
+\end{equation*}
+recordemos que $n$ era la separación entre los dos índices de la ecuación indicial, como en este caso teníamos $s_1=\nu,s_2=-\nu\Rightarrow n=-2\nu$. Además, el índice más alto $\alpha$ en este caso es $\nu$. Calculando la primera y segunda derivada de esta solución obtenemos:
+\begin{align*}
+    y_2'(x)=&J_\nu'(x)\ln x+\frac{J_\nu(x)}{x}+\sum_{j=-2\nu}^\infty (j+\nu)d_jx^{j+\nu-1},\\
+    y_2''(x)=&J_\nu''(x)\ln x+2\frac{J_\nu'(x)}{x}-\frac{J_\nu(x)}{x^2}+\sum_{j=-2\nu}^\infty (j+\nu)(j+\nu-1)d_jx^{j+\nu-2}.
+\end{align*}
+Si reemplazamos estas expresiones en la ecuación de Bessel obtendremos:
+\begin{align*}
+    \left[x^2J_\nu''+xJ_\nu'+(x^2-\nu^2)J_\nu\right]\ln x -J_\nu+J_\nu+2xJ_\nu'&+\sum_{j=-2\nu}^\infty j(j+2\nu)d_jx^{j+\nu}\\
+    &+\sum_{j=-2\nu}^\infty d_jx^{j+\nu+2}=0.
+\end{align*}
+El término en corchetes se hace 0 debido a que $J_\nu$ es solución de la ecuación de Bessel, $J_\nu$ se cancela y nos quedamos con 
+\begin{equation*}
+    2xJ_\nu'+\sum_{j=-2\nu}^\infty j(j+2\nu)d_jx^{j+\nu}
+   +\sum_{j=-2\nu}^\infty d_jx^{j+\nu+2}=0.
+\end{equation*}
+Ahora, podemos escribir $2xJ_\nu'$ como una serie:
+\begin{equation*}
+    2xJ_\nu'(x)=\sum_{j=0}^\infty a_j x^{j+\nu}.
+\end{equation*}
+Si hacemos la operación del lado derecho de la igualdad nos saldrá que
+\begin{equation*}
+    a_{2j}=\frac{(-1)^j(\nu+2j)}{j!(\nu+j)!2^{\nu+2j-1}}.
+\end{equation*}
+Con lo que tenemos:
+\begin{equation*}
+   \sum_{j=0}^\infty a_j x^{j+\nu}+\sum_{j=-2\nu}^\infty j(j+2\nu)d_jx^{j+\nu}
+   +\sum_{j=-2\nu+2}^\infty d_{j-2}x^{j+\nu}=0,
+\end{equation*}
+aquí cambiamos el límite inferior de la tercera suma para que todos los términos tengan el mismo exponente. Notamos un problema, no podemos agrupar la sumatoria debido a que los límites inferiores no coinciden. Por lo tanto, buscamos la potencia más baja para ver qué restricciones podemos poner en los coeficientes.
+\begin{itemize}
+    \item Para la primera sumatoria con $j=0$, tenemos $a_0x^n$.
+    \item Para la segunda sumatoria con $j=-2\nu$, tenemos $0*d_{-2\nu}x^{-n}$, es decir, este término desaparece. Probamos con $j=-2\nu+1$ y obtenemos $(-2\nu+1)(1)d_{-2\nu+1}x^{-\nu+1}$.
+    \item Por último, para la tercera sumatoria con $j=-2n+2$ sacamos $d_{-2\nu}x^{-n+2}.$
+\end{itemize}
+
+Es evidente que la segunda sumatoria con $j=-2\nu+1$ da el exponente más bajo. Por lo que tenemos 
+\begin{equation}
+    (-2n+1)d_{-2\nu+1}x^{-n+1}=0\Rightarrow d_{-2\nu+1}=0.
+\end{equation}
+Ahora, para el coeficiente $x^\nu$ se tiene
+\begin{equation}
+    a_0x^\nu+d_{-2}x^\nu=0\Rightarrow d_{-2}=-a_0.
+\end{equation}
+Para las potencias de $x$ desde $-\nu+2$ a $\nu$ tenemos $-2\nu+2\leq j < 0 $. Esto nos da la condición
+\begin{equation*}
+    d_j=-\frac{d_{j-2}}{j(j+2\nu)},
+\end{equation*}
+usando la condición 4.54, escribimos:
+\begin{equation}
+    d_{j+2}=-\frac{d_j}{(j+2)(j+2\nu+2)}.
+\end{equation}
+Por último, para $j\geq 0$, tenemos la condición:
+\begin{equation}
+    d_j=\frac{-a_j-d_{j-2}}{j(j+2\nu)}
+\end{equation}
+Notamos que para $j=0$ tenemos una indeterminación para $d_0$. Sin embargo, siempre podemos añadir un término $kJ_\nu$ de tal manera que $d_0=0$. Con esto, podemos escribir los coeficientes de la siguiente manera:
+
+\begin{equation}
+    d_j=
+    \begin{cases}
+        d_{j-2}=-j(j+2\nu)d_j, & \text{si }-2\nu+2\leq j<0 , \\
+        d_0, & \text{si } j=0 \\
+       \frac{-a_j-d_{j-2}}{j(j+2\nu)}, & \text{si  } j>0
+    \end{cases}
+\end{equation}
+
+Si calculamos los coeficientes vamos a tener la segunda solución de la ecuación de Bessel de orden $\nu$ de la siguiente manera:
+
+\begin{equation}
+    N_\nu=(x)\equiv J_\nu(x)\ln|x|+\sum_{j=-2\nu+2}^{-2}\frac{(-1-j/2)!}{(\nu+j/2)!}\left(\frac{x}{2}\right)^{j+\nu}+\sum_{j=1}^{\infty}\sum_{k=1}^{j}\frac{(-1)^{2k+j+1}(\nu+2k)}{k(\nu+k)j!(j+\nu)!}\left(\frac{x}{2}\right)^{2j+\nu},
+\end{equation}
+siendo $N_\nu$ la ecuación de Neumann de orden $\nu$. Esta es una forma de la solución totalmente válida. Sin embargo, no es la manera estándar de escribirla. Para $\nu\notin \mathbb{N}$, la solución se puede escribir como 
+\begin{equation}
+    N_{\nu}(x)=\frac{\cos \nu\pi J_\nu(x)-J_{-\nu}(x)}{\sen \nu\pi}.
+\end{equation}
+Para $\nu\in \mathbb{N}$ en cambio, tenemos:
+\begin{equation}
+    N_\nu(x)=-\frac{1}{\pi}(\nu-1)!\left(\frac{2}{x}\right)^\nu+\cdots+\frac{2}{\pi}\left(\frac{x}{2}\right)^\nu\frac{1}{\nu!}\ln\left(\frac{x}{2}\right)+\cdots.
+\end{equation}

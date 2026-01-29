@@ -1,0 +1,126 @@
+\section{Introducción} Las funciones de Green son una herramienta muy poderosa para atacar ecuaciones diferenciales parciales no homogéneas. Esta herramienta surge de una intuición física para luego generalizarla en el campo de las matemáticas. Para empezar entonces, consideremos la ecuación de Poisson que describe el potencial generado por una distribución de cargas electrostáticas
+
+\begin{equation}
+    \nabla^2\psi(\bmR)=-\frac{\rho(\bmR)}{\epsilon_0}.
+\end{equation}
+
+Conocemos que la solución de esta ecuación diferencial viene dada por 
+\begin{equation}
+    \psi(\bmR)=\frac{1}{4\pi\epsilon_0}\int\frac{\rho(\bmR')}{|\bmR-\bmR'|}d^3\mathcal{R}'.
+\end{equation}
+
+Si definimos la función de Green $ G(\bmR,\bmR')$ cómo
+
+\begin{equation}
+    G(\bmR,\bmR')=\frac{1}{4\pi|\bmR-\bmR'|},
+\end{equation}
+podemos transformar (9.1) a 
+\begin{equation}
+    \mathcal{L}\psi(\bmR)=f(\bmR),
+\end{equation}
+dónde $ \mathcal{L}=-\nabla^2$ es el operador diferencial y $f(\bmR)=\rho(\bmR)/\epsilon_0$ es el término de fuente. Esto quiere decir, que puedo calcular el potencial usando
+\begin{equation}
+    \psi(\bmR)=\int G(\bmR,\bmR')f(\bmR')d^3\mathcal{R}'.
+\end{equation}
+En otras palabras, podemos calcular el potencial $\psi$ si conocemos su función de Green y el término de fuente. 
+
+\section{Método General}
+
+En la introducción encontramos la función de Green para la ecuación de Poisson. Esto fue fácil porque ya conocíamos de antemano cuál era la forma de la solución para el potencial. En el caso de que no tengamos esta ventaja (que tristemente es casi todo el tiempo) debemos seguir el siguiente proceso. Supongamos que tenemos una ecuación lineal no homogénea de la forma 
+
+\begin{equation}
+    \mathcal{L}\psi(\bmR)=f(\bmR),
+\end{equation}
+dónde $ \mathcal{L}$ es un operador lineal cualquiera y $f(\bmR)$ un término de fuente arbitrario. Suponemos además que $\psi(\bmR)$ tiene solución de la forma
+
+\begin{equation}
+    \psi(\bmR)=\int G(\bmR,\bmR')f(\bmR')d^3\mathcal{R}'.
+\end{equation}
+
+Si aplicamos el operador $ \mathcal{L}$ a (9.7) tendremos
+\begin{equation}
+    \mathcal{L}\psi(\bmR)=\mathcal{L}\int G(\bmR,\bmR')f(\bmR')d^3\mathcal{R}'.
+\end{equation}
+Por la definición (9.6) y la linealidad del operador, (9.8) se transforma en 
+\begin{equation}
+    f(\bmR)=\int \left[\mathcal{L}G(\bmR,\bmR')\right]f(\bmR')d^3\mathcal{R}'.
+\end{equation}
+
+Ahora, definimos la delta de Dirac $\delta(\bmR,\bmR')$ cómo
+\begin{equation}
+    f(\bmR)=\int \delta(\bmR,\bmR') f(\bmR')d^3\mathcal{R}'.
+\end{equation}
+Notamos que las ecuaciones (9.9) y (9.10) implican que 
+\begin{equation}
+    \mathcal{L}G(\bmR,\bmR')=\delta(\bmR,\bmR'),
+\end{equation}
+
+todas las funciones de Green deben cumplir con la ecuación diferencial anterior. 
+\begin{example}
+    Encontrar la función de Green para la ecuación de Poisson 
+    \begin{equation*}
+    -\nabla^2\psi(\bmR)=\frac{\rho(\bmR)}{\epsilon_0}.
+    \end{equation*}
+\end{example}
+
+Por (9.11) se cumple que
+\begin{equation*}
+    -\nabla^2G(\bmR,\bmR')=\delta(\bmR,\bmR').
+\end{equation*}
+La ecuación anterior tiene la solución 
+\begin{equation*}
+    G(\bmR,\bmR')=\frac{1}{4\pi|\bmR-\bmR'|}+F(\bmR,\bmR'),
+\end{equation*}
+dónde $F(\bmR,\bmR')$ es la solución de la ecuación homogénea (en este caso, la ecuación de Laplace). \hfill $\blacksquare$
+
+\section{Teoremas de Green}
+
+Recordemos que el teorema de la divergencia nos dice que 
+\begin{equation}
+    \int_V \nabla\cdot \mathbf{A}d^3\mathcal{R}=\oint_S \mathbf{A}\cdot \hat{\mathbf{n}}d^2\mathcal{R}. 
+\end{equation}
+
+Este teorema funciona para cualquier campo vectorial $\mathbf{A}$, por lo que también debe servir para 
+\begin{equation}
+    \mathbf{A}=\phi \nabla \psi,
+\end{equation}
+dónde $\phi$ y $\psi$ son funciones escalares. Por propiedades vectoriales, tenemos que 
+\begin{equation}
+    \nabla\cdot\left[\phi \nabla \psi\right]=\phi\nabla^2\psi+\nabla\phi\cdot\nabla \psi,
+\end{equation}
+(se puede comprobar esta fórmula usando notación de Einstein) y también
+\begin{equation}
+    \phi \nabla \psi\cdot\hat{\mathbf{n}}= \phi (\nabla \psi\cdot\hat{\mathbf{n}})=\phi\frac{\partial\psi}{\partial n},
+\end{equation}
+dónde $\nabla \psi\cdot\hat{\mathbf{n}}=\partial\psi/\partial n$ es la derivada direccional de $\psi$ en dirección $n$. Usando (9.13)-(9.15) en (9.12) obtenemos el Primer Teorema de Green:
+
+\begin{theorem}
+\textbf{(Primer Teorema de Green)}. Si $\phi$ y $\psi$ son funciones escalares bien portadas (continuamente diferenciables) y conociendo la derivada direccional de $\psi$ en dirección $n$ entonces las funciones cumplen con la ecuación
+    \begin{equation}
+    \int_V\left[\phi\nabla^2\psi+\nabla\phi\cdot\nabla \psi\right]d^3\mathcal{R}=\oint_S \phi\frac{\partial\psi}{\partial n}d^2\mathcal{R}.
+\end{equation}
+\end{theorem}
+
+El orden de las funciones en (9.13) no tiene nada de especial, por lo que podemos usar el mismo procedimiento con $\mathbf{A=\psi\nabla\phi}$, restar el resultado con (9.16) y así obtendremos:
+
+\begin{theorem}
+\textbf{(Segundo Teorema de Green)}. Si $\phi$ y $\psi$ son funciones escalares bien portadas (continuamente diferenciables) y conociendo la derivada direccional de $\psi$ y $\phi$ en dirección $n$ entonces las funciones cumplen con la ecuación
+    \begin{equation}
+    \int_V\left[\phi\nabla^2\psi-\psi\nabla^2\phi\right]d^3\mathcal{R}=\oint_S \left[\phi\frac{\partial\psi}{\partial n}-\psi\frac{\partial\phi}{\partial n}\right]d^2\mathcal{R}.
+\end{equation}
+\end{theorem}
+
+Con el anterior teorema obtenemos el siguiente corolario:
+
+\begin{corollary}
+    Si $\phi(\bmR)=\Phi(\bmR)$ y $\psi(\bmR)=G(\bmR,\bmR')$ con $\Phi(\bmR)$ una función escalar que cumple con $\nabla^2\Phi(\bmR)=-f(\bmR)$. Entonces, por el Teorema 9.2 obtenemos
+    \begin{equation}
+        \Phi(\bmR)=\int_V G(\bmR,\bmR')f(\bmR')d^3\mathcal{R}'-\oint_s\left[\Phi(\bmR')\frac{\partial G}{\partial n'}-G\frac{\partial\Phi(\bmR')}{\partial n'}\right]d^2\mathcal{R'}.
+    \end{equation}
+\end{corollary}
+
+\begin{proof}
+    Usamos el hecho de que $\nabla^2G(\bmR,\bmR')=-\delta(\bmR,\bmR')$ y que $G(\bmR,\bmR')=G(\bmR',\bmR)\land \delta(\bmR,\bmR')=\delta(\bmR',\bmR)$, es decir, $G$ y $\delta$ son simétricos para cambiar la variable de integración de $\mathcal{R}$ a $\mathcal{R}'$ en (9.17). Luego usamos la definición de la delta de Dirac (9.10) y la linealidad de la integración para llegar finalmente a (9.18).
+\end{proof}
+
+El corolario es muy importante ya que la fórmula (9.18) nos dice cómo encontrar el potencial para un volumen finito. El término $$\Phi(\bmR')$$ es una condición de frontera de tipo Dirichlet (conocemos el valor del potencial en el borde), mientras que $$\frac{\partial\Phi(\bmR')}{\partial n'}$$ es una condición de frontera de tipo Neumann (conocemos el valor de la derivada normal del potencial en el borde). Para resolver un problema solo es necesario conocer una de estas dos condiciones de frontera, pues tener estas dos condiciones a la vez puede llevar a una sobre determinación del problema. Además, la ecuación (9.18) hace evidente que si no conocemos las condiciones iniciales, el potencial no puede calcularse de forma completa.

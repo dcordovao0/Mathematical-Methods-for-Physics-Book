@@ -1,0 +1,745 @@
+\section{Introducción} En el anterior capítulo vimos como atacar EDOs lineales y de segundo orden, las cuales son las más comunes en física. Las EDOs se caracterizan por tener una función y derivadas de esa función con respecto a una sola variable. Las EDPs en cambio están en función de dos o más variables y sus respectivas derivadas. En cuanto a las derivadas, si es que definimos una función de dos variables $\phi(x)$ podemos tener
+\begin{equation*}
+    \frac{\partial^n\phi}{\partial x^n},\quad\frac{\partial^n\phi}{\partial y^n},\quad\frac{\partial^n\phi}{\partial x^m\partial y^{n-m}},\cdots
+\end{equation*}
+El concepto de orden de la ecuación es el mismo que para las EDOs: el el grado de la derivada más alta. En física, usualmente, no aparecen las derivadas mixtas. De forma general, una EDP puede escribirse con el operador $\mathcal{L}$ de la siguiente manera
+\begin{equation*}
+    \mathcal{L}\phi(x,y)=F(x,y),
+\end{equation*}
+si es que $F(x,y)=0$, decimos que la ecuación es homogénea, mientras que si $F(x,y)\neq 0$, la ecuación es no homogénea. La aparición más común en física de las EDPs se debe al laplaciano, ya que este se encuentra en varias ecuaciones, como por ejemplo:
+
+\section{EDP del primer orden}
+
+Sea el operador diferencial 
+\begin{equation*}
+    \mathcal{L}=a\frac{\partial}{\partial x}+b\frac{\partial}{\partial y}.
+\end{equation*}
+Una EDP lineal (de primer orden) homogénea con coeficientes constantes vendrá dada por
+\begin{equation}
+    \mathcal{L}f(x,y)=0,\quad a\frac{\partial f(x,y)}{\partial x}+b\frac{\partial f(x,y)}{\partial y}=0.
+\end{equation}
+
+Lo primero que vamos a intentar es usar todo lo que ya sabemos de resolución de EDOs lineales. Por lo tanto, intentaremos hacer un cambio de variable que
+convierta la EDP linel en una EDO lineal. Para ello hacemos el cambio
+\begin{equation*}
+    (x,y)\to(s,t),
+\end{equation*}
+donde definimos
+\begin{align*}
+    s&=ax+by,\\
+    t&=bx-ay.
+\end{align*}
+Con esto, tendremos la nueva función
+\begin{equation*}
+    \hat{f}(s,t)=f(x(s,t),y(s,t)).
+\end{equation*}
+Por lo tanto, la derivada parcial de $f$ con respecto a $x$ y $y$ será
+\begin{align*}
+    \frac{\partial f}{\partial x}&=\frac{\partial \hat{f}}{\partial s}\frac{\partial s}{\partial x}+\frac{\partial \hat{f}}{\partial t}\frac{\partial t}{\partial x}=a\frac{\partial \hat{f}}{\partial s}+b\frac{\partial \hat{f}}{\partial t},\\
+    \frac{\partial f}{\partial y}&=\frac{\partial \hat{f}}{\partial s}\frac{\partial s}{\partial y}+\frac{\partial \hat{f}}{\partial t}\frac{\partial t}{\partial y}=b\frac{\partial \hat{f}}{\partial s}-a\frac{\partial \hat{f}}{\partial t},
+\end{align*}
+respectivamente. Si reemplazamos estas derivadas en la EDP original, obtenemos
+\begin{equation*}
+    a(a\frac{\partial \hat{f}}{\partial s}+b\frac{\partial \hat{f}}{\partial t})+b(b\frac{\partial \hat{f}}{\partial s}-a\frac{\partial \hat{f}}{\partial t})=0,
+\end{equation*}
+desarrollando la expresión obtenemos finalmente
+\begin{equation*}
+    (a^2+b^2)\frac{\partial \hat{f}}{\partial s}=0\Rightarrow \frac{\partial \hat{f}}{\partial s}=0.
+\end{equation*}
+Esto implica que $\hat{f}$ es una función constante con respecto a $s$. Por otro lado, no hay ninguna restricción para $t$, por lo que $\hat{f}$ es una función de $t$ únicamente. Por lo tanto, la solución general de la EDP original es
+\begin{equation}
+    f(x,y)=\hat{f}(t)=f(bx-ay).
+\end{equation}
+\begin{example}
+    Probar que la función $f(x,y)=e^{bx-ay}$ es solución de la EDP
+    \begin{equation*}
+        a\frac{\partial f(x,y)}{\partial x}+b\frac{\partial f(x,y)}{\partial y}=0.
+    \end{equation*}
+\end{example}
+Para probar que $f(x,y)=e^{bx-ay}$ es solución de la EDP dada, debemos reemplazarla en la EDP y verificar que se cumple la igualdad. Por lo tanto, tenemos
+\begin{align*}
+    a\frac{\partial f(x,y)}{\partial x}+b\frac{\partial f(x,y)}{\partial y}&=a\frac{\partial e^{bx-ay}}{\partial x}+b\frac{\partial e^{bx-ay}}{\partial y}\\
+    &=a(be^{bx-ay})+b(-ae^{bx-ay})\\
+    &=abe^{bx-ay}-abe^{bx-ay}\\
+    &=(ab-ab)e^{bx-ay}=0.
+\end{align*}
+Por lo tanto, hemos probado que $f(x,y)=e^{bx-ay}$ es solución de la EDP dada.
+
+\section{Condiciones de borde}
+En el plano $xy$, si fijamos un valor para $t$ obtendremos rectas de la forma 
+\begin{equation*}
+    y=\frac{b}{a}x-\frac{t}{a}.
+\end{equation*}
+Dentro de estas líneas, la función $f(x,y)$ se mantiene constante debido a que tanto $s$ como $t$ lo son. También podemos dejar que $t$ varíe. Estas curvas, en las que $t$ varía, se llaman curvas características. Para el caso que estamos discutiendo, estas curvas tendrán la forma:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figuras/Fig_5.pdf}
+    \caption{En tomate se encuentran las curvas en las que $t=cte$. En rojo se denotan las curvas características $t=bx-ay$.}
+    \label{curv-caract}
+\end{figure}
+
+Ya conocemos que para conocer la solución de una ecuación diferencial se necesitan los valores de frontera. En el caso de las EDOs, con la información de $n$ puntos se podía encontrar la solución a la ecuación de orden $n$. Ahora, para las EDPs, no es suficiente puntos para delimitar las condiciones de borde, sino curvas para una EDP de 2 variables, superficies para una de 3 y así sucesivamente. Las condiciones de borde, para ser útiles y poder delimitar la función, deben cumplir con la siguiente propiedad. 
+\begin{theorem}
+    Si la condición de frontera en $\mathbb{R}^2$, dada por una curva, no es una curva característica, entonces esta condición define las constantes de la solución.
+\end{theorem}
+\begin{proof}
+    Supongamos que conozco un punto $(x_0,y_0)$ por el que pasa la función $f(x,y)$. Si hago la expansión de Taylor alrededor de este punto y truncando en el primer exponente, se obtiene:
+    \begin{equation*}
+        f(x,y)=f(x_0,y_0)+\frac{\partial f}{\partial x}\Big{|}_{x_0}(x-x_0)+\frac{\partial f}{\partial y}\Big{|}_{y_0}(y-y_0).
+    \end{equation*}
+    Ahora, definamos $l$ como la dirección de la curva. Si es que derivamos $f$ en función de $l$ obtenemos:
+    \begin{equation}
+        \frac{\partial f}{\partial l}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial l}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial l}.
+    \end{equation}
+    Si acoplamos (5.3) con (5.1) obtendremos
+    \begin{equation*}
+        \begin{vmatrix}
+            \frac{dx}{dl} & \frac{dy}{dl}\\
+            a & b 
+        \end{vmatrix}=b\frac{dx}{dl}-a\frac{dy}{dl}=\frac{d}{dl}(bx-ay)=\frac{dt}{dl}.
+    \end{equation*}
+
+    Si es que la condición de frontera está especificada a lo largo de una curva característica $t$ será constante. Por lo tanto, $dt/dl=0$, es decir, no puedo encontrar la solución con el valor de borde igual a una curva característica.
+\end{proof}
+
+\section{EDP de segundo orden}
+
+Después de ver una manera de resolver EDP de primer orden, podemos ver el caso para EDP del segundo orden. El caso más sencillo de una EDP del segundo orden, con una función $\psi(x,y)$ es
+\begin{equation}
+    a^2\frac{\partial^2\psi(x,y)}{\partial x^2}-c^2\frac{\partial^2\psi(x,y)}{\partial y^2}=0.
+\end{equation}
+Lo que podemos hacer es factorizar esta expresión para obtener
+\begin{equation*}
+    \left[a\frac{\partial}{\partial x}+c\frac{\partial}{\partial y}\right]\left[a\frac{\partial}{\partial x}-c\frac{\partial}{\partial y}\right]\psi(x,y)=0\Rightarrow\begin{cases}
+         [a\frac{\partial}{\partial x}+c\frac{\partial}{\partial y}]\psi_1&=0\\
+         [a\frac{\partial}{\partial x}-c\frac{\partial}{\partial y}]\psi_2&=0.
+    \end{cases}
+\end{equation*}
+Como podemos observar, la EDP de segundo orden se simplificó a dos EDP lineales homogéneas, lo cual ya sabemos como manejar. La solución de esta EDP será entonces,
+\begin{equation}
+    \psi_1(x,y)=f(cx-ay),\quad \psi_2(x,y)=g(cx+ay).
+\end{equation}
+
+Ahora, la ecuación
+\begin{equation}
+    a^2\frac{\partial^2\psi(x,y)}{\partial x^2}+c^2\frac{\partial^2\psi(x,y)}{\partial y^2}=0.
+\end{equation}
+se puede factorizar como 
+\begin{equation*}
+    \left[a\frac{\partial}{\partial x}+ic\frac{\partial}{\partial y}\right]\left[a\frac{\partial}{\partial x}-ic\frac{\partial}{\partial y}\right]\psi(x,y)=0.
+\end{equation*}
+En este caso, se producirán curvas características complejas. Notamos que solo un cambio de signo puede cambiar totalmente a la solución de una EDP. Por lo tanto, debemos caracterizar qué tipos de EDP podemos tener para poder atacar a cada uno.
+
+\subsection{Clases de EDP del segundo orden}
+
+Sea el operador diferencial de las EDP del segundo orden 
+\begin{equation}
+    \mathcal{L}=a\frac{\partial^2}{\partial x^2}+b\frac{\partial^2}{\partial x \partial y}+c\frac{\partial^2}{\partial y^2}.
+\end{equation}
+Definimos el discriminante $\Delta$ como
+\begin{equation}
+    \Delta=b^2-4ac,
+\end{equation}
+con esto, podemos reescribir (5.7) de la siguiente manera:
+\begin{equation*}
+\mathcal{L}=\left(\frac{b+\sqrt{\Delta}}{2c^{1/2}}\frac{\partial}{\partial x}+c^{1/2}\frac{\partial}{\partial y}\right)\left(\frac{b-\sqrt{\Delta}}{2c^{1/2}}\frac{\partial}{\partial x}+c^{1/2}\frac{\partial}{\partial y}\right).
+\end{equation*}
+Con el discriminante definido de esta manera, podemos caracterizar las EDP de segundo orden en 3 casos:
+\begin{itemize}
+    \item $\Delta>0$, se dice que la EDP es hiperbólica. 
+    \item $\Delta<0$, se dice que la EDP es elíptica. 
+    \item $\Delta=0$, se dice que la EDP es parabólica. 
+\end{itemize}
+Usando esta caracterización, la ecuación (5.4) es hiperbólica y la (5.6) es elíptica. 
+\subsection{Matriz Parte principal}
+Definimos la matriz $M$ de la siguiente manera
+\begin{equation}M=
+    \begin{pmatrix}
+        a & b/2 \\
+        b/2 & c 
+    \end{pmatrix}
+\end{equation}
+Usando esta matriz, podemos escribir $\mathcal{L}$ como en la ecuación (5.7) de la siguiente manera:
+\begin{equation*}
+    \left(\frac{\partial}{\partial x},\frac{\partial}{\partial y}\right)\begin{pmatrix}
+        a & b/2 \\
+        b/2 & c 
+    \end{pmatrix}\begin{pmatrix}
+        \frac{\partial}{\partial x} \\
+        \frac{\partial}{\partial y}\end{pmatrix}=\left(\frac{\partial}{\partial x},\frac{\partial}{\partial y}\right)\begin{pmatrix}
+            a\frac{\partial}{\partial x}+\frac{b}{2}\frac{\partial}{\partial y}\\
+            \frac{b}{2}\frac{\partial}{\partial x}+c\frac{\partial}{\partial y}    
+    \end{pmatrix}=a\frac{\partial^2}{\partial x^2}+b\frac{\partial^2}{\partial x \partial y}+c\frac{\partial^2}{\partial y^2}=\mathcal{L}.
+\end{equation*}
+Es decir, recordando que 
+\begin{equation*}
+    \nabla=\begin{pmatrix}
+        \frac{\partial}{\partial x} \\
+        \frac{\partial}{\partial y}
+    \end{pmatrix},\quad \nabla^T= \left(\frac{\partial}{\partial x},\frac{\partial}{\partial y}\right),
+\end{equation*}
+el operador diferencial $\mathcal{L}$ se puede escribir como
+\begin{equation}
+    \mathcal{L}=\nabla^T M \nabla
+\end{equation}
+Además, $M$ cumple la propiedad
+\begin{equation}
+    \det(M)=ac-\frac{b^2}{4}\Rightarrow \Delta=-4\det(M).
+\end{equation}
+\subsection{EDP del segundo orden en $\bmR=(x,y,z)$}
+El operador diferencial $\mathcal{L}$ para este caso será
+\begin{equation}
+    \mathcal{L}=a\frac{\partial^2}{\partial x^2}+b\frac{\partial^2}{\partial y^2}+c\frac{\partial^2}{\partial z^2}+d\frac{\partial^2}{\partial x\partial y}+e\frac{\partial^2}{\partial x\partial z}+f\frac{\partial^2}{\partial y\partial z}.
+\end{equation}
+La matriz principal será
+\begin{equation}
+    M=\begin{pmatrix}
+        a & d/2 & e/2 \\
+        d/2 & b & f/2 \\
+        e/2 & f/2 & c \\
+    \end{pmatrix}.
+\end{equation}
+Calculamos el determinante de la matriz como
+\begin{equation*}
+    \det(M)=a\left(bc-\frac{f^2}{4}\right)+\frac{d}{2}\left(\frac{ef}{4}-\frac{cd}{2}\right)+\frac{e}{2}\left(\frac{df}{4}-\frac{bl}{2}\right)=abc-\frac{1}{4}(af^2+cd^2+be^2-def).
+\end{equation*}
+Si calculamos el discriminante usando (5.11), tenemos
+\begin{equation}
+ \Delta=af^2+cd^2+be^2-4abc-def.
+\end{equation}
+Aquí hacemos la misma caracterización de acuerdo a si $\Delta$ es positivo negativo o 0 como lo hicimos en la sección anterior. 
+\subsection{EDP de primer orden en 3 dimensiones}
+Sea la ecuación diferencial
+\begin{equation}
+    a\frac{\partial \psi}{\partial x}+b\frac{\partial \psi}{\partial y}+c\frac{\partial \psi}{\partial z}.
+\end{equation}
+
+Definimos la coordenadas
+\begin{align*}
+    s&=ax+by+cz=(a,b,c)\cdot \bmR,\\
+    t&=\alpha_1 x+\alpha_2 y+\alpha_3 z=(\alpha_1,\alpha_2,\alpha_3)\cdot \bmR,\\
+    u&=\beta_1 x+\beta_2 y+\beta_3 z=(\beta_1,\beta_2,\beta_3)\cdot \bmR.
+\end{align*}
+Si $s,t,u$ son coordenadas ortogonales, entonces
+\begin{align*}
+    (a,b,c)\cdot(\alpha_1,\alpha_2,\alpha_3)&=0,\\
+    (a,b,c)\cdot(\beta_1,\beta_2,\beta_3)&=0,\\
+    (\alpha_1,\alpha_2,\alpha_3)\cdot(\beta_1,\beta_2,\beta_3)&=0.
+\end{align*}
+Ahora, calculamos las siguientes derivadas usando la regla de la cadena
+\begin{align*}
+    \frac{\partial\psi}{\partial x}&=a\frac{\partial\psi}{\partial s}+\alpha_1\frac{\partial\psi}{\partial t}+\beta_1\frac{\partial\psi}{\partial u},\\
+    \frac{\partial\psi}{\partial y}&=b\frac{\partial\psi}{\partial s}+\alpha_2\frac{\partial\psi}{\partial t}+\beta_2\frac{\partial\psi}{\partial u},\\
+    \frac{\partial\psi}{\partial z}&=c\frac{\partial\psi}{\partial s}+\alpha_3\frac{\partial\psi}{\partial t}+\beta_3\frac{\partial\psi}{\partial u}.\\
+\end{align*}
+Reemplazando las anteriores expresiones en (5.15) tenemos:
+\begin{equation*}
+    a\left(a\frac{\partial\psi}{\partial s}+\alpha_1\frac{\partial\psi}{\partial t}+\beta_1\frac{\partial\psi}{\partial u}\right)+b\left(b\frac{\partial\psi}{\partial s}+\alpha_2\frac{\partial\psi}{\partial t}+\beta_2\frac{\partial\psi}{\partial u}\right)+c\left(c\frac{\partial\psi}{\partial s}+\alpha_3\frac{\partial\psi}{\partial t}+\beta_3\frac{\partial\psi}{\partial u}\right)=0.
+\end{equation*}
+Factorizando esta expresión tenemos:
+\begin{equation*}
+    (a^2+b^2+c^2)\frac{\partial\psi}{\partial s}+(a\alpha_1+b\alpha_2+c\alpha_3)\frac{\partial\psi}{\partial t}+(a\beta_1+b\beta_2+c\beta_3)\frac{\partial\psi}{\partial u}=0.
+\end{equation*}
+Por las condiciones de ortogonalidad:
+\begin{equation}
+    (a^2+b^2+c^2)\frac{\partial\psi}{\partial s}=0.
+\end{equation}
+
+Para este caso, las condiciones iniciales van a ser un plano. Una condición inicial es buena cuando las líneas características atraviesan la misma. Es decir cuando se tiene
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figuras/Fig_6.pdf}
+    \caption{Condiciones iniciales de una EDP de primer orden en 3 dimensiones}
+    \label{EDP3D}
+\end{figure}
+Si la condición inicial no es buena, se tiene un gráfico de la forma:
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figuras/Fig_7.pdf}
+    \caption{Malas condiciones iniciales de una EDP de primer orden en 3 dimensiones}
+    \label{3D_malas}
+\end{figure}
+
+Si conozco la solución sobre una superficie, puedo propagar la solución en dos direcciones (independientes) $l$ y $l'$. Si calculamos la derivada de la función $\psi$ con respecto a estas dos direcciones tenemos:
+\begin{align*}
+    \frac{\partial \psi}{\partial l}&=\frac{\partial \psi}{\partial x}\frac{\partial x}{\partial l}+\frac{\partial \psi}{\partial y}\frac{\partial y}{\partial l}+\frac{\partial \psi}{\partial z}\frac{\partial z}{\partial l}\\
+    \frac{\partial \psi}{\partial l'}&=\frac{\partial \psi}{\partial x}\frac{\partial x}{\partial l'}+\frac{\partial \psi}{\partial y}\frac{\partial y}{\partial l'}+\frac{\partial \psi}{\partial z}\frac{\partial z}{\partial l'}
+\end{align*}
+
+Calculando el siguiente determinante tenemos:
+\begin{equation*}
+    \begin{vmatrix}
+        \frac{\partial x}{\partial l} & \frac{\partial y}{\partial l} & \frac{\partial z}{\partial l} \\
+        \frac{\partial x}{\partial l'} & \frac{\partial y}{\partial l'} & \frac{\partial z}{\partial l'} \\
+        a & b & c
+    \end{vmatrix} \neq 0
+\end{equation*}
+\subsection{Caracterización de condiciones de borde}
+Además de la caracterización con el determinante que se hizo previamente, se pueden clasificar las EDP con:
+\begin{itemize}
+    \item \textbf{Condiciones de borde de Cauchy.} El valor de una función y su derivada normal están especificadas en el borde. 
+    \item \textbf{Condiciones de borde de Dirichlet.} El valor de una función está especificada en el borde. 
+    \item \textbf{Condiciones de borde de Neumann.} La derivada normal de una función está especificada en el borde. 
+\end{itemize}
+
+Si conectamos estas condiciones con la caracterización que hicimos para EDP del segundo orden tenemos:
+
+\begin{tabular}{|p{3.5cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline 
+\multirow[t]{2}{*}{Condiciones de frontera} & \multicolumn{3}{|c|}{Tipo de ecuación diferencial parcial} \\
+\cline{2-4}
+ & Elíptica & Hiperbólica & Parabólica \\
+\hline 
+ & Laplace, Poisson en $(x, y)$ & Ecuación de onda en $(x, t)$ & Ecuación de difusión en $(x, t)$ \\
+\hline 
+\multicolumn{4}{|l|}{Cauchy} \\
+\hline 
+Superficie abierta & Resultados no físicos (inestabilidad) & Solución única y estable & Demasiado restrictivo \\
+\hline 
+Superficie cerrada & Demasiado restrictivo & Demasiado restrictivo & Demasiado restrictivo \\
+\hline 
+\multicolumn{4}{|l|}{Dirichlet} \\
+\hline 
+Superficie abierta & Insuficiente & Insuficiente & Solución única y estable en una dirección \\
+\hline 
+Superficie cerrada & Solución única y estable & Solución no única & Demasiado restrictivo \\
+\hline 
+\multicolumn{4}{|l|}{Neumann} \\
+\hline 
+Superficie abierta & Insuficiente & Insuficiente & Solución única y estable en una dirección \\
+\hline 
+Superficie cerrada & Solución única y estable & Solución no única & Demasiado restrictivo \\
+\hline
+\end{tabular}
+
+Para una superficie abierta se necesitan dos informaciones para definir las condiciones de frontera correctamente, mientras que para una superficie cerrada solo se necesita una. 
+
+\section{Ecuaciones no lineales}
+
+Una ecuación no lineal tiene términos de la forma
+\begin{equation*}
+    \psi^2,\quad \psi\frac{\partial \psi}{\partial x},\quad\frac{\partial^n\psi}{\partial x^n}\frac{\partial^m\psi}{\partial y^n},\quad f(\psi)\frac{\partial\psi}{\partial x}, \quad\dots
+\end{equation*}
+\subsection{Ecuación de Kortweg-de Vries}
+Esta ecuación es una ecuación de onda no lineal que modela la propagación, sin pérdidas, de ondas de agua en agua poco profunda. Si $\eta(x,t)$ es la elevación de la onda que depende de la posición (en este caso, unidimensional) y el tiempo, la ED que modela esta variable viene dada por 
+\begin{equation}
+    \frac{\partial\eta}{\partial t}+c_0\frac{\partial\eta}{\partial x}+\frac{3}{2}\frac{c_0}{h}\eta\frac{\partial\eta}{\partial x}+\frac{c_0h^2}{6}\frac{\partial^3\eta}{\partial x^3}=0,
+\end{equation}
+dónde $c_0=\sqrt{gh}$ es la velocidad lineal de la onda, $g$ es la aceleración de la gravedad y $h$ es la altura del agua en reposo. Si es que el sistema de referencia que estamos tomando se mueve con velocidad constante $c_0$ podemos hacer el cambio de variable
+\begin{equation*}
+    x\to \xi=x-c_0t,\quad \eta(\xi,t)=\eta(\xi(x,t),t).
+\end{equation*}
+La derivada de $\eta$ con respecto a la coordenada espacial será
+\begin{equation*}
+    \frac{\partial \eta}{\partial x}=\frac{\partial \eta}{\partial \xi}\frac{\partial \xi}{\partial x}=\frac{\partial \eta}{\partial \xi},
+\end{equation*}
+y así para las derivadas de orden superior. Sin embargo, para la derivada temporal tenemos:
+\begin{align*}
+    \frac{\partial\eta(\xi(t),t)}{\partial t}&=  \frac{\partial\eta(\xi,t)}{\partial \xi}\frac{\partial\xi(t)}{\partial t}+ \frac{\partial\eta(\xi,t)}{\partial t}\\
+    &=-c_0\frac{\partial\eta}{\partial\xi}+\frac{\partial\eta}{\partial t}.
+\end{align*}
+Si sustituimos esta expresión en (5.17) obtendremos:
+\begin{equation}
+     \frac{\partial\eta}{\partial t}+\frac{3}{2}\frac{c_0}{h}\eta\frac{\partial\eta}{\partial \xi}+\frac{c_0h^2}{6}\frac{\partial^3\eta}{\partial \xi^3}=0.
+\end{equation}
+Esta ecuación es la manera convencional en la que se encuentra a la ecuación de Kortweg-de Vries y tiene una solución de solitón.
+\subsection{Ecuación de tasa de láser}
+Para modelar el comportamiento de un láser en un material de ganancia usamos la ecuación de inversión de la población. El funcionamiento de un láser, de manera cualitativa, es que un material de ganancia, es decir, un material en el que se el que sus componentes están en un nivel de energía más alto que su estado estable, se incide luz. La intensidad de la luz aumenta en este medio, ya que por cada fotón que incide en un átomo del material, se expulsan dos fotones más por que el material vuelve a su estado estable. De esta manera, se logra un crecimiento exponencial. Esta ecuación viene dada por
+\begin{equation}
+    \frac{dN}{dt}+\frac{N-\Tilde{N}}{\tau_1}=-B\Phi,
+\end{equation}
+dónde $N$ es la fracción de partículas que están en estado excitado, $(N-\Tilde{N})/\tau_1$ es energía externa que se le pone al material de ganancia y $\Phi$ es la densidad de fotones. $N$ toma valores entre -1 y 1, siendo 1 que todas las partículas están en estado excitado y -1 que ninguna de ellas lo están. La densidad de fotones sigue la siguiente ecuación:
+\begin{equation}
+    \frac{d\Phi}{dt}=B\Phi N-C\Phi,
+\end{equation}
+dónde $B\Phi N$ es la emisión estimulada y $-C\Phi$ es la tasa de pérdida. Si es que el término de la derecha de (5.19) es 0, es decir, la densidad de fotones es 0 (algo que no es físico), $N\to\Tilde{N}$ en $\tau_1$. Con esto, la ecuación (5.20) se convierte en 
+\begin{equation}
+    \frac{d\Phi}{dt}=(B\Tilde{N}-C)\Phi,
+\end{equation}
+que permite la solución
+\begin{equation*}
+    \Phi(t)=e^{(B\Tilde{N}-C)t}.
+\end{equation*}
+Cuando $B\Tilde{N}>C$, la solución es una exponencial creciente, algo que no puede modelar algo físico, ya que va hacia el infinito rápidamente. Sin embargo, cuando consideramos la parte derecha de (5.19) cuando $N$ llega a su estado estable (SS por su nombre en inglés \textit{steady state}), tenemos:
+\begin{equation*}
+    N_{SS}-\Tilde{N}=-B\tau_1-\Phi\Rightarrow N_{SS}=\Tilde{N}-B\Phi,
+\end{equation*}
+con la anterior expresión en la ecuación de densidad de fotones tenemos: 
+\begin{equation}
+     \frac{d\Phi}{dt}=(B\Tilde{N}-B^2\Phi-C)\Phi.
+\end{equation}
+
+La ecuación anterior es una ecuación no lineal, aunque tanto la ecuación de inversión de población como la de densidad de fotones no parezcan a primera vista ecuaciones no lineales. El hecho de que estas ecuaciones están acopladas hace que la ecuación sea no lineal. Para $\Phi\approx 0$, tendremos el crecimiento exponencial, pero cuando $\Phi$ llegue a su estado estable, tendremos
+\begin{equation*}
+    (B\Tilde{N}-B^2\Phi_{SS}-C)\Phi_{SS}=0,
+\end{equation*}
+que tiene la solución trivial $\Phi=0$, pero esta solución no es estable ya que el 0 matemático no existe en el mundo físico. Se tiene la otra solución
+\begin{equation}
+    \Phi_{SS}=\frac{B\Tilde{N}-C}{B^2}.
+\end{equation}
+A esta parte de la solución se la llama saturación.
+\section{Separación de Variables}
+
+Este método consiste en dividir una EDP de $n$ variables en $n$ EDOs, para luego proponer una solución de la EDP que sea la multiplicación de funciones que sean de una sola variable. La solución obtenida por este método no es la ecuación general, sino que provee de una base para a partir de ahí construir la ecuación general. Se usará la ecuación de Helmholtz
+\begin{equation}
+    \Delta^2\psi(\bmR)+k^2\psi(\bmR)=0
+\end{equation}
+como ejemplo para usar este método. En cada sistema de coordenadas tenemos diferentes variables, por lo que vamos a analizar los tres más importantes: coordenadas cartesianas, cilíndricas y esféricas.
+
+\subsection{Coordenadas Cartesianas}
+
+En coordenadas cartesianas, la ecuación de Helmholtz toma la forma
+
+\begin{equation}
+    \frac{\partial^2 \psi}{\partial^2 x}+\frac{\partial^2 \psi}{\partial^2 y}+\frac{\partial^2 \psi}{\partial^2 z}+k^2\psi=0.
+\end{equation}
+
+Vamos a probar una solución de la forma 
+
+\begin{equation} \label{helcar}
+    \psi(x,y,z)=X(x)Y(y)Z(z)
+\end{equation}
+
+y sustituirla en (5.26). Este método usualmente funciona si no hay términos mixtos ($\frac{\partial \psi}{\partial x_i\partial x_j},i\neq j$) y cuando las condiciones de frontera se pueden separar de igual manera en diferentes factores. Sin embargo, este método es un intentemos y veamos que pasa. Si sustituimos la ecuación tenemos
+
+\begin{equation}
+    YZ \frac{d^2X}{dx^2}+XZ\frac{d^2Y}{dy^2}+XY\frac{d^2Z}{dz^2}+k^2XYZ=0,
+\end{equation}
+si dividimos para XYZ y restanto a ambos lados tenemos
+
+\begin{equation}
+    \frac{1}{X}\frac{d^2X}{dx^2}+\frac{1}{Y}\frac{d^2Y}{dy^2}+k^2=-\frac{1}{Z}\frac{d^2Z}{dz^2}.
+\end{equation}
+
+Notamos que el lado derecho de la ecuación depende de $x,y$ mientras que el izquierdo depende de $z$. Debido a que las coordenadas son independientes, la única manera en la que la igualdad se cumpla es que ambas partes sean iguales a la misma constante. Esto nos da dos ecuaciones:
+
+\begin{align}
+    \frac{1}{X}\frac{d^2X}{dx^2}+\frac{1}{Y}\frac{d^2Y}{dy^2}+k^2&=\text{cte},\\
+    -\frac{1}{Z}\frac{d^2Z}{dz^2}&=\text{cte}.
+\end{align}
+
+No tenemos ninguna restricción para la constante, por lo que puede ser positiva o negativa. Definimos a la constante como $\text{cte}=\pm k_z^2$ y con esto tenemos dos casos para la ecuación (5.30).
+
+Caso positivo (\text{cte}=$k_z^2$):
+\begin{equation*}
+    \frac{d^2Z}{dz^2}+k_z^2Z=0.
+\end{equation*}
+Caso negativo (\text{cte}=$k_z^2$):
+\begin{equation*}
+    \frac{d^2Z}{dz^2}-k_z^2Z=0.
+\end{equation*}
+Buscamos soluciones de la forma $Z=e^{\alpha z}$ y obtenemos, respectivamente:
+\begin{equation}
+    \begin{aligned}
+        \alpha^2+k_z^2&=0\Rightarrow \alpha=\pm ik_z,\\
+        \alpha^2-k_z^2&=0\Rightarrow \alpha=\pm k_z.
+    \end{aligned}
+\end{equation}
+
+Esto quiere decir que para \text{cte}=$k_z^2$ tendremos una ecuación oscilante y para \text{cte}=$-k_z^2$ una ecuación exponencial creciente o decreciente. Debemos elegir el signo de la constante de acuerdo a las condiciones de frontera de mi sistema físico, no hay una respuesta universal para cualquier ejercicio. 
+
+En este caso, a modo de ejemplo, elegimos $k_z^2$, con lo que tenemos:
+
+\begin{equation}
+    Z(z)=e^{\pm ik_z z}.
+\end{equation}
+
+Con la constante definida, la ecuación (5.29) nos da:
+
+\begin{equation}
+    \frac{1}{X}\frac{d^2X}{dx^2}+k^2-k_z^2=-\frac{1}{Y}\frac{d^2Y}{dy^2}.
+\end{equation}
+
+El lado izquierdo de la igualdad solo depende de $x$ y el derecho solo de $y$. Por el mismo razonamiento que hicimos anteriormente, la única manera de que la igualad se cumpla es sea igual a una constante. Definimos ahora a la constante $k_y^2$ (positiva), con lo que tenemos:
+
+\begin{equation}
+    Y(y)=e^{\pm ik_y y}.
+\end{equation}
+ 
+Ahora, solo nos queda buscar la solución en $x$:
+
+\begin{equation}
+    \frac{1}{X}\frac{d^2X}{dx^2}+k^2-k_y^2-k_z^2=0.
+\end{equation}
+
+Queremos una solución oscilante, por lo que definimos
+
+\begin{equation}
+    k_x^2=k^2-k_y^2-k_z^2,
+\end{equation}
+con lo que finalmente obtenemos la ecuación:
+\begin{equation}
+    X(x)=e^{\pm ik_x x}
+\end{equation}
+
+Notamos que ya tenemos las ecuaciones separadas de la solución que buscamos. Si definimos $\mathbf{k}=(k_x,k_y,k_z)$ tendremos las soluciones
+\begin{equation}
+    \begin{aligned}
+        \psi^+(\bmR)&=e^{i\mathbf{k}\cdot\bmR},\\
+        \psi^-(\bmR)&=e^{-i\mathbf{k}\cdot\bmR}.
+    \end{aligned}
+\end{equation}
+
+Notamos que esta es la solución de onda plana. Podemos elegir cualquier de las dos soluciones, pues lo único que cambia es la dirección en la que se propaga la onda. Tenemos completa libertad para el valor de $\mathbf{k}$, lo único que debemos fijar es su módulo al cuadrado $k^2$, es decir:
+\begin{equation}
+    k^2=k_x^2+k_y^2+k_z^,
+\end{equation}
+lo que implica que la solución dependerá de dos parámetros, pues el tercero depende de estos. Si es que hacemos que $k_z$ dependa de $k_x,k_y$ tendremos:
+
+\begin{equation}
+    \psi_{k_xk_y}(\bmR)=e^{i\mathbf{k}\cdot\bmR}.
+\end{equation}
+
+Como se mencionó al inicio de la sección, la solución obtenida no es la solución general de la ecuación. Para la solución general debemos tomar una combinación lineal de la ecuación (5.40) y obtendremos
+
+\begin{equation}
+    \Psi(\bmR)=\sum_{k_xk_y}a_{k_xk_y}e^{i\mathbf{k}\cdot\bmR},
+\end{equation}
+dónde los coeficientes $a_{k_xk_y}$ se determinan por los valores de frontera. En el caso de que en lugar de valores discretos tengamos un continuo de $k_xk_y$, tendremos la solución
+
+\begin{equation}
+    \Psi(\bmR)=\int a(\mathbf{k})e^{i\mathbf{k}\cdot\bmR}d^3 k.
+\end{equation}
+
+La parte derecha de la ecuación es una transformada de Fourier, esto nos dice que podemos encontrar una solución del espacio real (tridimensional) en el espacio $\mathbf{k}$, un resultado que es muy profundo. 
+
+\subsection{Coordenadas Cilíndricas}
+
+La ecuación de Helmholtz en coordenadas cilíndricas viene dada por (revisar la sección 2.5.3 para el cálculo del laplaciano en coordenadas curvilíneas):
+
+\begin{equation}
+\frac{1}{\rho} \frac{\partial}{\partial \rho}\left(\rho \frac{\partial \psi}{\partial \rho}\right)+\frac{1}{\rho^2} \frac{\partial^2 \psi}{\partial \varphi^2}+\frac{\partial^2 \psi}{\partial z^2}+k^2 \psi=0 .
+\end{equation}
+
+Asumimos ahora una solución de la forma 
+
+\begin{equation}
+    \psi(\bmR)=P(\rho)\Phi(\varphi)Z(z).
+\end{equation}
+
+Sustituimos (5.44) en (5.43) para obtener:
+
+\begin{equation}
+\frac{\Phi Z}{\rho} \frac{d}{d \rho}\left(\rho \frac{d P}{d \rho}\right)+\frac{P Z}{\rho^2} \frac{d^2 \Phi}{d \varphi^2}+P \Phi \frac{d^2 Z}{d z^2}+k^2 P \Phi Z=0 .
+\end{equation}
+
+Si dividimos todo para $P\Phi Z$ y restando $\frac{1}{Z} \frac{d^2 Z}{d z^2}$ a ambos lados tenemos:
+
+\begin{equation}
+\frac{1}{\rho P} \frac{d}{d \rho}\left(\rho \frac{d P}{d \rho}\right)+\frac{1}{\rho^2 \Phi} \frac{d^2 \Phi}{d \varphi^2}+k^2=-\frac{1}{Z} \frac{d^2 Z}{d z^2} .
+\end{equation}
+
+De igual manera que en coordenadas cartesianas, al lado izquierdo de la igualdad tenemos una función que depende de $\rho,\varphi$ y a la derecha una que solo depende de $z$, por lo que la única manera en la que la igualdad se cumpla es que sean iguales a una constante. Esto quiere decir que
+\begin{align}
+    \frac{1}{\rho P} \frac{d}{d \rho}\left(\rho \frac{d P}{d \rho}\right)+\frac{1}{\rho^2 \Phi} \frac{d^2 \Phi}{d \varphi^2}+k^2&=\text{cte},\\
+    -\frac{1}{Z} \frac{d^2 Z}{d z^2}&=\text{cte}.
+\end{align}
+
+Definimos a la constante $\pm l^2$. Ahora, $Z$ puede ser periódica o tener forma exponencial, depende de la elección del signo de la constante, pues se puede tener
+\begin{equation*}
+    \frac{d^2Z}{dz^2}+l^2Z=0\quad,\quad \frac{d^2Z}{dz^2}-l^2Z=0.
+\end{equation*}
+La elección, de nuevo, dependerá de las condiciones de frontera del problema. Escojamos que la constante sea negativa, lo que implica una $Z$ exponencial. Además, supongamos que $Z$ decae exponencialmente,
+
+\begin{equation}
+    Z(z)=e^{-lz}.
+\end{equation}
+
+Con la definición de la constante, (5.47) se modifica a:
+\begin{equation}
+    \frac{1}{\rho P} \frac{d}{d \rho}\left(\rho \frac{d P}{d \rho}\right)+\frac{1}{\rho^2 \Phi} \frac{d^2 \Phi}{d \varphi^2}+k^2=-l^2.
+\end{equation}
+
+Si definimos
+
+\begin{equation}
+    k^2+l^2=n^2,
+\end{equation}
+y multiplicando todo para $\rho^2$ tenemos:
+
+\begin{equation}
+\frac{\rho}{P} \frac{d}{d \rho}\left(\rho \frac{d P}{d \rho}\right)+n^2 \rho^2=-\frac{1}{\Phi} \frac{d^2 \Phi}{d \varphi^2} .
+\end{equation}
+
+De esta manera, tenemos al lado derecho una ecuación solo de $\rho$ y en el izquierdo una solo de $\varphi$. Por lo tanto, debe ser igual a una constante para que se cumpla la igualdad. Sin embargo, no podemos escoger un signo arbitrario para la constante, ya que $\varphi$ es naturalmente una constante periódica. Por esto, necesariamente, la constante será positiva para admitir la solución oscilante. Definimos a la constante como $m^2$ y tenemos:
+\begin{equation}
+    \frac{d^2 \Phi}{d \varphi^2}+m^2\Phi=0\Rightarrow \Phi=e^{im\varphi}.
+\end{equation}
+
+La parte radial, con la definición de $m^2$ y multiplicando todo por $P$ nos da:
+
+\begin{equation}
+\rho \frac{d}{d \rho}\left(\rho \frac{d P}{d \rho}\right)+\left(n^2 \rho^2-m^2\right) P=0 .
+\end{equation}
+
+Si hacemos el cambio de variable 
+
+$$x=n\rho\quad,\quad y(x)=P(\rho(x)),$$
+
+por regla de la cadena y sustitución directa obtendremos:
+
+\begin{equation}
+    x^2y''+xy'+(x^2-m^2)y=0,
+\end{equation}
+
+reconocemos inmediatamente (o eso se espera), a la ecuación de Bessel de orden $m$, con lo que tenemos:
+\begin{equation}
+    P=J_m(n\rho)
+\end{equation}
+Con todo esto, notamos que (5.49) depende del parámetro $l$, (5.53) de $m$ y (5.56) de $m,n$. Además, recordemos que establecimos (5.51), por lo que $n$ puede es función de $l$. Por lo tanto, podemos escribir la solución general de la EDP 
+\begin{equation}
+    \Psi(\bmR)=\sum_{lm}a_{lm}P_{lm}(\rho)\Phi_m(\varphi)Z_l(z).
+\end{equation}
+
+\subsection{Coordenadas Esféricas}
+
+Por último, tenemos las coordenadas esféricas. En este sistema, la ecuación de Helmholtz se convierte en 
+
+\begin{equation}
+\frac{1}{r^2 \sin \theta}\left[\sin \theta \frac{\partial}{\partial r}\left(r^2 \frac{\partial \psi}{\partial r}\right)+\frac{\partial}{\partial \theta}\left(\sin \theta \frac{\partial \psi}{\partial \theta}\right)+\frac{1}{\sin \theta} \frac{\partial^2 \psi}{\partial \varphi^2}\right]+k^2 \psi=0.
+\end{equation}
+
+Asumimos ahora una solución de la forma
+
+\begin{equation}
+    \psi(\bmR)=R(r)\Theta(\theta)\Phi(\varphi).
+\end{equation}
+
+Seguimos el mismo proceso que en los sistemas de coordenadas anteriores. Reemplazo (5.58) en (5.57) para obtener:
+
+\begin{equation}
+\frac{1}{R r^2} \frac{d}{d r}\left(r^2 \frac{d R}{d r}\right)+\frac{1}{\Theta r^2 \sen \theta} \frac{d}{d \theta}\left(\sen \theta \frac{d \Theta}{d \theta}\right)+\frac{1}{\Phi r^2 \sen ^2 \theta} \frac{d^2 \Phi}{d \varphi^2}+k^2 =0.
+\end{equation}
+Multiplicamos por $r^2\sen^2\theta$ para aislar a $\Phi$:
+
+\begin{equation}
+\frac{\sen^2\theta}{R} \frac{d}{d r}\left(r^2 \frac{d R}{d r}\right)+\frac{\sen\theta}{\Theta} \frac{d}{d \theta}\left(\sen \theta \frac{d \Theta}{d \theta}\right)+k^2r^2\sen^2\theta =-\frac{1}{\Phi} \frac{d^2 \Phi}{d \varphi^2}.
+\end{equation}
+
+Como siempre, el lado izquierdo de la igualdad depende solo de $r,\theta$, mientras que el derecho depende de $\varphi$. Como en el caso de las coordenadas cilíndricas, $\varphi$ es naturalmente periódica. Esto es, la constante que definamos que va a ser igual a (5.61) debe ser positiva, necesariamente. Definimos a la constante como $m^2$. Con esto tenemos
+\begin{equation}
+    -\frac{1}{\Phi} \frac{d^2 \Phi}{d \varphi^2}=m^2 \Rightarrow\Phi(\varphi)=e^{\pm im\varphi}
+\end{equation}
+
+Dividimos ahora (5.61) para $\sen^2\theta$ (después de definir (5.62) para obtener 
+
+\begin{equation}
+\frac{1}{R} \frac{d}{d r}\left(r^2 \frac{d R}{d r}\right)+r^2 k^2=-\frac{1}{\Theta \sin \theta} \frac{d}{d \theta}\left(\sin \theta \frac{d \Theta}{d \theta}\right)+\frac{m^2}{\sin ^2 \theta} .
+\end{equation}
+
+Notamos que el lado izquierdo depende solo de $r$ y el derecho solo de $\theta$. La función $\Theta$ dependerá tanto de $m$ como de la nueva constante que definamos. Definimos a la nueva constante como $\lambda$, ya que es difícil establecer su signo por el momento. Con esto tenemos
+
+\begin{align}
+    \frac{1}{R} \frac{d}{d r}\left(r^2 \frac{d R}{d r}\right)+r^2 k^2&=\lambda,\\
+    \frac{1}{\Theta \sin \theta} \frac{d}{d \theta}\left(\sin \theta \frac{d \Theta}{d \theta}\right)+\frac{m^2}{\sin ^2 \theta}&=-\lambda.
+\end{align}
+
+Multiplicamos a (5.64) por $R$ y (5.65) por $\Theta$ para obtener, respectivamente
+
+\begin{align}
+    \frac{d}{d r}\left(r^2 \frac{d R}{d r}\right)+\left[r^2 k^2-\lambda\right]R&=0,\\
+    \frac{1}{ \sin \theta} \frac{d}{d \theta}\left(\sin \theta \frac{d \Theta}{d \theta}\right)+\left[\lambda-\frac{m^2}{\sin ^2 \theta}\right]\Theta&=0.
+\end{align}
+
+Hacemos el cambio de variable
+\begin{equation}
+    \Theta(\theta)=P(\cos\theta)=P(t),
+\end{equation}
+con el que la ecuación (5.67), aplicando regla de la cadena  y con $\sen^2\theta=1-t^2$, queda
+
+\begin{equation}
+    (1-t^2)P''(t)-2tP'(t)+\left[\lambda-\frac{m^2}{1-t^2}\right]P(t)=0.
+\end{equation}
+
+Daremos un nombre a esta ecuación después de encontrar el valor de $\lambda$. Para hallar dicho valor, usamos (5.66) en su forma más sencilla, i.e., $k=0$
+
+\begin{equation*}
+    \frac{d}{d r}\left(r^2 \frac{d R}{d r}\right)-\lambda R=0,
+\end{equation*}
+
+aplicando la derivada tenemos:
+\begin{equation}
+    r^2R''+2rR'-\lambda R=0.
+\end{equation}
+
+Usamos el método de Frobenius para hallar soluciones de la forma 
+\begin{equation*}
+    R=\sum_n a_n r^{n+s}.
+\end{equation*}
+Calculamos las derivadas y reemplazamos en la ecuación (5.70) para obtener:
+\begin{equation*}
+    \sum_n a_n r^{n+s}\left[(n+s)(n+s-1)+2(n+s)-\lambda\right].
+\end{equation*}
+
+Es evidente que no vamos a tener una ecuación de recurrencia, pero podemos encontrar una ecuación indicial con $n=0$:
+\begin{equation}
+    s(s-1)+2s-\lambda=0\Rightarrow \lambda=s(s+1).
+\end{equation}
+
+Definimos a $\lambda$ como 
+\begin{equation}
+    \lambda=l(l+1),
+\end{equation}
+lo que nos da los valores de $s$
+\begin{equation}
+    s=l\quad,\quad s=-(l+1).
+\end{equation}
+
+Esto quiere decir que, en el caso de que $k=0$, $R$ tendrá la forma 
+
+\begin{equation}
+    R_l(r)=A_lr^l+\frac{B_l}{r^{l+1}}.
+\end{equation}
+
+Con $\lambda$ definido, (5.69) toma la forma
+
+\begin{equation}
+    \frac{d}{dt}\left[(1-t^2)\frac{dP(t)}{dt}\right]+\left[l(l+1)-\frac{m^2}{1-t^2}\right]P(t)=0,
+\end{equation}
+a esta ecuación se la conoce como la ecuación asociada de Legendre, con solución
+\begin{equation}
+    P(t)=P_l^m(\cos\theta),
+\end{equation}
+
+Ahora nos queda (5.66), reemplazando el valor de $\lambda$ y calculando la derivada tenemos:
+
+\begin{equation}
+    r^2R''+2rR'+\left[(kr)^2-l(l+1) \right]R=0.
+\end{equation}
+
+Realizamos el cambio de variable
+\begin{equation}
+    R(r)=\frac{Z(kr)}{\sqrt{kr}}=\frac{Z(x)}{x^{1/2}}.
+\end{equation}
+
+Con este cambio, usando regla de la cadena y sustitución directa, (5.77) toma la forma
+\begin{equation}
+    x^2Z''+xZ'+\left[x^2-\left(l+\frac{1}{2}\right)^2\right]Z=0.
+\end{equation}
+Por simple inspección, notamos que esta es la ecuación de Bessel, con soluciones:
+
+\begin{equation*}
+    Z_1(x)=J_{l+1/2}(x)\quad,\quad Z_2(x)=Y_{l+1/2}(x).
+\end{equation*}
+
+A estas funciones se las denomina funciones de Bessel esféricas y se las define usualmente como
+\begin{align}
+    j_l(x)&=\sqrt{\frac{\pi}{x}} J_{l+1/2}(x),\\
+    y_l(x)&=\sqrt{\frac{\pi}{x}} Y_{l+1/2}(x),
+\end{align}
+
+Con esto, vamos a tener las siguientes soluciones.
+\begin{itemize}
+    \item Laplace:
+\end{itemize}
+    \begin{equation}
+\psi(r, \theta, \varphi)=\sum_{l, m}\left(A_{l m} r^l+B_{l m} r^{-l-1}\right) P_l^m(\cos \theta)\left(A_{l m}^{\prime} \sin m \varphi+B_{l m}^{\prime} \cos m \varphi\right) .
+\end{equation}
+\begin{itemize}
+    \item Helmholtz:
+\end{itemize}
+
+\begin{equation}
+\psi(r, \theta, \varphi)=\sum_{l, m}\left[A_{l m} j_l(k r)+B_{l m} y_l(k r)\right] \times P_l^m(\cos \theta)\left(A_{l m}^{\prime} \sin m \varphi+B_{l m}^{\prime} \cos m \varphi\right) .
+\end{equation}
+En el siguiente capítulo se discutirá la ecuación asociada de Legendre y sus soluciones. 

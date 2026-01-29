@@ -1,0 +1,339 @@
+\section{Introducción}
+Recordemos que definimos los vectores unitarios de las coordenadas cartesianas y cilíndricas de la siguiente manera
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+         Coordenadas Cartesianas & Coordenadas Cilíndricas  \\
+         $\hat{x_1}=(1,0,0)$ &  $\hat{r}(\theta)=(\cos\theta,\sen\theta,0)$\\
+         $\hat{x_2}=(0,1,0)$ &  $\hat{\theta}(\theta)=(-\sen\theta,\cos\theta,0)$\\
+         $\hat{x_3}=(0,0,1)$ &  $\hat{z}=(0,0,1)$
+    \end{tabular}
+    \label{cart_cil}
+\end{table}
+Notamos que los vectores unitarios en coordenadas cartesianas no dependen de ninguna coordenada espacial, mientras que $\hat{r},\hat{\theta}$ dependen de la coordenada espacial $\theta$. Si es que queremos pasar de un sistema a otro de coordenadas tenemos
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+         $x_1=r\cos\theta$ &  $r=\sqrt{x_1^2+x_2^2}$\\
+         $x_2=r\sen\theta$ &  $\theta=\tg^{-1}\frac{x_2}{x_1}$\\
+         $x_3=z$ &  $z=x_3$
+    \end{tabular}
+    \label{equiv_car_cil}
+\end{table}
+Podemos hacer lo mismo para pasar de coordenadas cartesianas a esféricas. Lo que queremos lograr es encontrar una manera general para tratar con cambios de coordenadas. A las coordenadas generales las llamamos coordenadas curvilíneas. Generalizando, podemos tener las coordenadas $(q_1,q_2,q_3)$. Estas coordenadas pueden o no ser longitudes. Además, los vectores unitarios de estas coordenadas pueden en principio depender de las 3 coordenadas espaciales, con esto se tiene:
+\begin{align*}
+    \hat{q_1}&=(q_1,q_2,q_3)\\
+    \hat{q_2}&=(q_1,q_2,q_3)\\
+    \hat{q_3}&=(q_1,q_2,q_3)
+\end{align*}
+\section{Producto Punto}
+Empecemos calculando el producto punto usando coordenadas curvilíneas. Si tenemos un campo vectorial $\mathbf{V}(\bmR)$ cualquiera, lo podemos descomponer en los componentes:
+\begin{equation}
+    \mathbf{V}(\bmR)=V_1(\bmR)\hat{x_1}+V_2(\bmR)\hat{x_2}+V_3(\bmR)\hat{x_3},
+\end{equation}
+Si hacemos el producto punto $\mathbf{V}(\bmR)\cdot \mathbf{W}(\bmR)$, con $\mathbf{W}(\bmR)$ otro campo vectorial, tenemos:
+\begin{equation}
+    \mathbf{V}(\bmR)\cdot \mathbf{W}(\bmR)=\sum_i V_i(\bmR)W_i(\bmR)=V_i(\bmR)W_i(\bmR).
+\end{equation}
+Por otro lado, un campo vectorial $\mathbf{V}(\bmR)$ en coordenadas cilíndricas se puede escribir como
+\begin{equation}
+     \mathbf{V}(\bmR)=V_r(\bmR)\hat{r}(\theta)+V_\theta(\bmR)\hat{\theta}(\theta)+V_z(\bmR)\hat{z},
+\end{equation}
+haciendo el producto punto obtenemos:
+\begin{equation}
+     \mathbf{V}(\bmR)\cdot \mathbf{W}(\bmR)=V_r(\bmR)W_r(\bmR)+V_\theta(\bmR)W_\theta(\bmR)+V_z(\bmR)W_z(\bmR).
+\end{equation}
+Usando coordenadas curvilíneas generales, tenemos
+\begin{equation}
+      \mathbf{V}(\bmR)=V_1(\bmR)\hat{q_1}(q_1,q_2,q_3)+V_2(\bmR)\hat{q_2}(q_1,q_2,q_3)+V_3(\bmR)\hat{q_3}(q_1,q_2,q_3),
+\end{equation}
+el producto punto puede simplificarse con esta notación a
+\begin{equation}
+     \mathbf{V}(\bmR)\cdot \mathbf{W}(\bmR)=V_i(\bmR)W_i(\bmR).
+\end{equation}
+\section{Métrica de la Transformación}
+Recordemos que los vectores unitarios no tienen unidades, por lo que las unidades de longitud de cada coordenada debe salir de otro lado. El vector posición ($\bmR$) se puede escribir en sus diferentes componentes:
+\begin{align*}
+   \bmR&= x_1\hat{x_1}+x_2\hat{x_2}+x_3\hat{x_3} \text{ coordenadas cartesianas}\\
+    \bmR&= r\hat{r}(\theta)+z\hat{z}\text{ coordenadas cilíndricas},
+\end{align*}
+como se puede notar, de manera general
+\begin{equation}
+    \bmR\neq q_1\hat{q_1}+q_2\hat{q_2}+q_3\hat{q_3}.
+\end{equation}
+Queremos encontrar una manera de describir los cambios de coordenadas. Para ello escribamos primero las coordenadas cartesianas en función de las curvilíneas:
+\begin{align*}
+    x_1&=x_1(q_1,q_2,q_3)\\
+    x_2&=x_2(q_1,q_2,q_3)\\
+    x_3&=x_3(q_1,q_2,q_3)
+\end{align*}
+Calculemos primero el diferencial $dx_1$ usando regla de la cadena:
+\begin{equation}
+    dx_1=\frac{\partial x_1}{\partial q_1}dq_1+\frac{\partial x_1}{\partial q_2}dq_2+\frac{\partial x_1}{\partial q_3}dq_3,
+\end{equation}
+usando notación de Einstein tenemos:
+\begin{equation}
+    dx_1=\frac{\partial x_i}{\partial q_j}dq_j.
+\end{equation}
+Por teorema de Pitágoras, la distancia entre dos punto en coordenadas cartesianas es
+\begin{equation}
+    dS^2=dx_1^2+dx_2^2+dx_3^2 \hspace{1cm}[dS^2\equiv(dS)^2].
+\end{equation}
+Nos interesa la distancia ya que queremos que sin importar el sistema de coordenadas esta sea invariante. Ahora, calculamos $dx_1^2=dx_1\cdot dx_1$, usamos notación de Einstein para simplificar el cálculo y ahorrar espacio:
+\begin{equation}
+    dx_1^2=\frac{\partial x_1}{\partial q_i}\frac{\partial x_1}{\partial q_j}dq_idq_j.
+\end{equation}
+Calculamos de manera similar $dx_2$ y $dx_3$ para llegar a 
+\begin{equation}
+    dS^2=\frac{\partial x_k}{\partial q_i}\frac{\partial x_k}{\partial q_j}dq_idq_j.
+\end{equation}
+Definimos
+\begin{equation}
+    g_{ij}\equiv\frac{\partial x_k}{\partial q_i}\frac{\partial x_k}{\partial q_j}
+\end{equation}
+como la métrica de la transformación. Reescribiendo (2.12) con (2.13) obtenemos
+\begin{equation}
+    dS^2= g_{ij}dq_idq_j.
+\end{equation}
+
+\begin{example}
+    Encontrar la métrica de la transformación de coordenadas 
+    
+    cilíndricas a cartesianas. 
+\end{example}
+\noindent
+\begin{minipage}{0.48\textwidth}
+\begin{align*}
+g_{11} &= \left(\frac{\partial x_1}{\partial r}\right)^2 + \left(\frac{\partial x_2}{\partial r}\right)^2 + \left(\frac{\partial x_3}{\partial r}\right)^2 \\
+       &= \cos^2 \theta + \sin^2 \theta \\
+       &= 1 \\
+g_{13} &= \frac{\partial x_1}{\partial r} \frac{\partial x_1}{\partial z} + \frac{\partial x_2}{\partial r} \frac{\partial x_2}{\partial z} + \frac{\partial x_3}{\partial r} \frac{\partial x_3}{\partial z} \\
+       &= 0 + 0 + 0 \\
+       &= 0 \\
+g_{22} &= \left(\frac{\partial x_1}{\partial \theta}\right)^2 + \left(\frac{\partial x_2}{\partial \theta}\right)^2 + \left(\frac{\partial x_3}{\partial \theta}\right)^2 \\
+       &= r^2 \cos^2 \theta + r^2 \sin^2 \theta \\
+       &= r^2 \\
+g_{31} &= \frac{\partial x_1}{\partial r} \frac{\partial x_1}{\partial z} + \frac{\partial x_2}{\partial r} \frac{\partial x_2}{\partial z} + \frac{\partial x_3}{\partial r} \frac{\partial x_3}{\partial z} \\
+       &= -r \sin \theta + r \sin \theta \cos \theta + 0 \\
+       &= 0 
+\end{align*}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.48\textwidth}
+\begin{align*}
+g_{12} &= \frac{\partial x_1}{\partial r} \frac{\partial x_1}{\partial \theta} + \frac{\partial x_2}{\partial r} \frac{\partial x_2}{\partial \theta} + \frac{\partial x_3}{\partial r} \frac{\partial x_3}{\partial \theta} \\
+       &= -r \sin \theta + r \sin \theta \cos \theta + 0 \\
+       &= 0 \\
+g_{21} &= \frac{\partial x_1}{\partial r} \frac{\partial x_1}{\partial \theta} + \frac{\partial x_2}{\partial r} \frac{\partial x_2}{\partial \theta} + \frac{\partial x_3}{\partial r} \frac{\partial x_3}{\partial \theta} \\
+       &= -r \sin \theta + r \sin \theta \cos \theta + 0 \\
+       &= 0 \\
+g_{23} &= \frac{\partial x_1}{\partial \theta} \frac{\partial x_1}{\partial z} + \frac{\partial x_2}{\partial \theta} \frac{\partial x_2}{\partial z} + \frac{\partial x_3}{\partial \theta} \frac{\partial x_3}{\partial z} \\
+       &= 0 + 0 + 0 \\
+       &= 0 \\
+g_{32} &= \frac{\partial x_1}{\partial \theta} \frac{\partial x_1}{\partial z} + \frac{\partial x_2}{\partial \theta} \frac{\partial x_2}{\partial z} + \frac{\partial x_3}{\partial \theta} \frac{\partial x_3}{\partial z} \\
+       &= 0 + 0 + 0 \\
+       &= 0 
+\end{align*}
+\end{minipage}
+\begin{align*}
+        g_{33} &= \left(\frac{\partial x_1}{\partial z}\right)^2 + \left(\frac{\partial x_2}{\partial z}\right)^2 + \left(\frac{\partial x_3}{\partial z}\right)^2 \\
+       &= 0 + 0 + 1 \\
+       &= 1 
+\end{align*}
+
+Con esto tenemos
+\begin{equation*}
+    g_{ij}=\begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & r^2 & 0\\
+        0 & 0 & 1
+    \end{bmatrix} 
+\end{equation*}
+Esta es la métrica de la transformación de coordenadas cilíndricas a cartesianas. \hfill $\blacksquare$
+
+Ahora, enfoquémonos en el vector
+\begin{equation*}
+    \left(\frac{\partial x_1}{\partial q_j},\frac{\partial x_2}{\partial q_j},\frac{\partial x_3}{\partial q_j}\right)dq_j
+\end{equation*}
+este es el desplazamiento diferencial en dirección $q_1$. Por lo tanto 
+\begin{equation}
+     \left(\frac{\partial x_1}{\partial q_j},\frac{\partial x_2}{\partial q_j},\frac{\partial x_3}{\partial q_j}\right) \parallel \hat{q_j}.
+\end{equation}
+Si es que las coordenadas son ortogonales tenemos 
+\begin{equation}
+    \hat{q_i}\cdot\hat{q_j}=\delta_{ij},
+\end{equation}
+lo que implica que 
+\begin{equation*}
+    \frac{\partial x_1}{\partial q_i}\frac{\partial x_1}{\partial q_j}+\frac{\partial x_2}{\partial q_i}\frac{\partial x_2}{\partial q_j}+\frac{\partial x_3}{\partial q_i}\frac{\partial x_3}{\partial q_j}=0\hspace{1cm}\text{con }i\neq j.
+\end{equation*}
+Esto quiere decir que, cuando las coordenadas son ortogonales tenemos
+\begin{equation*}
+    g_{ij}=g_{ij}\delta_{ij}=g_{ii}.
+\end{equation*}
+Definimos
+\begin{equation}
+    h_i^2\equiv g_{ii},
+\end{equation}
+llamamos a $h_i$ factores de escala. Con esto tenemos
+\begin{equation}
+    g_{ij}=\begin{bmatrix}
+        h_1^2 & 0 & 0 \\
+        0 & h_2^2 & 0 \\
+        0 & 0 & h_3^2 
+    \end{bmatrix}
+\end{equation}
+ Por definición,
+ \begin{equation}
+     h_i=\sqrt{\left(\frac{\partial x_1}{\partial q_i}\right)^2+\left(\frac{\partial x_2}{\partial q_i}\right)^2+\left(\frac{\partial x_3}{\partial q_i}\right)^2}.
+ \end{equation}
+ Con esto reescribimos
+ \begin{equation}
+     dS_i^2=g_{ii}dq_i^2\equiv (h_idq_i)^2\Rightarrow dS_i=h_idq_i.
+ \end{equation}
+ 
+ Además, podemos escribir los vectores unitarios de la siguiente manera:
+ \begin{equation}
+     \frac{1}{h_j}\left(\frac{\partial x_1}{\partial q_j},\frac{\partial x_2}{\partial q_j},\frac{\partial x_3}{\partial q_j}\right) = \hat{q_j}.
+\end{equation}
+ \section{Integrales}
+ Con lo que hemos definido podemos calcular integrales en funciones parametrizadas.
+ \subsection{Integral de Línea}
+ La integral de línea viene dada por
+ \begin{equation}
+     \int_C \mathbf{V}(q_1,q_2,q_3)\cdot d\mathbf{S}(q_1,q_2,q_3)=\int_C V_ih_idq_i
+ \end{equation}
+ \subsection{Integral de Superficie}
+ Definimos:
+ \begin{equation*}
+     d\sigma_1=h_2h_3dq_2dq_3,\quad d\sigma_2=h_1h_3dq_1dq_3,\quad d\sigma_3=h_1h_2dq_1dq_2
+ \end{equation*}
+ \begin{equation*}    d\boldsymbol{\sigma}=d\sigma_1\hat{q_1}+d\sigma_2\hat{q_2}+d\sigma_3\hat{q_3}.
+ \end{equation*}
+ Con esto tenemos:
+ \begin{equation}
+     \iint_S \mathbf{V}(q_1,q_2,q_3)\cdot d\mathbf{\sigma}.
+ \end{equation}
+ Sobre toda una superficie cerrada podemos calcular:
+ \begin{equation}
+     \iint_S V_i \left|\frac{\varepsilon_{ijk}}{2}\right|h_ih_jdq_idq_j
+ \end{equation}
+ \subsection{Integral de Volumen}
+ La integral de volumen se calcula de manera sencilla con
+ \begin{equation}
+     \int_V V(q_1,q_2,q_3)h_1h_2h_3dq_1dq_2dq_3
+ \end{equation}
+ \section{Operadores Diferenciales}
+ \subsection{Divergencia}
+ Recordemos que concluimos que $dS_i=h_idq_i$. Debido a que 
+ \begin{equation}
+     d\mathbf{S}=S_1\hat{q_1}+S_2\hat{q_2}+S_3\hat{q_3}
+ \end{equation}
+ podemos escribir el desplazamiento diferencial en coordenadas curvilíneas como 
+\begin{equation}
+    d\mathbf{S}=h_1dq_1\hat{q_1}+h_2dq_2\hat{q_2}+h_3dq_3\hat{q_3}.
+\end{equation}
+Lo que nos interesa ahora es poder crear operadores diferenciales en coordenadas curvilíneas. Cuando derivamos, nos va a interesar le derivada en $dS_i$, debido que $dS_i$ tiene unidades de longitud, mientras que $q_i$ no necesariamente las tiene. Esto no quiere decir que no se pueda hacer la operación
+\begin{equation*}
+    \frac{d}{dq_i}f(q_1,q_2,q_3),
+\end{equation*}
+esta es una operación completamente válida. Sin embargo, en términos físicos, no es de ninguna utilidad. La operación que nos sirve para derivar es 
+\begin{equation}
+    \frac{1}{h_1}\frac{d}{dq_i}f(\mathbf{q}),\quad\text{definimos }\mathbf{q}\equiv(q_1,q_2,q_3)
+\end{equation}
+De esta manera podemos definir el gradiente de una función escalar de la siguiente manera
+\begin{equation}
+    \nabla f(\mathbf{q})=\frac{1}{h_1}\frac{\partial f(\mathbf{q})}{\partial q_1}\hat{q_1}+\frac{1}{h_2}\frac{\partial f(\mathbf{q})}{\partial q_2}\hat{q_2}+\frac{1}{h_3}\frac{\partial f(\mathbf{q})}{\partial q_3}\hat{q_3}.
+\end{equation}
+Con notación de Einstein, podemos simplificar este resultado como 
+\begin{equation}
+     \nabla f(\mathbf{q})=\frac{1}{h_i}\frac{\partial f(\mathbf{q})}{\partial q_i}\hat{q_i}.
+\end{equation}
+\subsection{Divergencia}
+Recordando lo visto de la clase de cálculo, definimos la divergencia de manera geométrica como el flujo sobre una superficie cerrada sobre su volumen cuando el volumen tiende a 0, es decir:
+\begin{equation}
+    \text{div}\mathbf{F}=\lim_{\text{Volumen}\to 0}\frac{\int_S \mathbf{F}\cdot d\mathbf{A}}{\text{Volumen de }S}.
+\end{equation}
+Para poder calcular la divergencia en coordenadas curvilíneas, empecemos con el siguiente diagrama ilustrativo.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Figuras/Fig_1.pdf}
+    \caption{Diagrama para calcular la Divergencia}
+    \label{div-cor-curv}
+\end{figure}
+Sea $\mathbf{F}$ un campo vectorial con $\mathbf{F}(\mathbf{q})=F_1\hat{q_1}+F_2\hat{q_2}+F_3\hat{q_3}$. Calculemos el flujo que paso por las paredes 1 y 2:
+\begin{align*}
+    \Phi_1&=-\mathbf{F}(q_1-\frac{1}{2}dq_1)\cdot d\mathbf{A}=-F_1(q_1-\frac{1}{2}dq_1)\sigma_1=-F_1(q_1-\frac{1}{2}dq_1)h_2h_3dq_2dq_3,\\
+    \Phi_2&=\mathbf{F}(q_1+\frac{1}{2}dq_1)\cdot d\mathbf{A}=F_1(q_1+\frac{1}{2}dq_1)\sigma_1=F_1(q_1+\frac{1}{2}dq_1)h_2h_3dq_2dq_3.
+\end{align*}
+Notemos que se abrevió $\mathbf{F}(q_1-\frac{1}{2}dq_1,q_2,q_3)$ a $\mathbf{F}(q_1-\frac{1}{2}dq_1)$. Esto se hizo ya que $d\mathbf{A}=d\sigma_1\hat{q_1}$. Sumando las expresiones anteriores tenemos
+\begin{equation*}
+    \Phi_{12}=\left(F_1(q_1+\frac{1}{2}-F_1(q_1-\frac{1}{2}dq_1)\right)dq_1)h_2h_3dq_2dq_3.
+\end{equation*}
+Multiplicamos por $\frac{dq_1}{d_1}$, y por definición de derivada obtenemos
+\begin{equation*}
+    \Phi_{12}=\frac{\partial F_1(\mathbf{q})}{\partial q_1}h_2h_3dq_1dq_2dq_3
+\end{equation*}
+Hacemos el mismo procedimiento para las superficies faltantes y llegamos a 
+\begin{equation*}
+    d\Phi=\left[\frac{\partial F_1(\mathbf{q})}{\partial q_1}h_2h_3+\frac{\partial F_2(\mathbf{q})}{\partial q_2}h_1h_3+\frac{\partial F_3(\mathbf{q})}{\partial q_3}h_1h_2\right]dq_1dq_2dq_3,
+\end{equation*}
+este es el flujo sobre la superficie diferencial. Algo importante que se está pasando por alto es que los factores de escala ($h_i$) también dependen de las coordenadas espaciales. Si es que esto no se toma en cuenta se caería en el error de tomar a $h_i$ como constantes, por lo que expresamos la derivada de manera no ambigua cómo:
+\begin{align*}
+    d\Phi = & \left\{ \frac{\partial }{\partial q_1}[F_1(\mathbf{q})h_2(\mathbf{q})h_3(\mathbf{q})] + \frac{\partial }{\partial q_2}[F_2(\mathbf{q})h_1(\mathbf{q})h_3(\mathbf{q})] \right. \\
+    & \left. + \frac{\partial }{\partial q_3}[F_3(\mathbf{q})h_1(\mathbf{q})h_2(\mathbf{q})] \right\} dq_1 dq_2 dq_3
+\end{align*}
+Dividimos ahora para $dV$, es decir $d^3S$ y obtenemos la divergencia:
+\begin{align}
+    \nabla \cdot \mathbf{F}(\mathbf{q}) = & \frac{d\Phi}{dV} = \left\{ \frac{\partial }{\partial q_1}[F_1(\mathbf{q})h_2(\mathbf{q})h_3(\mathbf{q})] \right. \nonumber \\
+    & \left. + \frac{\partial }{\partial q_2}[F_2(\mathbf{q})h_1(\mathbf{q})h_3(\mathbf{q})] + \frac{\partial }{\partial q_3}[F_3(\mathbf{q})h_1(\mathbf{q})h_2(\mathbf{q})] \right\} \frac{1}{h_1(\mathbf{q})h_2(\mathbf{q})h_3(\mathbf{q})}.
+\end{align}
+
+Con notación de Einstein y poniendo como implícita la dependencia en $\mathbf{q}$ tenemos:
+\begin{equation}
+    \nabla\cdot\mathbf{F}(\mathbf{q})=\frac{1}{h_1h_2h_3}\left|\frac{\varepsilon_{ijk}}{2}\right|\frac{\partial}{\partial q_i}[F_ih_jh_k].
+\end{equation}
+\subsection{Laplaciano}
+Para el laplaciano ocupamos las definiciones de gradiente y divergencia que hemos visto y tenemos:
+\begin{equation}
+    \nabla\cdot\nabla\phi(\mathbf{q})=\frac{1}{h_1h_2h_3}\left[\frac{\partial}{\partial q_1}\left(\frac{h_2h_3}{h_1}\frac{\partial \phi}{\partial q_1}\right)+\frac{\partial}{\partial q_2}\left(\frac{h_1h_3}{h_2}\frac{\partial \phi}{\partial q_2}\right)+\frac{\partial}{\partial q_3}\left(\frac{h_1h_2}{h_3}\frac{\partial \phi}{\partial q_3}\right)\right]
+\end{equation}
+Con notación de Einstein: 
+\begin{equation}
+    \nabla^2\phi(\mathbf{q})=\frac{1}{h_1h_2h_3}\left|\frac{\varepsilon_{ijk}}{2}\right|\frac{\partial}{\partial q_i}\left[\frac{h_jh_k}{h_i}\frac{\partial \phi}{\partial q_i}\right]
+\end{equation}
+\subsection{Rotacional}
+Para calcular el rotacional usamos su definición geométrica:
+\begin{equation}
+    \text{rot} \mathbf{F}=\frac{\oint_C\mathbf{F}\cdot d\mathbf{l}}{dA}.
+\end{equation}
+Empezamos con la siguiente figura
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figuras/Fig_2.pdf}
+    \caption{Diagrama para calcular el rotacional}
+    \label{rot}
+\end{figure}
+Sea $\mathbf{B}$ un campo vectorial con $\mathbf{B}=B_1\hat{q_1}+B_2\hat{q_2}+B_3\hat{q_3}$. Calculemos la circulación a lo largo del camino señalado en el plano $q_1q_2$.
+\begin{align*}
+    \oint_C\mathbf{B}\cdot d\mathbf{l}=&B_1\left(q_2-\frac{1}{2}dq_2\right)h_1\left(q_2-\frac{1}{2}dq_2\right)q_1\\
+    &-B_1\left(q_2+\frac{1}{2}dq_2\right)h_1\left(q_2+\frac{1}{2}dq_2\right)q_1\\
+    &-B_2\left(q_1-\frac{1}{2}dq_1\right)h_2\left(q_1-\frac{1}{2}dq_1\right)q_2\\
+    &+B_2\left(q_1+\frac{1}{2}dq_1\right)h_2\left(q_1+\frac{1}{2}dq_1\right)q_2,
+\end{align*}
+multiplicamos por $\frac{dq_2}{dq_2}$ la primera parte y por $\frac{dq_1}{dq_1}$ la segunda. Por definición de derivada parcial obtenemos:
+\begin{equation*}
+    \oint_C\mathbf{B}\cdot d\mathbf{l}=-\frac{\partial}{\partial q_2}[B_1h_1]+\frac{\partial}{\partial q_1}[B_2h_2].
+\end{equation*}
+Si es que dividimos para $dA$, en este caso $dA=\sigma_3=h_1h_2q_1q_2$ obtenemos:
+\begin{equation}
+    (\nabla\times\mathbf{B})_3=\frac{1}{h_1h_2}\left[\frac{\partial}{\partial q_1}(B_2h_2)-\frac{\partial}{\partial q_2}(B_1h_1)\right],
+\end{equation}
+este es el tercer componente del vector del rotacional. Si es que seguimos el mismo proceso para los planos restantes obtenemos:
+\begin{equation}
+    \nabla\times\mathbf{B}=\begin{vmatrix}
+        h_1\hat{q_1} & h_2\hat{q_2} & h_3\hat{q_3}\\
+        \frac{\partial}{\partial q_1} & \frac{\partial}{\partial q_2} & \frac{\partial}{\partial q_3} \\
+        h_1B_1 & h_2B_2 & h_3B_3
+    \end{vmatrix} \frac{1}{h_1h_2h_3}
+\end{equation}

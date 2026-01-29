@@ -1,0 +1,289 @@
+\section{Introducción}
+Tenemos la siguiente ecuación diferencial:
+\begin{equation*}
+    a_n\frac{d^nf}{dx^n}+a_{n-1}\frac{d^{n-1}f}{dx^{n-1}}+\cdots+a_0f=0.
+\end{equation*}
+Conocemos que esta ecuación va a tener $n$ soluciones independientes. Puedo construir la solución general como
+\begin{equation}
+    f=c_0f_0+c_1f_1+\cdots+c_nf_n,
+\end{equation}
+donde los $c_i$ son constantes que dependen de los valores de frontera. Aunque sean funciones, podemos manejarlas como si fueran vectores en un espacio n-dimensional, con un producto interno definido. En este caso, definimos el producto interno como 
+\begin{equation}
+    \langle f,g \rangle=\int f(x)g(x)dx.
+\end{equation}
+Debido a esta generalización (y por otras razones que se verán más adelante), nos es útil definir una extensión de los vectores y matrices: los tensores.
+\section{Transformaciones}
+Los tensores se definen en dependencia de como transforman en el sistema de coordenadas. Definimos a un tensor por grados. Si es que estamos en el espacio tridimensional tenemos:
+\begin{itemize}
+    \item Tensor de grado 0: Escalar
+    \item Tensor de grado 1: Vector
+    \item Tensor de grado 2: Matriz 3$\times$3
+    \item Tensor de grado 3: Cubo 3$\times$3$\times$3,
+\end{itemize}
+y así sucesivamente para grados superiores. Definimos ahora las coordenadas:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+        Coordenadas Cartesianas & Nuevas Coordenadas \\
+        $x_1=x_1(x_1',x_2',x_3')$ & $x_1'=x_1'(x_1,x_2,x_3)$\\
+        $x_2=x_2(x_1',x_2',x_3')$ & $x_2'=x_2'(x_1,x_2,x_3)$\\
+        $x_3=x_3(x_1',x_2',x_3')$ & $x_3'=x_3'(x_1,x_2,x_3)$
+    \end{tabular}
+    \label{nuevascoor}
+\end{table}
+Analicemos cómo cambian estos sistemas de coordenadas con respecto a algunas transformaciones.
+\subsection{Traslaciones}
+Sin pérdida de generalidad, supongamos que la traslación solo se realiza en la coordenada $x_1$, una distancia a, es decir:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figuras/Fig_3.pdf}
+    \caption{Traslación}
+    \label{tras}
+\end{figure}
+Con esto tenemos las coordenadas y vectores unitarios:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c}
+        $x_1'=x_1-a$ &  $x_1=x_1'+a$ & $\hat{e_1}'=\hat{e_1}$\\
+        $x_2'=x_2$ &  $x_2=x_2'$ & $\hat{e_2}'=\hat{e_2}$\\
+        $x_3'=x_3$ &  $x_3=x_3'$ & $\hat{e_3}'=\hat{e_3}$
+    \end{tabular}
+    \label{cortras}
+\end{table}
+Notamos que
+\begin{equation}
+    \frac{\partial x_i'}{\partial x_j}=\delta_{ij},\quad \frac{\partial x_i}{\partial x_j'}=\delta_{ij}
+\end{equation}
+Para evaluar la función escalar $\phi$ en las nuevas coordenadas solo calculamos
+\begin{equation}
+    \phi'(\bmR')=\phi(\bmR(\bmR')).
+\end{equation}
+Para un campo vectorial $\mathbf{A}$ se trabaja de la misma manera:
+\begin{equation}
+    \mathbf{A}'(\bmR')=\mathbf{A}(\bmR(\bmR')).
+\end{equation}
+\begin{example}
+    Se tiene un carga positiva y puntual $q$ en el origen. Calcular el campo producido por la misma en los dos sistemas de coordenadas usados. 
+\end{example}
+
+Para el sistema cartesiano normal tenemos:
+\begin{equation*}
+    \mathbf{E}(\bmR)=\frac{q}{4\pi\epsilon_0}\frac{\bmR}{[x_1^2+x_2^2+x_3^2]^{3/2}}.
+\end{equation*}
+Para las coordenadas trasladadas tenemos en cambio:
+\begin{equation*}
+    \mathbf{E}'(\bmR')=\frac{q}{4\pi\epsilon_0}\frac{(x_1'+a,x_2',x_3')}{[(x_1'+a)^2+x_2'^2+x_3'^2]^{3/2}}. 
+\end{equation*}
+Notamos que la traslación transforma escalares y vectores de la misma manera. \hfill $\blacksquare$
+\subsection{Rotaciones}
+Se tiene una rotación del sistema de coordenadas de la siguiente manera:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figuras/Fig_4.pdf}
+    \caption{Rotación del sistema de coordenadas}
+    \label{rotcoord}
+\end{figure}
+Se puede observar de inmediato una diferencia crucial entre la rotación y traslación: la rotación cambia los vectores unitarios, es decir que 
+\begin{equation}
+    \frac{\partial x_i'}{\partial x_j}\neq \delta_{ij}
+\end{equation}
+Sin embargo, el tamaño del vector no cambia. Con esto podemos escribir las coordenadas:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+        $x_1'=r\cos\theta'$ & $x_1=r\cos\theta$ \\
+        $x_2'=r\sen\theta'$ & $x_2=r\sen\theta$ \\
+        $x_3'=x_3$ & $x_3=x_3'$
+    \end{tabular}
+    \label{tabrot}
+\end{table}
+Por la gráfica tenemos que $\theta'=\theta-\alpha$. Usando resta de ángulos del seno y coseno tenemos:
+\begin{align*}
+    x_1'&=r\cos\theta'=r\cos(\theta-\alpha)=r\cos\theta\cos\alpha+r\sen\theta\sen\alpha\\
+    x_2'&=r\sen\theta'=r\sen(\theta-\alpha)=r\sen\theta\cos\alpha-r\cos\theta\sen\alpha.
+\end{align*}
+Reemplazando los $x_i$ en la ecuación tenemos:
+\begin{align*}
+    x_1'&=x_1\cos\alpha+x_2\sen\alpha \\
+    x_1'&=-x_1\sen\alpha+x_2\cos\alpha.
+\end{align*}
+Con esto, los vectores unitarios cambian a 
+\begin{align*}
+    \hat{e_1}'&=\cos\alpha\hat{e_1}+\sen\alpha\hat{e_2} \\
+    \hat{e_2}'&=-\sen\alpha\hat{e_1}+\cos\alpha\hat{e_2}.
+\end{align*}
+Si calculamos $\frac{\partial x_i'}{x_j}$, notamos que podemos escribir las nuevas coordenadas como:
+\begin{align*}
+    x_1'&=\frac{\partial x_1'}{x_1}x_1+\frac{\partial x_1'}{x_2}x_2+\frac{\partial x_1'}{x_3}x_3 \\
+    x_2'&=\frac{\partial x_2'}{x_1}x_1+\frac{\partial x_2'}{x_2}x_2+\frac{\partial x_2'}{x_3}x_3 \\
+    x_3'&=\frac{\partial x_3'}{x_1}x_1+\frac{\partial x_3'}{x_2}x_2+\frac{\partial x_3'}{x_3}x_3.
+\end{align*}
+Para calcular una función escalar en el nuevo sistema de coordenadas seguimos usando (3.4). Sin embargo, para calcular una función vectorial tenemos que tener en cuenta el cambio en los vectores unitarios, es decir:
+\begin{align*}
+    A_1'&=\mathbf{A}(\bmR(\bmR'))\cdot \hat{e_1}'=\mathbf{A}\cdot (\cos\alpha\hat{e_1}+\sen\alpha\hat{e_2})=A_1\cos\alpha+A_2\sen\alpha\\
+    A_2'&=\mathbf{A}(\bmR(\bmR'))\cdot \hat{e_2}'=\mathbf{A}\cdot (-\sen\alpha\hat{e_1}+\cos\alpha\hat{e_2})=-A_1\sen\alpha+A_2\cos\alpha\\
+    A_3'&=\mathbf{A}(\bmR(\bmR'))\cdot \hat{e_3}'=\mathbf{A}\cdot\hat{e_3}=A_3
+\end{align*}
+\subsection{Vectores Contravariantes}
+A todos los vectores que transforman de esta manera se los llama vectores contravariantes. A estos vectores se los identifica con el índice en la parte superior. Todas las coordenadas son contravariantes, por lo que desde este momento en lugar de escribir $(x_1,x_2,x_3)$, se escribirá $(x^1,x^2,x^3)$. De manera abreviada, decimos que un vector es contravariante si cumple con 
+\begin{equation}
+    A'^i=\frac{\partial x'^i}{\partial x^j}A^j \quad\text{Contravariante}
+\end{equation}
+\subsection{Vectores Covariantes}
+Miremos ahora cómo escribir el gradiente bajo una transformación. Por definición, se tiene que el gradiente viene dado por 
+\begin{align*}
+    \nabla\phi&=\frac{\partial\phi}{\partial x^1}\hat{e_1}+\frac{\partial\phi}{\partial x^2}\hat{e_2}+\frac{\partial\phi}{\partial x^3}\hat{e_3},\\
+    \nabla'\phi&=\frac{\partial\phi}{\partial x'^1}\hat{e_1'}+\frac{\partial\phi}{\partial x'^2}\hat{e_2'}+\frac{\partial\phi}{\partial x'^3}\hat{e_3'}.
+\end{align*}
+Usando regla de la cadena, podemos escribir
+\begin{equation}
+    \frac{\partial \phi}{\partial x'^i}=\frac{\partial \phi}{\partial x^1}\frac{\partial x_1}{\partial x'^1}+\frac{\partial \phi}{\partial x^2}\frac{\partial x_2}{\partial x'^2}+\frac{\partial \phi}{\partial x^3}\frac{\partial x_3}{\partial x'^3},
+\end{equation}
+de forma abreviada:
+\begin{equation}
+    \frac{\partial \phi}{\partial x'^i}=\frac{\partial \phi}{\partial x^j}\frac{\partial x_j}{\partial x'^i}.
+\end{equation}
+A los vectores que transforman de esta manera, es decir, los vectores que cumplen con 
+\begin{equation}
+    A_i'=\frac{\partial x_j}{\partial x'^i}A_j \quad\text{Covariante}
+\end{equation}
+los llamamos vectores covariantes. A estos vectores los caracterizamos con el índice en la parte inferior.
+\subsection{Tensores de Rango 2}
+Cuando se sube el rango en los tensores se aumenta el número de variantes que puede tener el mismo. Para los escalares (rango 0) no hay ninguna variante. Para los vectores (rango 1) hay 1 variante, y son los vectores contra y covariantes. Para las matrices (rango 2) hay 2 variantes: las ya conocidas variantes y contravariantes y los tensores mixtos. Las variantes del tensor de rango 2 se pueden escribir de la siguiente manera
+\begin{align}
+    A'^{ij}&=\sum_{kl}\frac{\partial x'^i}{\partial x^k}\frac{\partial x'^j}{\partial x^l}A^{kl}\quad\text{Contravariante}\\
+    B'^{i}_j&=\sum_{kl}\frac{\partial x'^i}{\partial x^k}\frac{\partial x^l}{\partial x'^j}B^k_l\quad\text{Mixto}\\
+    C'_{ij}&=\sum_{kl}\frac{\partial x^k}{\partial x'^i}\frac{\partial x^l}{\partial x'^j}C_{kl}\quad\text{Covariante}
+\end{align}
+Un ejemplo de un tensor de rango 2 es la ya conocida delta de Kronecker. En particular, es un tensor mixto.
+\begin{example}
+    Probar que la delta de Kronecker es un tensor mixto.
+\end{example}
+
+Por definición de delta de Kronecker tenemos que
+\begin{equation*}
+    \delta^k_l\frac{\partial x'^i}{\partial x^k}\frac{\partial x^l}{\partial x'^j}=\frac{\partial x'^i}{\partial x^k}\frac{\partial x^k}{\partial x'^j},
+\end{equation*}
+por regla de la cadena se tiene
+\begin{equation*}
+    \frac{\partial x'^i}{\partial x^k}\frac{\partial x^k}{\partial x'^j}= \frac{\partial x'^i}{\partial x'^j}.
+\end{equation*}
+Recordemos que las coordenadas $x'^i$ y $x'^j$ son independientes, por lo que la variación de una con respecto a la otra será 0 a menos que sean las mismas coordenadas. Esto quiere decir que
+\begin{equation*}
+    \frac{\partial x'^i}{\partial x'^j}=\delta'^i_j.
+\end{equation*}
+Por transitividad concluimos que
+\begin{equation*}
+    \delta'^i_j=\frac{\partial x'^i}{\partial x^k}\frac{\partial x^l}{\partial x'^j} \delta^k_l.
+\end{equation*}
+Esta es la definición de tensor mixto, por lo que queda demostrado que la delta de Kronecker es un tensor mixto. \hfill $\blacksquare$
+\section{Propiedades de los tensores}
+\subsection{Simetría y antisimetría}
+Un tensor simétrico cumple con la propiedad
+\begin{equation}
+    A^{mn}=A^{nm}.
+\end{equation}
+Por otro lado, un tensor antisimétrico cumple con
+\begin{equation}
+    A^{mn}=-A^{nm}.
+\end{equation}
+Esta propiedad es importante para los tensores de rango 2, ya que podemos escribir cualquier tensor de rango 2 en la forma
+\begin{equation}
+    A^{mn}=\frac{1}{2}(A^{mn}+A^{nm})+\frac{1}{2}(A^{mn}-A^{nm})
+\end{equation}
+dividiendo al tensor en una parte simétrica y otro antisimétrica. Esta propiedad se aplica en mecánica cuántica.
+\section{Vectores Base}
+\subsection{Vectores Contravariantes} Pasemos ahora a una revisión más extensa de los tensores de rango 1 (vectores), ya que son los elementos más usados en física. Tenemos un sistema al que se le somete al siguiente cambio de coordenadas:
+\begin{equation*}
+    \mathbf{q}=(q^1,q^2,q^3)\to \bmR=(x^1,x^2,x^3).
+\end{equation*}
+Recordemos que la métrica de la transformación viene dada por
+\begin{equation*}
+    g_{ij}=\frac{\partial x^k}{\partial q^i}\frac{\partial x^k}{\partial q^j}
+\end{equation*}
+Cuando las coordenadas son ortogonales, se cumple que
+\begin{equation*}
+    g_{ij}=g_{ij}\delta^i_j=h_i^2\delta^i_j,
+\end{equation*}
+es decir, estamos transformando coordenadas curvilíneas cualesquiera a cartesianas. A los vectores unitarios del espacio $\mathbf{q}$ los podemos escribir como 
+\begin{equation}
+    \hat{q_i}=\frac{1}{h_i}\frac{\partial\bmR}{\partial q^i}.\quad \text{no suma}
+\end{equation}
+Definimos los vectores base $\boldsymbol{\varepsilon}_i$ de la siguiente manera
+\begin{equation}
+    \boldsymbol{\varepsilon}_i=\frac{\partial\bmR}{\partial q^i}.
+\end{equation}
+Podemos definir ahora los vectores base en función de los vectores unitarios como 
+\begin{equation}
+    \boldsymbol{\varepsilon}_i=h_i\hat{q_i}.
+\end{equation}
+\begin{example}
+    Calcular los vectores base en la transformación de coordenadas cilíndricas a cartesianas.
+\end{example} 
+
+Usando la definición de vectores base tenemos
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+      $x_1=r\cos\theta$   & $\boldsymbol{\varepsilon}_r=(\cos\theta,\sen\theta,0)=\hat{e_r}$ \\
+      $x_2=r\sen\theta$   & $\boldsymbol{\varepsilon}_\theta=(-r\sen\theta,r\cos\theta,0)=r\hat{e_\theta}$ \\
+      $x_3=z$   & $\boldsymbol{\varepsilon}_z=(0,0,1)=\hat{e_z}$ 
+    \end{tabular}
+    \label{ejercicio 3.3}
+\end{table}
+De esta manera hemos calculado los vectores base de la transformación requerida. \hfill$\blacksquare$
+
+Debido a que toda transformación de sistema de coordenadas transforma de forma contravariante, tenemos:
+\begin{equation}
+    V'^i=\frac{\partial x^i}{\partial q^j}V^j.
+\end{equation}
+Notamos que podemos expandir $\boldsymbol{\varepsilon}_i$ de la siguiente manera
+\begin{equation}
+    \boldsymbol{\varepsilon}_i=\left(\frac{\partial x^1}{\partial q^i},\frac{\partial x^2}{\partial q^i},\frac{\partial x^3}{\partial q^i}\right).
+\end{equation}
+Con esto, podemos construir el vector transformado $\mathbf{V'}$ cómo:
+\begin{equation}
+    \mathbf{V'}=V^j\boldsymbol{\varepsilon}_j=V^1\boldsymbol{\varepsilon}_1+V^2\boldsymbol{\varepsilon}_2+V^3\boldsymbol{\varepsilon}_3.
+\end{equation}
+Notamos que $\boldsymbol{\varepsilon}_j$ es un vector covariante.
+
+\subsection{Vectores Covariantes} Ahora, recordemos que definimos el gradiente como
+\begin{equation*}
+    \frac{\partial}{\partial x^i}= \frac{\partial q^j}{\partial x^i} \frac{\partial}{\partial q^j},
+\end{equation*}
+sea $V'_i=\frac{\partial}{\partial x^i}$ y $V_j=\frac{\partial}{\partial q^j}$. Definamos ahora 
+\begin{equation}
+    \boldsymbol{\varepsilon}^i=\left(\frac{\partial q^i}{\partial x^1},\frac{\partial q^i}{\partial x^2},\frac{\partial q^i}{\partial x^3}\right)
+\end{equation}
+con lo que la condición de que un vector sea covariante queda expresada como 
+\begin{equation}
+    \mathbf{V'}=V_j\boldsymbol{\varepsilon}^j.
+\end{equation}
+Notamos que $\boldsymbol{\varepsilon^j}$ es contravariante.
+
+\subsection{Propiedades de los vectores base} Las propiedades más importantes de los vectores base son:
+\begin{align}
+    \boldsymbol{\varepsilon}_i\cdot\boldsymbol{\varepsilon}_j&=\frac{\partial x_k}{\partial q^i}\frac{\partial x_k}{\partial q^j}=g_{ij}\\
+    \boldsymbol{\varepsilon}^i\cdot\boldsymbol{\varepsilon}^j&=\frac{\partial q^i}{\partial x_k}\frac{\partial q^j}{\partial x_k}=g^{ij}\\
+    g^{ij}\boldsymbol{\varepsilon}_j&=\boldsymbol{\varepsilon}^i\\
+    g_{ij}\boldsymbol{\varepsilon}^j&=\boldsymbol{\varepsilon}_i
+\end{align}
+\begin{example}
+    Demostrar la propiedad (3.27). 
+\end{example}
+Por definción de $g^{ij}$ y $\boldsymbol{\varepsilon}_j$ tenemos:
+\begin{align*}
+    g^{ij}\boldsymbol{\varepsilon}_j&=\frac{\partial q^i}{\partial x^k}\frac{\partial q^j}{\partial x^k}\left(\frac{\partial x^1}{\partial q^j},\frac{\partial x^2}{\partial q^j},\frac{\partial x^3}{\partial q^j}\right)\\
+    &=\left(\frac{\partial q^i}{\partial x^k}\frac{\partial x^1}{\partial x^k},\frac{\partial q^i}{\partial x^k}\frac{\partial x^2}{\partial x^k},\frac{\partial q^i}{\partial x^k}\frac{\partial x^3}{\partial x^k}\right)\\
+    &=\left(\frac{\partial q^i}{\partial x^k}\delta^1_k,\frac{\partial q^i}{\partial x^k}\delta^2_k,\frac{\partial q^i}{\partial x^k}\delta^3_k\right)\\
+    &=\left(\frac{\partial q^i}{\partial x^1},\frac{\partial q^i}{\partial x^2},\frac{\partial q^i}{\partial x^3}\right)\\
+    &=\boldsymbol{\varepsilon}^i,
+\end{align*}
+demostrando lo que se quería. \hfill $\blacksquare$
+
+Debido a que cualquier vector $F$ se puede descomponer en sus vectores base, de manera general se tiene que 
+\begin{align}
+    g^{ij}F_j&=F^i\\
+    g_{ij}F^j&=F_i
+\end{align}

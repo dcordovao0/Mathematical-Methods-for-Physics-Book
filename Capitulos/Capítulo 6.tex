@@ -1,0 +1,657 @@
+\section{Introducción}
+
+En física, en la resolución de ecuaciones diferenciales, hay varias ecuaciones que se repiten o cuya forma es parecida. Las soluciones de estas ecuaciones están bien estudiadas y caracterizadas, por lo que es importante tener un catálogo de estas funciones que en algún momento nos podrán servir para resolver una ecuación diferencial.
+
+\section{Ecuación de Legendre}
+
+Como vimos en el capítulo anterior, la ecuación de Legendre surge cuando resolvemos ecuaciones de la forma
+
+\begin{equation}
+    \nabla^2 \varphi+[\lambda-V(r)]\varphi=0
+\end{equation}
+en coordenadas esféricas. Por el método de separación de variables, asumimos una solución de esta ecuación de la forma
+
+\begin{equation*}
+    \varphi(\bmR)=R(r)\Theta(\theta)\Phi(\varphi).
+\end{equation*}
+
+El resultado que obtuvimos para la parte angular de la solución fue que tomando en cuenta la periodicidad de $\phi$ se tenía
+
+\begin{equation}
+    \Phi(\varphi)=e^{\pm im\varphi},
+\end{equation}
+
+y para $\theta$ teníamos la ecuación asociada de Legendre
+
+\begin{equation}
+    (1-x^2)P''(x)-2xP'(x)+\left[l(l+1)-\frac{m^2}{1-x^2}\right]P(x)=0,
+\end{equation}
+dónde 
+
+\begin{equation*}
+    \Theta(\theta)=P(\cos\theta)=P(x)\quad,\quad x=\cos\theta.
+\end{equation*}
+
+Consideremos primero el caso en el que existe simetría azimutal $(m=0)$, con lo que se tiene la ecuación de Legendre
+
+\begin{equation}
+    (1-x^2)P''(x)-2xP'(x)+l(l+1)P(x)=0,
+\end{equation}
+por la simetría azimutal notamos que la ecuación no depende de la constante $m$ que se obtuvo en la ecuación para $\Phi$. Analizamos esta ecuación en busca de puntos singulares cómo lo vimos en la sección 3.1. Como recordatorio, la ecuación diferencial ordinaria homogénea de segundo orden \footnote{En la sección 3.1 se denotaban a $p(x),q(x)$ con las letras mayúsculas $P(x),Q(x)$. Sin embargo, para evitar confusiones con la función de Legendre $P$, se cambió la notación.}
+
+\begin{equation}
+    y''(x)+p(x)y'(x)+q(x)y(x)=0
+\end{equation}
+
+tiene un punto singular $x_0$ si
+
+\begin{equation}
+    \lim_{x\to x_0}p(x)=\infty\quad\lor\quad  \lim_{x\to x_0}q(x)=\infty, 
+\end{equation}
+
+Este punto es singular regular si 
+
+\begin{equation}
+    \lim_{x\to x_0}(x-x_0)p(x)=a\quad\land\quad  \lim_{x\to x_0}(x-x_0)^2q(x)=b, 
+\end{equation}
+dónde $a,b\in \mathbb{R}<\infty$. Por otro lado, la EDO tiene un punto singular irregular si 
+
+\begin{equation}
+    \lim_{x\to x_0}(x-x_0)p(x)=\infty\quad\lor\quad  \lim_{x\to x_0}(x-x_0)^2q(x)=\infty. 
+\end{equation}
+
+Notamos que la ecuación de Legendre (6.4) con 
+\begin{equation}
+    p(x)=-\frac{2x}{1-x^2}\quad,\quad q(x)=\frac{l(l+1)}{1-x^2},
+\end{equation}
+tiene puntos singulares en 1 y -1. Recordemos que $x=\cos\theta$, por lo que $x\in [-1,1]$ y, por ende, toma los valores con los que se obtiene una singularidad. Veamos si los puntos son singulares regulares o irregulares para $x_0=1$ y $x_0=-1$. Podemos factorizar $1-x^2=(1-x)(1+x)$. Para $p(x)$:
+
+\begin{equation*}
+    \lim_{x\to 1}(x-1)\frac{-2x}{(1-x)(1+x)}=1\quad,\quad \lim_{x\to -1}(x+1)\frac{-2x}{(1-x)(1+x)}=1.
+\end{equation*}
+
+Para $q(x)$:
+
+\begin{equation*}
+    \lim_{x\to 1}(x-1)^2\frac{l(l+1)}{(1-x)(1+x)}=0\quad,\quad \lim_{x\to -1}(x+1)^2\frac{l(l+1)}{(1-x)(1+x)}=0.
+\end{equation*}
+
+Por lo tanto, 1 y -1 son puntos singulares regulares. Debido a esto, buscamos una solución con el método de Frobenius. Asumimos una solución de la forma
+
+\begin{equation*}
+    P(x)=\sum_j a_j x^{j+s},
+\end{equation*}
+
+reemplazando la función y sus derivadas en (6.4) tenemos:
+
+\begin{equation*}
+    \sum_j\left\{ a_j(s+j)(s+j-1)x^{s+j-2}-a_j[(s+j)(s+j-1)+2(s+j)-l(l+1)]x^{s+j}\right\}=0.
+\end{equation*}
+
+Si tomamos $j=0$, tenemos un término $x^{s-2}$ que no se combina con ningún otro término, por lo que necesariamente
+\begin{equation*}
+    a_0 s(s+1)x^{s-2}=0,
+\end{equation*}
+
+como $a_0\neq0$ y $x$ es variable, solo nos queda la opción
+\begin{equation*}
+    s(s-1)=0\Rightarrow s=0,s=1.
+\end{equation*}
+
+Ahora, para $j=1$, siguiendo un razonamiento similar tenemos
+
+\begin{equation*}
+    a_1s(s+1)x^{s-1}=0,
+\end{equation*}
+
+como ya tenemos los valores de $s$ por la ecuación indicial, para que se cumpla la igualdad en la expresión anterior $a_1=0$. Tomamos primero $s=0$ para encontrar una relación de recurrencia
+
+\begin{equation*}
+    \sum_j a_j j(j-1)x^{j-2}-\sum_ja_j[j(j-1)+2j-l(l+1)]x^j=0,
+\end{equation*}
+reemplazando en la primera sumatoria $j$ por $j+2$ tenemos
+\begin{equation*}
+    \sum_j a_{j+2} (j+2)(j+1)x^{j}-\sum_ja_j[j(j-1)+2j-l(l+1)]x^j=0.
+\end{equation*}
+
+Si factorizamos $x_j$, para que la suma sea 0, término por término nos tiene que dar 0, lo que nos da la relación de recurrencia
+
+\begin{equation}
+    a_{j+2}=a_j\frac{j(j+1)-l(l+1)}{(j+2)(j+1)}.
+\end{equation}
+
+Para $j=l$ tenemos
+
+\begin{equation*}
+    a_{l+2}=a_l\frac{l(l+1)-l(l+1)}{(j+2)(j+1)}=0,
+\end{equation*}
+esto quiere decir que la serie se trunca en $l$. Por tanto, la solución de la ecuación de Legendre tiene la forma
+
+\begin{equation}
+    P_l(x)=\sum_{j=0}^l a_jx^j.
+\end{equation}
+
+Ahora, si usamos $s=1$ tendremos:
+
+\begin{equation*}
+    \sum_j a_{j} j(j+1)x^{j-1}-\sum_ja_j[(j+1)j+2(j+1)-l(l+1)]x^{j+1}=0,
+\end{equation*}
+reemplazando en la primera sumatoria $j$ por $j+2$ tenemos:
+\begin{equation*}
+    \sum_j a_{j+2} (j+2)(j+3)x^{j+1}-\sum_ja_j[(j+1)j+2(j+1)-l(l+1)]x^{j+1}=0.
+\end{equation*}
+
+Con esto llegamos a la relación de recurrencia
+\begin{equation}
+    a_{j+2}=a_j\frac{(j+2)(j+1)-l(l+1)}{(j+2)(j+3)}.
+\end{equation}
+
+Cuando $j=l-1$, tenemos:
+\begin{equation*}
+    a_{l+1}=a_{l-1}\frac{l(l+1)-l(l+1)}{(j+2)(j+3)}=0,
+\end{equation*}
+es decir, la serie se trunca en $l-1$. Con esto tenemos la solución
+\begin{equation}
+    P_l(x)=\sum_{j=0}^{l-1} a_jx^{j+1}.
+\end{equation}
+
+La expresión (6.11) es para los polinomios pares de Legendre y (6.14) es para los impares, con lo que tenemos:
+
+\begin{equation}
+    P_{2l}(x)=\sum_{j=0}^l a_jx^{2j}\quad,\quad P_{2l-1}(x)=\sum_{j=0}^{l-1} b_jx^{2j+1}.
+\end{equation}
+
+En la siguiente sección veremos la forma que toman los polinomios de Legendre y sus coeficientes. 
+
+\section{Polinomios de Legendre} Sea $g$ la función generatriz de los polinomios de Legendre, dada por
+
+\begin{equation}
+    g(x,t)=\frac{1}{\sqrt{1-2xt+t^2}}=\sum_n P_n(x) t^n.
+\end{equation}
+
+¿Por qué razón esta es la función generatriz de los polinomios de Legendre? Esto lo probaremos con el siguiente teorema.
+
+\begin{theorem}
+    La ecuación 
+    \begin{equation*}
+    g(x,t)=\frac{1}{\sqrt{1-2xt+t^2}}
+\end{equation*}
+satisface la EDP
+\begin{equation}
+    (1-x^2)\frac{\partial^2 g}{\partial x^2}-2x\frac{\partial g}{\partial x}+t\frac{\partial^2}{\partial t^2}(tg)=0.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+    Calculamos las derivadas como
+    \begin{multicols}{2}
+\begin{equation*}
+    \frac{\partial g}{\partial x}=t(1-2xt+t^2)^{-3/2},
+\end{equation*}
+
+\begin{equation*}
+    \frac{\partial^2 g}{\partial x^2}=3t^2(1-2xt+t^2)^{-5/2},
+\end{equation*}
+\end{multicols}
+
+\begin{equation*}
+    \frac{\partial}{\partial t}(tg)=(1-2xt+t^2)^{-1/2}-(t^2-xt)(1-2xt+t^2)^{-3/2},
+\end{equation*}
+
+\begin{equation*}
+    \frac{\partial^2}{\partial t^2}(tg)=(2x-3t)(1-2xt+t^2)^{-3/2}+3(t^3-2t^2x+tx^2)(1-2xt+t^2)^{-5/2}.
+\end{equation*}
+
+Reemplazando las derivadas en (6.16) y con $\gamma\equiv 1-2xt+t^2$ tenemos:
+
+\begin{align*}
+    (1-x^2)&3t^2\gamma^{-5/2}-2xt\gamma^{-3/2}+3t^2(t^2-2xt+x^2)\gamma^{-5/2}\\
+    &=3t^2\gamma^{-5/2}(1-x^2+t^2-2xt+x^2)-2xt\gamma^{-3/2}+2xt\gamma^{-3/2}-3t^2\gamma^{-3/2}\\
+    &=3t^2\gamma^{-5/2}\gamma-3t^2\gamma^{-3/2}\\
+    &=3t^2\gamma^{-3/2}-3t^2\gamma^{-3/2}\\
+    &=0
+\end{align*}
+
+Con lo que hemos demostrado el teorema.
+\end{proof}
+
+\begin{corollary}
+    La función generatriz (6.15) implica la ecuación de Legendre
+    \begin{equation}
+        (1-x^2)P_n''(x)-2xP_n'(x)+n(n+1)P_n(x)=0.
+    \end{equation}
+\end{corollary}
+
+\begin{proof}
+    Por el teorema anterior, ya sabemos que $g$ cumple con la EDP (6.16). Ahora, definimos $\delta\equiv 2xt-t^2$ y hacemos expansión de Taylor alrededor de 0 de $(1-\delta)^{-1/2}$ y tenemos:
+
+    \begin{equation}
+        (1-\delta)^{-1/2}=1+\frac{1}{2}\delta+\dfrac{\dfrac{1}{2}\dfrac{3}{2}}{2!}\delta^2+\dfrac{\dfrac{1}{2}\dfrac{3}{2}\dfrac{5}{2}}{3!}\delta^3+\cdots
+    \end{equation}
+    Usando la definición de $\delta$ en (6.18) tenemos
+    \begin{align*}
+        (1-2xt+t^2)^{-1/2}&=1+\frac{1}{2}(2xt-t^2)+\frac{3}{8}(2xt-t^2)^2+\cdots\\
+        &=1+xt-\frac{t^2}{2}+\frac{3}{8}(4x^2t^2-4xt^3+t^4)+\cdots \\
+        &=1+xt+\left(\frac{3}{2}x^2-\frac{1}{2}\right)t^2+\cdots \\
+        &=g_0(x)+g_1(x)t+g_2(x)t^2+\cdots \\
+        &=\sum_{n=0}^\infty g_n(x)t^n.
+    \end{align*}
+    Esta sumatoria también satisface la EDP (6.16), esto porque es solo otra manera de escribir la función $(1-2xt+t^2)^{-1/2}$. Por esto tenemos:
+    \begin{align*}
+        (1-x^2)\frac{\partial^2}{\partial x^2}\left(\sum_{n=0}^\infty g_n(x)t^n\right)-2x\frac{\partial}{\partial x} \left(\sum_{n=0}^\infty g_n(x)t^n\right)+t\frac{\partial^2}{\partial x^2}\left(t\sum_{n=0}^\infty g_n(x)t^n\right)&=0\\
+         (1-x^2)\sum_{n=0}^\infty g_n''(x)t^n-2x\sum_{n=0}^\infty g_n'(x)t^n+t\sum_{n=0}^\infty g_n(x)t^{n-1}(n+1)n=0.
+    \end{align*}
+    Uniendo las sumatorias y sacando de factor común $t^n$ tenemos
+    \begin{equation*}
+        \sum_{n=0}^\infty t^n[(1-x^2)g_n''(x)-2xg_n'(x)+n(n+1)g_n(x)]=0.
+    \end{equation*}
+
+    Para que la igualdad se cumpla, se debe cumplir término a término y como $t$ es una variable, la única forma en la que se cumpla la igualdad es si 
+    \begin{equation*}
+        (1-x^2)g_n''(x)-2xg_n'(x)+n(n+1)g_n(x)=0,
+    \end{equation*}
+    es decir, hemos llegado a la ecuación de Legendre. Por lo tanto, $g_n(x)=P_n(x)$, terminando la demostración.
+\end{proof}
+
+La función generatriz es muy útil porque nos puede dar información importante de los polinomios antes de que encontremos una manera de calcularlos. Por ejemplo, si queremos saber la escala dada a $P_n$ solo fijamos $x=1$ y usamos expansión de series de Taylor para tener
+\begin{equation}
+    g(1,t)=\frac{1}{\sqrt{1-2t+t^2}}=\frac{1}{1-t}=\sum_{n=0}^\infty t^n,
+\end{equation}
+por lo que $P_n(1)=1$. En otras palabras, todos los polinomios de Legendre cuando $x=1$ tienen el valor de 1. 
+
+Ahora, si calculamos $g(-x,-t)$ nos damos cuenta de que no cambiamos nada, por lo que tenemos
+\begin{equation}
+\sum_{n=0}^{\infty} P_n(x) t^n=g(x, t)=g(-x,-t)=\sum_{n=0}^{\infty} P_n(-x)(-t)^n,
+\end{equation}
+lo que demuestra que 
+\begin{equation}
+P_n(-x)=(-1)^n P_n(x) .
+\end{equation}
+Por este resultado $P_n(-1)=(-1)^n$ y $P_n(x)$ tendrá la misma paridad de $x^n$.
+Otro valor importante es $P_n(0)$. Si escribimos $P_{2n}$ y $P_{2n+1}$ para distinguir polinomios pares e impares. Debido a que $P_{2n+1}$ tiene paridad impar, deberíamos tener que $P_{2n+1}=0$. Para obtener $P_{2n}$ usamos la expansión binomial
+
+\begin{equation}
+g(0, t)=\left(1+t^2\right)^{-1 / 2}=\sum_{n=0}^{\infty}\binom{-1 / 2}{n} t^{2 n}=\sum_{n=0}^{\infty} P_{2 n}(0) t^{2 n}.
+\end{equation}
+
+Para evaluar el coeficiente binomial, usamos
+
+\begin{equation}
+    \binom{-1 / 2}{n}=(-1)^n\frac{(2n-1)!!}{(2n)!!},
+\end{equation}
+dónde $!!$ representa el doble factorial que se define como 
+\begin{equation}
+    n!!=\begin{cases}
+        n(n-2)(n-4)\cdots 4\cdot 2, \quad\text{si $n$ es par} \\
+        n(n-2)(n-4)\cdots 3\cdot 1, \quad\text{si $n$ es impar}.
+    \end{cases}
+\end{equation}
+
+Con lo anterior tenemos
+\begin{equation}
+    P_{2n}(0)=(-1)^n\frac{(2n-1)!!}{(2n)!!}.
+\end{equation}
+
+Es importante también caracterizar los términos dominantes de los polinomios. Para eso aplicamos el teorema binomial para a la función generatriz, 
+
+\begin{equation}
+\left(1-2 x t+t^2\right)^{-1 / 2}=\sum_{n=0}^{\infty}\binom{-1 / 2}{n}\left(-2 x t+t^2\right)^n,
+\end{equation}
+donde notamos que la máxima potencia de $x$ que multiplica $t^n$ es $x^n$. Además, vemos que los términos serán alternantes. Debido a esto, es evidente que $P_0=\text{cte}$ y $P_1=\text{cte}*x$. Por el factor de escalamiento que ya calculamos (el valor de escala es 1) se sigue que $P_0=1$ y $P_1=x$.
+
+\subsection{Fórmulas de Recurrencia}
+
+Ahora que tenemos las características generales de los polinomios de Legendre encontraremos una manera de calcularlos usando relaciones de recurrencia y los valores ya conocidos de $P_0$ y $P_1$. Usando $\partial g/\partial t$ podemos construir la ecuación diferencial 
+\begin{equation}
+\left(1-2 x t+t^2\right) \sum_{n=0}^{\infty} n P_n(x) t^{n-1}+(t-x) \sum_{n=0}^{\infty} P_n(x) t^n=0,
+\end{equation}
+si hacemos la expansión los términos, los cambios de variable $n+1\to n,n-1\to n$ y agrupamos todo lo que es igual llegamos a 
+
+\begin{equation}
+(2 n+1) x P_n(x)=(n+1) P_{n+1}(x)+n P_{n-1}(x), \quad n=1,2,3, \ldots
+\end{equation}
+
+Podemos usar la expresión anterior para calcular todos los polinomios de Legendre conociendo que $P_0=1$ y $P_1=x$. Esta fórmula es muy útil para calcular los polinomios con la ayuda de una computadora. Los primeros polinomios de Legendre vienen dados por
+
+\begin{table}[H]
+\centering
+\caption{Polinomios de Legendre}
+\begin{tabular}{|c|l|}
+\hline
+$n$ & $P_n(x)$ \\ \hline
+0 & $1$ \\ 
+1 & $x$ \\ 
+2 & $\frac{1}{2}(3x^2 - 1)$ \\ 
+3 & $\frac{1}{2}(5x^3 - 3x)$ \\ 
+4 & $\frac{1}{8}(35x^4 - 30x^2 + 3)$ \\ 
+5 & $\frac{1}{8}(63x^5 - 70x^3 + 15x)$ \\ 
+6 & $\frac{1}{16}(231x^6 - 315x^4 + 105x^2 - 5)$ \\ 
+7 & $\frac{1}{16}(429x^7 - 693x^5 + 315x^3 - 35x)$ \\ 
+8 & $\frac{1}{128}(6435x^8 - 12012x^6 + 6930x^4 - 1260x^2 + 35)$ \\ \hline
+\end{tabular}
+\end{table}
+
+
+Ya que tenemos la fórmula de recurrencia para hallar el n-ésimo polinomio de Legendre, veamos si encontramos una fórmula de recurrencia para sus derivadas. Para ello notamos que $\partial g/\partial x$ satisface la ecuación
+\begin{equation}
+    (1-2xt+t^2)\sum_{n=0}^\infty P_n'(x)t^n-t\sum_{n=0}^\infty P_n'(x)t^n=0.
+\end{equation}
+
+Con el mismo proceso anterior, llegamos la relación de recurrencia 
+\begin{equation}
+    2xP_n'(x)+P_n(x)=P_{n+1}'+P_{n-1}'(x).
+\end{equation}
+
+Hay una manera más útil de construir esta relación y es calcular $\partial/\partial x$ de (6.28) y multiplicar por 2 para luego restarlo para (6.30) multiplicado para $2n-1$. Con esto tenemos:
+\begin{equation}
+    P'_{n+1}(x)-P_{n-1}'(x)=(2n+1)P_n(x).
+\end{equation}
+
+Podemos tener otras maneras de expresar la relación de recurrencia:
+
+\begin{align}
+P_{n+1}^{\prime}(x) & =(n+1) P_n(x)+x P_n^{\prime}(x), \\
+P_{n-1}^{\prime}(x) & =-n P_n(x)+x P_n^{\prime}(x), \\
+\left(1-x^2\right) P_n^{\prime}(x) & =n P_{n-1}(x)-n x P_n(x), \\
+\left(1-x^2\right) P_n^{\prime}(x) & =(n+1) x P_n(x)-(n+1) P_{n+1}(x) .
+\end{align}
+
+Todas estas maneras son equivalentes.
+
+\subsection{Ortogonalidad}
+
+Los polinomios tienen una característica importante y es que son todos ortogonales entre sí. Esto lo probaremos de la siguiente manera.
+
+\begin{theorem}
+    Los polinomios de Legendre $P_n(x),P_m(x)$ con $n\neq m$ son ortogonales.
+\end{theorem}
+
+\begin{proof}
+Empecemos con la ecuación de Legendre 
+\begin{equation*}
+    \frac{d}{dx}[(1-x^2)P_n'(x)]+n(n+1)P_n(x)=0,
+\end{equation*}
+dónde $P_n$ es el polinomio de Legendre de orden $n$, por lo que satisface la ecuación. Ahora, multiplicamos la ecuación anterior por $P_m$ dónde $P_m$ es el polinomio de Legendre de orden $m$. Con esto tenemos:
+\begin{equation}
+    \frac{d}{dx}[(1-x^2)P_n'(x)]P_m(x)+n(n+1)P_n(x)P_m(x)=0.
+\end{equation}
+
+Hacemos el mismo procedimiento, solo que ahora con $P_m$ en la ecuación de Legendre y tenemos:
+\begin{equation}
+    \frac{d}{dx}[(1-x^2)P_m'(x)]P_n(x)+m(m+1)P_m(x)P_n(x)=0.
+\end{equation}
+
+Si hacemos la operación (6.37)-(6.36) vamos a tener
+\begin{equation*}
+     \frac{d}{dx}[(1-x^2)P_m'(x)]P_n(x)- \frac{d}{dx}[(1-x^2)P_n'(x)]P_m(x)+[m(m+1)-n(n+1)]P_m(x)P_n(x)=0,
+\end{equation*}
+usando regla de la cadena y factorizando el segundo término, podemos reescribir la ecuación anterior como 
+\begin{equation*}
+   \frac{d}{dx} \{(1-x^2)[P_m'(x)P_n(x)-P_n'(x)P_m(x) ]\}+(m-n)(m+n+1)P_m(x)P_n(x)=0.
+\end{equation*}
+
+Si integramos de -1 a 1 (que es dónde está definido $x$) el primer término se hará 0 (aplicamos el Teorema Fundamental del cálculo, luego el factor $1-x^2$ se hace 0 con $x=1,-1$). Lo que nos deja con el resultado
+\begin{equation*}
+    (m-n)(m+n+1)\int_{-1}^{1}P_m(x)P_n(x)=0.
+\end{equation*}
+Por hipótesis, $n\neq m$, por lo que el término $(m-n)(m+n+1)\neq 0$, por lo tanto, la única manera en la que se cumpla la igualdad de arriba es si
+
+\begin{equation}
+    \int_{-1}^{1}P_m(x)P_n(x)=0.
+\end{equation}
+
+Demostrando de esta manera que los polinomios de Legendre $P_n,P_m$ con $n\neq m$ son ortogonales por definición de ortogonalidad del espacio de funciones.
+\end{proof}
+
+Ahora podemos discutir el caso $m=n$, estableciendo también la normalización de $P_n$. Empecemos elevando al cuadrado la función generatriz
+\begin{equation}
+    (1-2xt+t^2)^{-1}=\left[\sum_{n=0}^\infty P_n(x) t^n\right]^2.
+\end{equation}
+
+Si integramos de $x=-1$ a $x=1$ tenemos
+
+\begin{equation*}
+\int_{-1}^1 \frac{d x}{1-2 t x+t^2}=\sum_{n=0}^{\infty} t^{2 n} \int_{-1}^1\left[P_n(x)\right]^2 d x+2\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\int_{-1}^1 t^{m+n}P_nP_m dx.
+\end{equation*}
+
+Por ortogonalidad, los términos mezclados se hacen 0, por lo que tenemos
+\begin{equation}
+\int_{-1}^1 \frac{d x}{1-2 t x+t^2}=\sum_{n=0}^{\infty} t^{2 n} \int_{-1}^1\left[P_n(x)\right]^2 d x.
+\end{equation}
+
+Haciendo la sustitución $y=1-2tx+t^2,$ con $dy=-2tdx$, obtenemos:
+\begin{equation}
+    \int_{-1}^1 \frac{d x}{1-2 t x+t^2}=\frac{1}{2t}  \int_{(1-t)^2}^{(1+t)^2}\frac{dy}{y}=\frac{1}{t}\ln\left(\frac{1+t}{1-t}\right).
+\end{equation}
+
+Aplicando la propiedad $\ln(x/y)=\ln x-\ln y$ y con la expansión en serie de Taylor
+\begin{equation}
+    \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots
+\end{equation}
+podemos calcular
+\begin{align*}
+    \frac{1}{t}\ln\left(\frac{1+t}{1-t}\right)&=\frac{1}{t}\left(t-\frac{t^2}{2}+\frac{t^3}{3}+\cdots\right)-\frac{1}{t}\left(-t+\frac{t^2}{2}-\frac{t^3}{3}+\cdots\right)\\
+    &=2\left(1+\frac{t^2}{3}+\frac{t^4}{5}+\cdots\right)\\
+    &=2\sum_{n=0}^\infty\frac{t^{2n}}{2n+1}
+\end{align*}
+
+Si igualamos los coeficientes con (6.40) tenemos:
+
+\begin{equation}
+    \int_{-1}^1\left[P_n(x)\right]^2 d x=\frac{2}{2n+1}.
+\end{equation}
+
+Combinando la condición de ortogonalidad con la ecuación anterior tenemos 
+\begin{equation}
+    \int_{-1}^1\left[P_n(x)\right]^2 d x=\frac{2\delta_{nm}}{2n+1}.
+\end{equation}
+
+\section{Ecuación Asociada de Legendre}
+
+La ecuación asociada de Legendre tiene la forma
+
+\begin{equation}
+    (1-x^2)P''(x)-2xP'(x)+\left[l(l+1)-\frac{m^2}{1-x^2}\right]P(x)=0.
+\end{equation}
+
+Notamos que la ecuación tiene un problema cuando $x=1,-1$ por el denominador $1-x^2$. Nos podemos deshacer de este problema con la substitución 
+\begin{equation}
+    P=(1-x^2)^{m/2}\mathcal{P}.
+\end{equation}
+Esta substitución me la dictaron en un sueño. Después de reemplazar esta sustitución en la ecuación original y de un largo y tedioso proceso de álgebra (ejercicio para el lector) podemos llegar a la ecuación
+
+\begin{equation}
+    (1-x^2)\mathcal{P}''-2x(m+1)\mathcal{P}'+[l(l+1)-m(m+1)]\mathcal{P}=0.
+\end{equation}
+
+Podemos usar ahora el método de Frobenius para conocer algunas propiedades de $\mathcal{P}$. Como siempre, probamos la solución $\mathcal{P}=\sum_j a_j x^{k+j}$. Reemplazando en (6.47) obtenemos:
+\begin{align*}
+    &\sum_{j=0}^\infty a_j(k+j)(k+j-1)x^{k+j-2}\\ &+\sum_{j=0}^\infty a_j[l(l+1)-m(m+1)-2(m+1)(k+j)-(k+j)(k+j-1)]x^{k+j}=0.
+\end{align*}
+Notamos que la potencia más baja la obtenemos cuando $j=0$. Este valor de $j$ nos da la ecuación indicial
+\begin{equation*}
+    a_0 k(k+1)=0,
+\end{equation*}
+por lo que $k=0,1$. Para $k=0$ tenemos
+\begin{equation*}
+    \sum_{j=0}^\infty a_j j(j-1)x^{j-2}+ \sum_{j=0}^\infty a_j[l(l+1)-m(m+1)-2(m+1)j-j(j-1)]x^{j}=0.
+\end{equation*}
+Para $j=1$ la primera sumatoria nos da $a_1\cdot 0=0$, por lo que el término $a_1$ es libre. Por conveniencia lo escogemos como 0. Ahora podemos hacer el cambio de variable $j\to j+2$ para la primera serie y así poder juntar las sumatorias en una sola. Con esto tenemos
+\begin{equation*}
+    \sum_{j=0}^\infty \{ a_{j+2}(j+2)(j-1)+ a_j[l(l+1)-m(m+1)-j^2-2mj-j)]x^{j}\}x^j=0.
+\end{equation*}
+La única manera de que se cumpla la igualdad es si se cumple término a término de la sumatoria, por lo que obtenemos la relación de recurrencia
+
+\begin{equation}
+    a_{j+2}=\frac{j^2+j(2m+1)-[l(l+1)-m(m+1)]}{(j+1)(j+2)}.
+\end{equation}
+
+La serie de potencias convergerá si se trunca con algún coeficiente $j$. Notamos que la expresión se vuelve 0 cuando
+\begin{equation*}
+    j^2+j(2m+1)=l(l+1)-m(m+1).
+\end{equation*}
+La igualdad se cumple para $j=l-m$ (esto también me lo dijeron en un sueño). El lector puede comprobar que la igualdad se cumple para este valor de $j$. Como $j$ debe ser positivo, tendremos una solución convergente si se cumple que 
+\begin{equation}
+    -l\leq m\leq l.
+\end{equation}
+
+Ahora que sabemos esta característica importante que debe cumplir la solución asociada de Legendre, podemos encontrar qué forma tiene la solución. Recordemos que la solución que estamos buscando es 
+\begin{equation}
+    P_l^m(x)=(1-x^2)^{m/2}\mathcal{P}_l^m(x).
+\end{equation}
+
+Para obtener la relación entre $P_l^m$ y los polinomios de Legendre $P_l$ podemos usar la fórmula de Leibniz
+\begin{equation}
+    \frac{d^n}{dx^n}[f(x)g(x)]=\sum_{k=0}^n\binom{n}{k}\frac{d^{n-k}f(x)}{dx^{n-k}}\frac{d^k g(x)}{dx^k},
+\end{equation}
+dónde
+\begin{equation}
+    \binom{n}{k}=\frac{n!}{k!(n-k)!}.
+\end{equation}
+Aplicando (6.51) a la ecuación de Legendre
+\begin{equation*}
+    (1-x^2)P_l''(x)-2xP_l'(x)+l(l+1)P_l(x)=0.
+\end{equation*}
+
+Primero definimos 
+\begin{equation}
+    u(x)=\frac{d^m}{dx^m}P_l(x).
+\end{equation}
+
+Para el primer término tenemos
+\begin{equation*}
+    \frac{d^m}{dx^m}[(1-x^2)P_l''(x)]=\sum_{k=0}^m\binom{m}{k}\frac{d^k }{dx^k}(1-x^2)\frac{d^{m-k}}{dx^{m-k}}P_l''(x)
+\end{equation*}
+para las derivadas de $(1-x^2)$ tenemos:
+\begin{equation*}
+    \frac{d^k }{dx^k}(1-x^2)=\begin{cases}
+        0\quad &\text{si } k>2,\\
+        -2\quad &\text{si } k=2,\\
+        -2x\quad &\text{si } k=1,\\
+        1-x^2\quad &\text{si } k=0.
+    \end{cases}
+\end{equation*}
+Por lo tanto, la suma se trunca en 2 y tenemos:
+\begin{equation*}
+    \frac{d^m}{dx^m}[(1-x^2)P_l''(x)]=\sum_{k=2}^m\binom{m}{k}\frac{d^k }{dx^k}(1-x^2)\frac{d^{m-k}}{dx^{m-k}}P_l''(x)
+\end{equation*}
+\begin{align}
+        &=\binom{m}{0}(1-x^2)\frac{d^m}{dx^m}P_l''(x)+\binom{m}{1}(-2x)\frac{d^{m-1}}{dx^{m-1}}P_l''(x)+\binom{m}{2}(-2)\frac{d^{m-2}}{dx_{m-2}}P_l''(x).
+\end{align}
+Sabiendo que
+\begin{equation*}
+    \binom{m}{0}=1\quad,\quad \binom{m}{1}=m\quad,\quad \binom{m}{2}=\frac{1}{2}m(m-1),
+\end{equation*}
+la expresión (6.54) queda de la forma
+\begin{equation}
+    (1-x^2)\frac{d^m}{dx^m}P_l''(x)-2mx\frac{d^{m-1}}{dx^{m-1}}P_l''(x)-m(m-1)\frac{d^{m-2}}{dx_{m-2}}P_l''(x).
+\end{equation}
+Usando el hecho de que 
+\begin{equation*}
+    P_l''(x)\equiv\frac{d^2}{dx^2}P_l(x)
+\end{equation*}
+y usando la definición (6.53) podemos reescribir (6.55) de la siguiente manera
+\begin{equation}
+    (1-x^2)u''(x)-2mxu'(x)-m(m-1)u(x).
+\end{equation}
+Para el segundo término repetimos el mismo proceso y tenemos
+\begin{equation}
+     \frac{d^m}{dx^m}[2xP_l'(x)]=2xu'(x)+2mu(x).
+\end{equation}
+Para el tercer término solo hacemos substitución directa con de la ecuación (6.53) ya que el término que acompaña a $P_l$ es constante. Combinando los 3 términos llegamos a 
+\begin{equation*}
+    (1-x^2)u''(x)-2mxu'(x)-m(m-1)u(x)-2xu'(x)-2mu(x)+l(l+1)u(x)=0,
+\end{equation*}
+reagrupando términos llegamos a 
+\begin{equation}
+      (1-x^2)u''(x)-2x(m+1)u'(x)+[l(l+1)-m(m+1)]u(x)=0.
+\end{equation}
+Notamos inmediatamente que esta es la ecuación (6.47), lo que implica que $u(x)=\mathcal{P}_l^m(x)$ por lo que tenemos
+\begin{equation}
+    \frac{d^m}{dx^m}P_l(x)=\mathcal{P}_l^m(x),
+\end{equation}
+con (6.46) obtenemos finalmente la relación 
+\begin{equation}
+    P_l^m(x)=(-1)^m(1-x^2)^{m/2} \frac{d^m}{dx^m}P_l(x),
+\end{equation}
+dónde $(-1)^m$ es un factor agregado para que los armónicos esféricos tengan la convención de fase usual. Con esto, podemos calcular los polinomios asociados de Legendre. 
+\subsection{Polinomios asociados de Legendre}
+Para encontrar relaciones de recurrencia que nos ayuden a calcular los polinomios asociados de Legendre de manera más sencilla podemos aplicar (6.59) a la función generatriz de $P_l$ (6.15) para obtener la función generatriz de $P_l^m$
+\begin{equation}
+    g_m(x,t)=\frac{(-1)^m(2m-1)!!}{(1-2xt+t^2)^{m+1/2}}=\sum_{s=0}^\infty \mathcal{P}_{s+m}^m(x)t^s.
+\end{equation}
+Si diferenciamos (6.61) con respecto a $t$ tenemos:
+\begin{equation*}
+    \frac{\partial g_m}{\partial t}=\frac{(-1)^m(2m-1)!!(2m+1)(x-t)}{(1-2xt+t^2)^{m+3/2}}.
+\end{equation*}
+Notamos que la por la expresión anterior y $g_m$ se satisface la ecuación
+\begin{equation}
+    (1-2xt+t^2)\frac{\partial g_m}{\partial t}=(2m+1)(x-t)g_m
+\end{equation}
+con lo que podemos calcular la relación de recurrencia, usando la substitución $l=s+m$
+\begin{equation}
+    (l-m+1)\mathcal{P}_{l+1}^m-(2l+1)x\mathcal{P}_{l}^m+(l+m)\mathcal{P}_{l-1}^m=0.
+\end{equation}
+
+Ahora, calculamos
+\begin{equation*}
+    g_{m+1}=\frac{(-1)^m(2m+1)!!}{(1-2xt+t^2)^{m+1/2+1}}.
+\end{equation*}
+Notamos que la expresión anterior cumple con la ecuación
+\begin{equation}
+    (1-2xt+t^2)g_{m+1}=-(2m+1)g_m.
+\end{equation}
+Si aplicamos esto a la función generatriz en su forma de serie obtenemos la relación de recurrencia
+\begin{equation}
+    \mathcal{P}_{l+1}^{m+1}(x)-2x \mathcal{P}_{l}^{m+1}(x)+ \mathcal{P}_{l-1}^{m+1}(x)=-(2m+1) \mathcal{P}_{l}^{m}(x).
+\end{equation}
+\subsection{Funciones asociadas de Legendre}
+Con las relaciones de recurrencia (6.63) y (6.65) podemos calcular 
+\begin{align}
+P_l^{m+1}(x)+\frac{2 m x}{\left(1-x^2\right)^{1 / 2}} P_l^m(x)+ & (l+m)(l-m+1) P_l^{m-1}(x)=0, \\
+(2 l+1) x P_l^m(x)=(l+m) & P_{l-1}^m(x)+(l-m+1) P_{l+1}^m(x),\\
+(2 l+1)\left(1-x^2\right)^{1 / 2} P_l^m(x)= & P_{l-1}^{m+1}(x)-P_{l+1}^{m+1}(x),  \\
+\left(1-x^2\right)^{1 / 2}\left(P_l^m(x)\right)^{\prime}= & \frac{1}{2}(l+m)(l-m+1) P_l^{m-1}(x)-\frac{1}{2} P_l^{m+1}(x).
+\end{align}
+La expresión (6.68) puede desarrollarse como
+\begin{align*}
+    (2 l+1)\left(1-x^2\right)^{1 / 2} P_l^m(x)= & P_{l-1}^{m+1}(x)-P_{l+1}^{m+1}(x)\\
+= & (l-m+1)(l-m+2) P_{l+1}^{m-1}(x) \\
+& -(l+m)(l+m-1) P_{l-1}^{m-1}(x).
+\end{align*}
+Y la expresión (6.69) puede reescribirse a
+\begin{align*}
+    \left(1-x^2\right)^{1 / 2}\left(P_l^m(x)\right)^{\prime}= & \frac{1}{2}(l+m)(l-m+1) P_l^{m-1}(x)-\frac{1}{2} P_l^{m+1}(x) \\
+    =&(l+m)(l-m+1)P_l^{m-1}(x)+\frac{mx}{(1-x^2)^{1/2}}P_l^m(x).
+\end{align*}
+Con estas relaciones de recurrencia se puede usar un programa para calcular el $P_l^m$ que queramos. Las primeras funciones asociadas de Legendre vienen dadas por
+
+\begin{table}[H]
+\centering
+\caption{Funciones de Legendre Asociadas}
+\begin{tabular}{|c|l|}
+\hline
+$l, m$ & $P_l^m(x)$ \\ \hline
+$1, 1$ & $-\sqrt{1-x^2} = -\sin \theta$ \\ 
+$2, 1$ & $-3x\sqrt{1-x^2} = -3\cos\theta\sin\theta$ \\ 
+$2, 2$ & $3(1-x^2) = 3\sin^2\theta$ \\ 
+$3, 1$ & $-\frac{3}{2}(5x^2 - 1)\sqrt{1-x^2} = -\frac{3}{2}(5\cos^2\theta - 1)\sin\theta$ \\ 
+$3, 2$ & $15x(1-x^2) = 15\cos\theta\sin^2\theta$ \\ 
+$3, 3$ & $-15(1-x^2)^{3/2} = -15\sin^3\theta$ \\ 
+$4, 1$ & $-\frac{5}{2}(7x^3 - 3x)\sqrt{1-x^2} = -\frac{5}{2}(7\cos^3\theta - 3\cos\theta)\sin\theta$ \\ 
+$4, 2$ & $\frac{15}{2}(7x^2 - 1)(1-x^2) = \frac{15}{2}(7\cos^2\theta - 1)\sin^2\theta$ \\ 
+$4, 3$ & $-105x(1-x^2)^{3/2} = -105\cos\theta\sin^3\theta$ \\ 
+$4, 4$ & $105(1-x^2)^2 = 105\sin^4\theta$ \\ \hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Paridad} La paridad de $P_l^m$ dependerá de $l,m$ de la siguiente manera
+\begin{equation}
+    P_l^m(-x)=(-1)^{l+m}P_l^m(x).
+\end{equation}
+
+\subsection{Ortogonalidad} Se puede demostrar que las funciones asociadas de Legendre cumple con la regla de ortogonalidad 
+\begin{equation}
+    \int_{-1}^1P_p^m(x)P_q^m(x)dx=\frac{2}{2p+1}\frac{(p+m)!}{(p-m)!}\delta_{pq}.
+\end{equation}

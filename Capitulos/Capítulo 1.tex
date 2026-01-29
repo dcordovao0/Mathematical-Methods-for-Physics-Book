@@ -1,0 +1,144 @@
+
+\section{Introducción}
+En las anteriores clases de física, hemos usado la siguiente notación para las coordenadas cartesianas:
+\begin{align*}
+    \mathbf{V}&=(V_x,V_y,V_z), \\
+   \bmR&=(x,y,z).
+\end{align*}
+Aunque esta notación sea la más natural e intuitiva, hay varias razones (que se expondrán más adelante) para cambiarla de la siguiente manera:
+\begin{align*}
+    \mathbf{V}&=(V_1,V_2,V_3), \\
+    \bmR&=(x_1,x_2,x_3).
+\end{align*}
+\section{Producto Punto}
+El producto punto en $\mathbb{R}^3$ viene dado por:
+\begin{equation}
+    \mathbf{a}\cdot\mathbf{b}=a_1b_1+a_2b_2+a_3b_3=\sum_{i=1}^3a_ib_i.
+\end{equation}
+Se puede notar que se puede simplificar la notación. Primero, podemos omitir el símbolo de sumatoria, ya que sabemos de antemano que estamos trabajando en el espacio tridimensional y los índices repetidos nos indican implícitamente que hay una suma. Con esta simplificación tenemos
+\begin{equation}
+    \mathbf{a}\cdot\mathbf{b}=a_ib_i
+\end{equation}
+al subíndice $i$ se lo conoce como índice mudo, ya que se lo puede cambiar por cualquier símbolo y la ecuación mantiene su significado. A esta simplificación se la conoce como notación de Einstein o notación de índices repetidos. Si queremos más generalidad en la notación, en lugar de repetir índices podemos usar la delta de Kronecker que viene definida por
+\begin{equation}
+    \delta_{ij}=
+    \begin{cases}
+        1, & \text{si }i=j, \\
+        0, & \text{si }i\neq j,
+    \end{cases}
+\end{equation}
+usando esta definición escribimos
+\begin{equation}
+    \mathbf{a}\cdot\mathbf{b}= \delta_{ij}a_ib_j.
+\end{equation}
+\section{Producto Cruz}
+Ahora, nos interesa saber si es que esta notación puede ayudarnos a simplificar el producto cruz, porque no es de mucha ayuda si es que solo simplifica la escritura del producto punto. Normalmente, se calcula el producto cruz de la siguiente manera
+\begin{equation}
+     \mathbf{a}\times\mathbf{b}=
+     \begin{vmatrix}
+        \hat{x_1} & \hat{x_2} & \hat{x_3}\\
+        a_1 & a_2 & a_3 \\
+        b_1 & b_2 & b_3 
+     \end{vmatrix}
+     =\mathbf{c}=
+     \begin{pmatrix}
+         c_1 \\
+         c_2 \\
+         c_3
+     \end{pmatrix}
+     =\begin{pmatrix}
+         a_2b_3-a_3b_2 \\
+         a_3b_1-a_1b_3 \\
+         a_1b_2-a_2b_1.
+     \end{pmatrix}
+\end{equation}
+Queremos encontrar un objeto que satisfaga la igualdad
+\begin{equation}
+    c_i= ? a_jb_k,
+\end{equation}
+llamemos a este objeto $\varepsilon_{ijk}$ y veamos el caso de $c_1$ para definir las propiedades que debe tener el objeto para cumplir la igualdad:
+\begin{equation}
+    c_1=
+    \begin{matrix}
+        \varepsilon_{111} & \varepsilon_{112} & \varepsilon_{113} \\
+        \varepsilon_{121} & \varepsilon_{122} & \varepsilon_{123} \\
+        \varepsilon_{131} & \varepsilon_{132} & \varepsilon_{133} 
+    \end{matrix}
+    =\begin{matrix}
+        a_1b_1 & a_1b_2 & a_1b_3 \\
+        a_2b_1 & a_2b_2 & a_2b_3 \\
+        a_3b_1 & a_3b_2 & a_3b_3.
+    \end{matrix}
+\end{equation}
+Es claro que los únicos elementos que queremos que sean $\neq 0$ son $\varepsilon_{123}$ y $\varepsilon_{132}$ y que $\varepsilon_{123}$ debe ser positivo mientras que $\varepsilon_{132}$ debe ser negativo. Con estas consideraciones, definidos el símbolo de Levi-Civita de la siguiente manera:
+\begin{equation}
+    \varepsilon_{ijk}=
+    \begin{cases}
+        0, & \text{si }i=j \lor i=k \lor j=k , \\
+        1, & \text{si }ijk \text{ es una permutación par de }123, \\
+       -1, & \text{si }ijk \text{ es una permutación impar de }123.
+    \end{cases}
+\end{equation}
+Definido este símbolo, podemos escribir el producto cruz cómo
+\begin{equation}
+    \mathbf{a}\times\mathbf{b}= \varepsilon_{ijk}a_jb_k,
+\end{equation}
+notamos que sólo hay 2 índices que se repiten, el tercer índice, en este caso $i$, es el que define que el resultado es un vector y no un escalar y recorre los componentes del vector. Este símbolo es muy útil para simplificar demostraciones de propiedades de operaciones vectoriales. Dos propiedades muy importantes de este símbolo son:
+\begin{equation}
+    \varepsilon_{ijk}=-\varepsilon_{ikj}
+\end{equation}
+y
+\begin{equation}
+     \varepsilon_{ijk} \varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}.
+\end{equation}
+A continuación, unos ejemplos de la aplicación de los símbolos definidos. 
+
+\begin{example}
+    Demostrar que $\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})=(\mathbf{a}\times\mathbf{b})\cdot \mathbf{c}$.
+\end{example} 
+
+Pasamos todo a notación de Einstein y tenemos
+\begin{align*}
+    \mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})&=\mathbf{a}\cdot(\varepsilon_{ijk}b_jc_k)\\
+    &=a_i\varepsilon_{ijk}b_jc_k\\
+    &=\varepsilon_{ijk}a_ib_jc_k\\
+    &=(\varepsilon_{ijk}a_ib_j)c_k\\
+    &=(\mathbf{a}\times\mathbf{b})c_k\\
+    &=(\mathbf{a}\times\mathbf{b})\cdot \mathbf{c}.  
+\end{align*}
+Demostrando lo que se quería. \hfill $\blacksquare$
+
+\begin{example}
+    Demostrar que $\mathbf{a}\times(\mathbf{b}\times\mathbf{c})=\mathbf{b}(\mathbf{a}\cdot\mathbf{c})-\mathbf{c}(\mathbf{a}\cdot\mathbf{b})$.
+\end{example} 
+
+\begin{align*}
+\mathbf{a}\times(\mathbf{b}\times\mathbf{c})&=\varepsilon_{ijk}a_j(\mathbf{b}\times\mathbf{c})_k\\
+    &=\varepsilon_{ijk}a_j(\varepsilon_{klm}b_lc_m),
+\end{align*}
+usando la propiedad (1.11) y conmutando tenemos:
+\begin{align*}
+    (\varepsilon_{ijk}\varepsilon_{klm})a_jb_lc_m&=(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})a_jb_lc_m\\
+    &=\delta_{il}\delta_{jm}a_jb_lc_m-\delta_{im}\delta_{jl}a_jb_lc_m,
+\end{align*}
+por definción, $\delta_{jm}a_jc_m=a_jc_j$ y $\delta_{il}b_l=b_i$. Con esto se obtiene
+\begin{align*}
+    \delta_{il}\delta_{jm}a_jb_lc_m-\delta_{im}\delta_{jl}a_jb_lc_m&=b_i(a_jc_j)-c_i(a_lb_l)\\
+    &=\mathbf{b}(\mathbf{a}\cdot\mathbf{c})-\mathbf{c}(\mathbf{a}\cdot\mathbf{b}). 
+\end{align*}
+Demostrando la propiedad. \hfill$\blacksquare$
+
+La notación de Einstein también es útil para definir el operador nabla y sus operaciones asociadas. Definimos el operador nabla de la siguiente manera
+\begin{equation}
+    \nabla_j=\frac{\partial}{\partial x_j}.
+\end{equation}
+Con esto definimos el gradiente, la divergencia y el rotacional:
+\begin{equation}
+    \nabla_jf(\bmR)
+\end{equation}
+\begin{equation}
+    \nabla_ia_i(\bmR)=\delta_{ij}\frac{\partial}{\partial x_i}a_j(\bmR)
+\end{equation}
+\begin{equation}
+    \varepsilon_{ijk}\nabla_ja_k(\bmR)=\varepsilon_{ijk}\frac{\partial}{\partial x_k}a_k(\bmR)
+\end{equation}

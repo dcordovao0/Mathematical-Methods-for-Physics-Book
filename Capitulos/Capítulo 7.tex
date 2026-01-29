@@ -1,0 +1,162 @@
+\section{Introducción}
+
+La función Gamma aparece muchas veces en problemas físicos. Para valores enteros aparece en toda expansión de Taylor y es usada para las funciones de Bessel de orden no entero. 
+
+Se ha demostrado que esta función pertenece a una clase más general de funciones que no satisfacen ninguna ecuación diferencial con coeficientes racionales. Como la mayoría de teorías físicas están gobernadas por ecuaciones diferenciales, la función gamma (por sí misma) no describe una cantidad física de interés, pero aparece como un factor en expansiones de las cantidades físicas relevantes. 
+
+\section{Constante de Euler-Mascheroni}
+
+Antes de discutir la función gamma, primero recordemos la definición de la constante de Euler-Mascheroni:
+
+\begin{equation}
+    \gamma=\lim_{n\to\infty}\left(\sum_{k=1}^n\frac{1}{k}-\ln n\right)=\int_1^\infty\left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right)dx,
+\end{equation}
+dónde $\lfloor x\rfloor=\text{floor}(x)$ es el mayor entero que es menor o igual a $x$. Esta constante es un número irracional y se puede aproximar con el valor de 
+\begin{equation}
+\gamma=0.5772156649015328606065120900824024\dots
+\end{equation}
+
+Con esta constante definida, podemos hablar sobre la definición de la función gamma. 
+\section{Definiciones y Propiedades}
+
+\subsection{Límite Infinito} La primera definición que tenemos de la función gamma (atribuída a Euler) es 
+
+\begin{equation}
+    \Gamma(z)=\lim_{n\to\infty} \frac{1\cdot2\cdot3\cdots n}{z(z+1)(z+2)\cdots(z+n)}n^z,\quad z\neq 0,-1,-2,\dots
+\end{equation}
+$z$ puede representar un real o un número complejo. Esta definición es útil para obtener derivadas de $\Gamma(z)$, además de que con ella podemos obtener 
+\begin{align*}
+    \Gamma(z+1)&=\lim_{n\to\infty}\frac{1\cdot2\cdot3\cdots n}{z(z+1)(z+2)\cdots(z+n)(z+n+1)}n^{z+1}\\
+    &=\lim_{n\to\infty} \frac{nz}{z+n+1}\frac{1\cdot2\cdot3\cdots n}{z(z+1)(z+2)\cdots(z+n)}n^z\\
+    &=\lim_{n\to\infty} \frac{nz}{n\left(\frac{z}{n}+\frac{1}{n}+1\right)}\lim_{n\to\infty}\frac{1\cdot2\cdot3\cdots n}{z(z+1)(z+2)\cdots(z+n)}n^z\\
+    &=z\Gamma(z)
+\end{align*}s
+Con lo que hemos obtenido una de las propiedades más importantes de al función gamma:
+\begin{equation}
+    \Gamma(z+1)=z\Gamma(z).
+\end{equation}
+
+Además, con la definición (7.3) podemos calcular
+\begin{equation}
+    \Gamma(1)=\lim_{n\to\infty}\frac{1\cdot2\cdot3\cdots n}{1\cdot2\cdot3\cdots n(n+1)}n=\lim_{n\to\infty}\frac{n}{n+1}=1.
+\end{equation}
+
+Con (7.5) y (7.4) podemos calcular el resto de valores para $x\in \mathbb{Z}^+$ de la siguiente manera:
+\begin{equation}
+    \Gamma(n)=(n-1)!,\quad n\in\mathbb{N}.
+\end{equation}
+
+\subsection{Integral definida}
+Una segunda definción (por Euler, de nuevo) viene dada por la integral
+
+\begin{equation}
+    \Gamma(z)\equiv\int_0^\infty e^{-t}t^{z-1}dt,\quad \text{Re}(z)>0.
+\end{equation}
+La restricción impuesta es para evitar la divergencia de la integral. La definición (7.7) tiene algunas variaciones, las más comunes son:
+\begin{equation}
+    \Gamma(z)=2\int_0^\infty e^{-t^2}t^{2z-1}dt,\quad \text{Re}(z)>0,
+\end{equation}
+o
+\begin{equation}
+    \Gamma(z)=\int_0^1 \left[\ln\left(\frac{1}{t}\right)\right]^{z-1}dt,\quad \text{Re}(z)>0.
+\end{equation}
+
+Cuando $z=\frac{1}{2}$, notamos que (7.8) es la integral de Gauss, por lo que tenemos
+\begin{equation}
+    \Gamma\left(\frac{1}{2}\right)=\sqrt{\pi}.
+\end{equation}
+
+Ahora, demostraremos la equivalencia entre (7.3) y (7.7).
+
+\begin{theorem}
+    Las expresiones (7.3) y (7.7) dadas por
+    \begin{equation*}
+        \lim_{n\to\infty} \frac{1\cdot2\cdot3\cdots n}{z(z+1)(z+2)\cdots(z+n)}n^z\quad,\quad \int_0^\infty e^{-t}t^{z-1}dt,
+    \end{equation*}
+\end{theorem}
+respectivamente, son equivalentes y son iguales a $\Gamma(z)$.
+
+\begin{proof}
+    Consideremos primero la función de dos variables
+    \begin{equation}
+        F(z,n)=\int_0^n\left(1-\frac{t}{n}\right)^nt^{z-1}dt,\quad \text{Re}(z)>0,
+    \end{equation}
+    con $n$ un número entero. Usamos la propiedad 
+    \begin{equation}
+        \lim_{n\to\infty}\left(1-\frac{t}{n}\right)^n\equiv e^{-t}.
+    \end{equation}
+    Aplicando (7.12) en (7.11) obtenemos la ecuación (7.7)
+    \begin{equation}
+         \lim_{n\to\infty}F(z,n)=F(z,\infty)=\int_0^\infty e^{-t}t^{z-1}dt\equiv \Gamma(z).
+    \end{equation}
+Ahora consideremos la sustitución $u=t/n$. Entonces tenemos
+\begin{equation}
+    F(z,n)=n^2\int_0^1(1-u)^{n-1}u^{z-1}du.
+\end{equation}
+Si aplicamos integración por partes obtenemos
+\begin{equation}
+    \frac{F(z,m)}{n^z}=(1-u)^n\frac{u^z}{z}\Big{|}_0^1+\frac{n}{z}\int_0^1(1-u)^{n-1}u^zdu,
+\end{equation}
+debido a que $z>0$ la parte integrada desaparece en ambos extremos. Repitiendo este proceso $n$ veces llegamos a 
+\begin{align*}
+    F(z,n)&=n^z\frac{n(n-1)\cdots n}{z(z+1)(z+2)\cdots (z+n-1)}\int_0^1 u^{z+n-1}du
+    &=\frac{1\cdot2\cdot3\cdots n}{z(z+1)(z+2)\cdots(z+n)}n^z.
+\end{align*}
+
+Tomando el límite cuando $n\to \infty$ llegamos a 
+\begin{equation}
+    \lim_{n\to\infty}F(z,m)=F(z,\infty)\equiv \Gamma(z),
+\end{equation}
+con lo que hemos demostrado la equivalencia de ambas definiciones.
+\end{proof}
+
+\subsection{Producto Infinito}  La tercera manera de definir a la función Gamma (esta vez dada por Weistrass, al fin alguien que no es Euler)  es dada por el producto infinito 
+\begin{equation}
+    \frac{1}{\Gamma(z)}=ze^{\gamma z}\prod_{n=1}^\infty \left(1+\frac{z}{m}\right)e^{-z/m},
+\end{equation}
+dónde $\gamma$ es la constante de Euler-Mascheroni definida anteriormente. Usamos
+\begin{equation}
+    \left(1+\frac{z}{m}\right)^{-1}=\left(\frac{m+z}{m}\right)^{-1}=\left(\frac{m}{m+z}\right),
+\end{equation}
+para calcular 
+\begin{align}
+    \prod_{m=1}^n\left(\frac{m}{m+z}\right)&=\frac{1}{1+z}\cdot\frac{2}{2+z}\cdots\frac{n}{n+z}\\
+    &=\frac{1\cdot2\cdot3\cdots n}{(z+1)(z+2)\cdots(z+n)},
+\end{align}
+con lo que podemos escribir
+\begin{equation}
+    \Gamma(z)=\lim_{n\to\infty}\frac{1\cdot2\cdot3\cdots n}{(z+1)(z+2)\cdots(z+n)}n^z=\lim_{n\to\infty}\frac{1}{z}  \prod_{m=1}^n\left(1+\frac{z}{m}\right)^{-1}n^z.
+\end{equation}
+Calculando el recíproco de (7.21) y usando 
+\begin{equation}
+    n^{-z}=e^{-\ln n}z
+\end{equation}
+llegamos a 
+\begin{equation}
+    \frac{1}{\Gamma(z)}=z\lim_{n\to\infty}e^{(-\ln n)z}\prod_{m=1}^n\left(1+\frac{z}{m}\right).
+\end{equation}
+Si multiplicamos y dividimos al lado derecho de (7.23) por
+\begin{equation}
+    \exp\left[\left(1+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}\right)z\right]=\prod_{m=1}^n e^{z/m}
+\end{equation}
+obtenemos la expresión
+\begin{align*}
+    \frac{1}{\Gamma(z)}&=z\left\{\lim_{n\to\infty} \exp\left[\left(1+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}-\ln n\right) z\right]\right\}\\
+&\left[\lim_{n\to\infty}\left(1+\frac{z}{m}\right)e^{-z/m}\right]\\
+&=z\lim_{n\to\infty}\exp\left[\left(\sum_{k=1}^n k^{-1}-\ln n\right)z\right]\left[\lim_{n\to\infty}\prod_{m=1}^n \left(1+\frac{z}{m}\right)e^{-z/m}\right]\\
+    &=ze^{\gamma z} \prod_{m=1}^\infty \left(1+\frac{z}{m}\right)e^{-z/n},
+\end{align*}
+en el último paso cambiamos $m$ por $n$, ya que es solo una etiqueta y usamos la definción (7.1) de $\gamma$. De esta manera demostramos que (7.17) también es equivalente a las anteriores definiciones.
+\section{Relaciones Funcionales}
+La función Gamma tiene varias propiedades o relaciones funcionales que la hacen muy útil para los problemas. Una de ellas es la ya conocida
+\begin{equation}
+    \Gamma(z+1)=z\Gamma(z).
+\end{equation}
+Otra propiedad muy importante es la fórmula de reflexión
+\begin{equation}
+    \Gamma(z)\Gamma(1-z)=\frac{\pi}{\sen z\pi}.
+\end{equation}
+Por último, tenemos la fórmula de duplicación de Legendre
+\begin{equation}
+    \Gamma(1+z)\Gamma\left(z+\frac{1}{2}\right)=2^{-2z}\sqrt{\pi}\Gamma(2z+1)
+\end{equation}
