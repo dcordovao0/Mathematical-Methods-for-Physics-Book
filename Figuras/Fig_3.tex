@@ -1,0 +1,22 @@
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, bending,calc,decorations.markings}
+
+\begin{document}
+\begin{tikzpicture}[>=Stealth]
+
+\draw [thick,->] (0,0) -- (5,0);
+\node[right] at (5,0) {$\hat{x}_1$};
+\draw [thick,->] (5.5,0) -- (6,0);
+\node[right] at (6,0) {$\hat{x}_1'$};
+\draw [thick,->](1,-2) -- (1,2);
+\node[above] at (1,2) {$\hat{x}_2$};
+\draw [thick,->](3.5,-2) -- (3.5,2);
+\node[above] at (3.5,2) {$\hat{x}_2'$};
+\draw[thick] (1,0) circle (0.15cm);
+\node[below right] at (1.1,0) {$\hat{x}_3$};
+\draw[thick] (3.5,0) circle (0.15cm);
+\node[below right] at (3.6,0) {$\hat{x}_3'$};
+
+\end{tikzpicture}
+\end{document}
